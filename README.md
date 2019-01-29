@@ -7,8 +7,8 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Game screen with board 
 - [ ] Resutscreen with game-history
 ### Game 
-- [ ] Representation for a board with squares
-- [ ] Being able to modify board 
+- [X] Representation of a board with squares
+- [X] Being able to modify board 
 - [ ] Determine if game is over or not  
 - [ ] Have a concept of users 
 - [ ] Implement solo play (random moves before AI) 
@@ -18,7 +18,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Figure out approach 
 - [ ] How to score different fields (i.e. what is biggest threat) 
 ### Testing 
-- [ ] use [assertJ](http://joel-costigliola.github.io/assertj)
+- [X] use [assertJ](http://joel-costigliola.github.io/assertj)
 - [ ] set up travis or similar 
 - [ ] Unit tests 
 - [ ] Android GUI tests 
