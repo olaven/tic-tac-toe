@@ -1,5 +1,6 @@
 package org.olaven.tictacktoe.game
 
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -17,23 +18,9 @@ internal class BoardTest {
     @Test
     fun testDefaultGridIs3x3() {
 
-        val count = board.grid.map { it.count() }.sum()
-        assertThat(count)
+        val count = board.grid.matrix.map { it.count() }.sum()
+        Assertions.assertThat(count)
             .isEqualTo(9)
-    }
-
-    @Test
-    fun testArbitraryGridSize() {
-        for(i in 0 until 20) {
-            val rows = Random.nextInt(0, 100)
-            val columns = Random.nextInt(0, 100);
-            val board = Board(rows, columns);
-
-            val count = board.grid.map { it.count() }.sum()
-
-            assertThat(count)
-                .isEqualTo(rows * columns)
-        }
     }
 
     @Test

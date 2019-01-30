@@ -23,6 +23,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Use life-cycle-methods correctly!
 - [ ] Determine android version
 - [ ] Records of previous games stored in local db
+- [ ] Changing default dimension in settings
 - [ ] Class diagram
 - [ ] Publish to Play store
 ### AI 
@@ -38,7 +39,8 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] >90% line coverage
 ### Documentation
 - [ ] Convesions
-- [ ]
+- [ ] Named parameters, where and why?
+- [ ] Use of comments
 
 
 ## Naming (by no means final)

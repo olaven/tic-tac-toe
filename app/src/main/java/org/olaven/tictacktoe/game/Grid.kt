@@ -1,3 +1,12 @@
 package org.olaven.tictacktoe.game
 
-// GRID LOGIC FROM BOARD SHOULD BE HERE
+class Grid<T>(rows: Int, columns: Int, defaultContent: T) {
+
+    val matrix = List(rows) {
+        List(columns) {
+            defaultContent
+        }
+    }
+    val size: Int = rows * columns
+
+}

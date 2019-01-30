@@ -58,7 +58,7 @@ internal abstract class PlayerTest {
 
     private fun getRandomMove(): Move {
         val boardDimension = Random.nextInt(1, 40)
-        val board = Board(boardDimension, boardDimension)
+        val board = Board(boardDimension)
 
         val column = Random.nextInt(boardDimension)
         val row = Random.nextInt(boardDimension)
