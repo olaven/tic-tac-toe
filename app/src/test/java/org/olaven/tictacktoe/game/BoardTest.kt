@@ -39,29 +39,29 @@ internal class BoardTest {
     @Test
     fun canMarkCircleAtCoordinate() {
 
-        val stateBefore = board.squareAt(0, 0).state
+        val stateBefore = board.squareAt(0, 0).mark
         assertThat(stateBefore)
-            .isEqualTo(SquareState.EMPTY);
+            .isEqualTo(SquareMark.EMPTY);
 
-        board.markSquareAt(0, 0, SquareState.CIRCLE)
+        board.markSquareAt(0, 0, SquareMark.CIRCLE)
 
-        val stateAfter = board.squareAt(0, 0).state
+        val stateAfter = board.squareAt(0, 0).mark
         assertThat(stateAfter)
-            .isEqualTo(SquareState.CIRCLE)
+            .isEqualTo(SquareMark.CIRCLE)
 
     }
 
     @Test
     fun canMarkCrossAtCoordinate() {
-        val before = board.squareAt(1, 2).state
+        val before = board.squareAt(1, 2).mark
         assertThat(before)
-            .isNotEqualTo(SquareState.CROSS) // am testing change, not a specific start
+            .isNotEqualTo(SquareMark.CROSS) // am testing change, not a specific start
 
-        board.markSquareAt(1, 2, SquareState.CROSS)
+        board.markSquareAt(1, 2, SquareMark.CROSS)
 
-        val after = board.squareAt(1, 2).state
+        val after = board.squareAt(1, 2).mark
         assertThat(after)
-            .isEqualTo(SquareState.CROSS)
+            .isEqualTo(SquareMark.CROSS)
 
     }
 }
