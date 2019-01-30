@@ -6,7 +6,7 @@ class Board(dimension: Int = 3) {
 
     fun squareAt(row: Int, column: Int): Square {
 
-        return grid.matrix[row][column];
+        return grid.matrix[row][column]
     }
 
     fun markSquareAt(row: Int, column: Int, newMark: SquareMark) {

@@ -45,23 +45,43 @@ internal class GridTest {
     }
 
     @Test
-    fun gridInteratable() {
-        TODO("Implement iterable on grid")
-        assertThat(false).isTrue()
+    fun testGridIsIterable() {
+        val grid = Grid(2, 2, "default")
+        assertThat(grid)
+            .isInstanceOf(Iterable::class.java)
+    }
+
+    @Test
+    fun testCountOfIterable() {
+
+        val grid = Grid(2, 2, 1)
+
+        grid.forEach {
+            println(it);
+        }
+
+        assertThat(grid.count())
+            .isEqualTo(4)
+    }
+
+    @Test
+    fun testSumOfContent() {
+        val grid = Grid(2, 2, 2)
+
+        assertThat(grid.sum())
+            .isEqualTo(8) // 2 * 2 * 2
     }
 
     @Test
     fun testDefaultContent() {
-        TODO("Implement iterable for this test to work")
+
         val default = "I AM DEFAULT"
         val grid = Grid(3, 3, default)
 
-        /* // GRID NEEDS TO BE ITERABLE!
+
         grid.forEach {
             assertThat(it == default)
         }
-        */
-
     }
 
 }
