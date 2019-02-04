@@ -4,6 +4,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 ## Todo (by no means final)
 ### GUI 
 - [X] Start screen where players can enter their name
+- [ ] Board is a grid-layout (inside main layout)
 - [ ] Option to play agains AI
 - [ ] Previous players as options on start screen?
 - [ ] Game screen with board
@@ -15,9 +16,11 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Representation of a board with squares
 - [X] Being able to modify board
 - [X] Concept of player (superclass for both AI and human)
-- [ ] Board should only be AxA, not AxB
+- [X] Board should only be AxA, not AxB
 - [ ] Game class modelling the game
 - [ ] Determine if game is over or not
+- [ ] Change board default board dimension
+- [ ] Change n-goal (has to be <= board dimension)
 - [ ] Implement solo play (random moves before AI) 
 ### Other
 - [ ] Use life-cycle-methods correctly!
@@ -26,6 +29,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Changing default dimension in settings
 - [ ] Class diagram
 - [ ] Publish to Play store
+- [ ] Popup when the AI has defeated 10 opponents (exam description)
 ### AI 
 - [ ] Figure out approach 
 - [ ] How to score different fields (i.e. what is biggest threat)
@@ -39,6 +43,8 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] >90% line coverage
 ### Documentation
 - [ ] Convesions
+    - [ ] lyttere i kode, ikke XML -> ryddigere
+    - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
 - [ ] Named parameters, where and why?
 - [ ] Use of comments
 
@@ -48,3 +54,5 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 activity/fragment/etc_type_name
 i.e.
 activity_main_button_sign_in
+
+## Notes on AI / Game rules

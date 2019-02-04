@@ -51,4 +51,21 @@ internal class BoardTest {
             .isEqualTo(SquareMark.CROSS)
 
     }
+
+    @Test
+    fun canApplyToEachSquare() {
+        board.onEachSquare { it.mark = SquareMark.CIRCLE }
+
+        board.grid.forEach {
+            assertThat(it.mark)
+                .isEqualTo(SquareMark.CIRCLE)
+        }
+
+        board.onEachSquare { it.mark = SquareMark.CROSS }
+
+        board.grid.forEach {
+            assertThat(it.mark)
+                .isEqualTo(SquareMark.CROSS)
+        }
+    }
 }

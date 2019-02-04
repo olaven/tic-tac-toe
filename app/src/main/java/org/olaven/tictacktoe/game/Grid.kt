@@ -1,6 +1,6 @@
 package org.olaven.tictacktoe.game
 
-class Grid<T>(rows: Int, columns: Int, defaultContent: T): Iterable<T> {
+class Grid<T>(val rows: Int, val columns: Int, defaultContent: T): Iterable<T> {
 
     val matrix = List(rows) {
         List(columns) {
