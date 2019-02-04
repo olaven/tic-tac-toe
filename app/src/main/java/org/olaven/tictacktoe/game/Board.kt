@@ -14,12 +14,5 @@ class Board(dimension: Int = 3) {
         square.mark = newMark
     }
 
-    fun onEachSquare(action: (square: Square) -> Unit) {
-        for(i in 0 until grid.columns) {
-            for(j in 0 until grid.rows) {
-                action(squareAt(i, j))
-            }
-        }
-    }
 
 }
