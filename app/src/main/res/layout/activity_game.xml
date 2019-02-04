@@ -8,13 +8,6 @@
         tools:context=".gui.activities.GameActivity">
 
 
-    <GridLayout
-            android:id="@+id/activity_game_grid_layout"
-            android:layout_width="match_parent"
-            android:layout_height="19dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent">
-        <TextView
-                android:text="GAME WILL APPEAR HERE"/>
-    </GridLayout>
+    <GridView
+        android:id="@+id/activity_game_grid_view"/>
 </android.support.constraint.ConstraintLayout>
