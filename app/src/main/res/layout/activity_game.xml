@@ -9,5 +9,12 @@
 
 
     <GridView
-        android:id="@+id/activity_game_grid_view"/>
+        android:id="@+id/activity_game_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="240dp"
+        android:gravity="center"/>
 </android.support.constraint.ConstraintLayout>

@@ -9,6 +9,7 @@ class Board(dimension: Int = 3) {
         return grid.matrix[row][column]
     }
 
+
     fun markSquareAt(row: Int, column: Int, newMark: SquareMark) {
         val square = squareAt(row, column)
         square.mark = newMark
