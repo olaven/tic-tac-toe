@@ -1,8 +1,5 @@
 package org.olaven.tictacktoe.game.board
 
-import org.olaven.tictacktoe.game.Coordinate
-import org.olaven.tictacktoe.game.SquareMark
-
 class Board(dimension: Int = 3) {
 
     val grid = Grid(

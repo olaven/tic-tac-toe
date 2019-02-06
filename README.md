@@ -5,6 +5,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 ### GUI 
 - [X] Start screen where players can enter their name
 - [X] Board is a grid-layout (inside main layout)
+- [ ] Board should update on changes!
 - [ ] Option to play agains AI
 - [ ] Previous players as options on start screen?
 - [ ] The side of player whose turn it is lights up

@@ -5,10 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import android.widget.Toast
-import org.olaven.tictacktoe.game.Coordinate
 import org.olaven.tictacktoe.game.Game
-import org.olaven.tictacktoe.game.SquareMark
+import org.olaven.tictacktoe.game.board.Coordinate
+import org.olaven.tictacktoe.game.board.SquareMark
 
 
 class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapter() {
