@@ -25,21 +25,25 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
         val square = game.board.squareAt(coordinate)
 
         val textView = TextView(context)
-        textView.text = when (square.mark) {
-            SquareMark.CROSS -> "X"
-            SquareMark.CIRCLE -> "O"
-            SquareMark.EMPTY -> "_"
-        }
+        textView.text = imageFromMark(square.mark)
 
         //TODO: Test asserting that only empty squares have listeners
         if (square.mark == SquareMark.EMPTY) {
             textView.setOnClickListener {
                 game.clickAt(coordinate)
-                Toast.makeText(context, "$coordinate", Toast.LENGTH_SHORT)
+                println(game.board.squareAt(coordinate).mark)
             }
         }
 
         return textView
+    }
+
+    private fun imageFromMark(mark: SquareMark): CharSequence {
+        return when (mark) {
+            SquareMark.CIRCLE -> "O"
+            SquareMark.CROSS -> "X"
+            SquareMark.EMPTY -> "_"
+        }
     }
 
     private fun positionToCoordinates(position: Int): Coordinate {
@@ -48,4 +52,5 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
 
         return Coordinate(row, column)
     }
+
 }

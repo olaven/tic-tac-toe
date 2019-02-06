@@ -22,6 +22,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Change n-goal (has to be <= board dimension)
 - [ ] Implement solo play (random moves before AI) 
 ### Other
+- [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
 - [ ] Determine android version
 - [ ] Records of previous games stored in local db
@@ -46,6 +47,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
     - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
 - [ ] Named parameters, where and why?
 - [ ] Use of comments
+- [ ] Comment the use of CanCopy -> krøkkete å vite om noe er data class -> unngå bug hvor alle i grid har samme refereranse
 - [ ] Refactor alltid når det er noe som føles mer riktig -> Råd fra tidligere undervisning (Finn artikler om det samme)
 - [ ] om bruk av "="-funksjoner (slå opp term)
 

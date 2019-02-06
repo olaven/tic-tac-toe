@@ -57,4 +57,21 @@ internal class BoardTest {
     }
 
 
+    @Test
+    fun markingOnlyAppliesToOneSquare() {
+        val coordinate = Coordinate(1, 1)
+
+        val countBefore = board.grid.filter {it.mark == SquareMark.EMPTY}.count()
+        assertThat(board.squareAt(coordinate).mark)
+            .isEqualTo(SquareMark.EMPTY)
+
+
+        board.markSquareAt(coordinate, SquareMark.CROSS)
+
+        val countAfter = board.grid.filter {it.mark == SquareMark.EMPTY}.count()
+        assertThat(countAfter)
+            .isEqualTo(countBefore - 1)
+    }
+
+
 }

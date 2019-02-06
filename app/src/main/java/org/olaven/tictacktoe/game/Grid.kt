@@ -1,15 +1,18 @@
 package org.olaven.tictacktoe.game
 
-class Grid<T>(val rows: Int, val columns: Int, defaultContent: T): Iterable<T> {
+class Grid<T: CanCopy<T>>(val rows: Int, val columns: Int, defaultContent: T): Iterable<T> {
+
 
     val matrix = List(rows) {
         List(columns) {
-            defaultContent
+            defaultContent.copy()
         }
     }
     val size: Int = rows * columns
 
     override fun iterator(): Iterator<T> {
+
+
         return object : Iterator<T> {
             val current = object {
                 var row = 0
