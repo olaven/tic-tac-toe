@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import kotlin.random.Random
+import org.olaven.tictacktoe.game.board.Board
 
 internal class BoardTest {
 

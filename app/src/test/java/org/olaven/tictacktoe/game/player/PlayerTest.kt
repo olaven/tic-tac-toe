@@ -3,10 +3,10 @@ package org.olaven.tictacktoe.game.player
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.olaven.tictacktoe.game.Board
-import org.olaven.tictacktoe.game.Coordinate
+import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.Move
-import org.olaven.tictacktoe.game.SquareMark
+import org.olaven.tictacktoe.game.board.Coordinate
+import org.olaven.tictacktoe.game.board.SquareMark
 import kotlin.random.Random
 
 

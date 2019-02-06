@@ -31,7 +31,6 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
         if (square.mark == SquareMark.EMPTY) {
             textView.setOnClickListener {
                 game.clickAt(coordinate)
-                println(game.board.squareAt(coordinate).mark)
             }
         }
 

@@ -1,8 +1,15 @@
-package org.olaven.tictacktoe.game
+package org.olaven.tictacktoe.game.board
+
+import org.olaven.tictacktoe.game.Coordinate
+import org.olaven.tictacktoe.game.SquareMark
 
 class Board(dimension: Int = 3) {
 
-    val grid = Grid(rows = dimension, columns = dimension, defaultContent = Square(SquareMark.EMPTY))
+    val grid = Grid(
+        rows = dimension,
+        columns = dimension,
+        defaultContent = Square(SquareMark.EMPTY)
+    )
 
     fun squareAt(coordinate: Coordinate): Square {
 

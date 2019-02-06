@@ -1,4 +1,6 @@
-package org.olaven.tictacktoe.game
+package org.olaven.tictacktoe.game.board
+
+import org.olaven.tictacktoe.game.CanCopy
 
 class Grid<T: CanCopy<T>>(val rows: Int, val columns: Int, defaultContent: T): Iterable<T> {
 

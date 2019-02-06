@@ -1,10 +1,9 @@
 package org.olaven.tictacktoe.game
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.player.HumanPlayer
-import org.olaven.tictacktoe.game.player.Player
 
 internal class GameTest {
 

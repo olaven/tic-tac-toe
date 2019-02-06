@@ -1,5 +1,6 @@
 package org.olaven.tictacktoe.game
 
+import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.player.Player
 
 class Game(val board: Board, private val player1: Player, private val player2: Player){
