@@ -7,4 +7,5 @@ enum class  SquareMark {
 }
 
 class Square(var mark: SquareMark)
-class Move(val mark: SquareMark, val board: Board, val row: Int, val column: Int)
+class Move(val mark: SquareMark, val board: Board, val coordinate: Coordinate)
+data class Coordinate(val x: Int, val y: Int)

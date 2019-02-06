@@ -25,14 +25,15 @@ internal class BoardTest {
 
     @Test
     fun canMarkCircleAtCoordinate() {
+        val coordinate = Coordinate(0, 0)
 
-        val stateBefore = board.squareAt(0, 0).mark
+        val stateBefore = board.squareAt(coordinate).mark
         assertThat(stateBefore)
-            .isEqualTo(SquareMark.EMPTY);
+            .isEqualTo(SquareMark.EMPTY)
 
-        board.markSquareAt(0, 0, SquareMark.CIRCLE)
+        board.markSquareAt(coordinate, SquareMark.CIRCLE)
 
-        val stateAfter = board.squareAt(0, 0).mark
+        val stateAfter = board.squareAt(coordinate).mark
         assertThat(stateAfter)
             .isEqualTo(SquareMark.CIRCLE)
 
@@ -40,13 +41,16 @@ internal class BoardTest {
 
     @Test
     fun canMarkCrossAtCoordinate() {
-        val before = board.squareAt(1, 2).mark
+        val coordinate = Coordinate(1, 2)
+
+        val before = board.squareAt(coordinate).mark
+
         assertThat(before)
             .isNotEqualTo(SquareMark.CROSS) // am testing change, not a specific start
 
-        board.markSquareAt(1, 2, SquareMark.CROSS)
+        board.markSquareAt(coordinate, SquareMark.CROSS)
 
-        val after = board.squareAt(1, 2).mark
+        val after = board.squareAt(coordinate).mark
         assertThat(after)
             .isEqualTo(SquareMark.CROSS)
 

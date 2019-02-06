@@ -4,14 +4,14 @@ class Board(dimension: Int = 3) {
 
     val grid = Grid(rows = dimension, columns = dimension, defaultContent = Square(SquareMark.EMPTY))
 
-    fun squareAt(row: Int, column: Int): Square {
+    fun squareAt(coordinate: Coordinate): Square {
 
-        return grid.matrix[row][column]
+        return grid.matrix[coordinate.x][coordinate.y]
     }
 
 
-    fun markSquareAt(row: Int, column: Int, newMark: SquareMark) {
-        val square = squareAt(row, column)
+    fun markSquareAt(coordinate: Coordinate, newMark: SquareMark) {
+        val square = squareAt(coordinate)
         square.mark = newMark
     }
 

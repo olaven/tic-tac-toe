@@ -9,8 +9,7 @@ abstract class Player(val name: String) {
 
     fun makeMove(move: Move) {
         move.board.markSquareAt(
-            row = move.row,
-            column = move.column,
+            move.coordinate,
             newMark = move.mark
         )
     }

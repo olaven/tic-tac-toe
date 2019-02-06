@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.olaven.tictacktoe.game.Board
+import org.olaven.tictacktoe.game.Coordinate
 import org.olaven.tictacktoe.game.Move
 import org.olaven.tictacktoe.game.SquareMark
 import kotlin.random.Random
@@ -26,20 +27,20 @@ internal abstract class PlayerTest {
     @Test
     fun testPlayerShouldBeAbleToMakeMove() {
         val board = Board()
+        val coordinate = Coordinate(0,0)
 
         val move = Move(
             SquareMark.CIRCLE,
             board,
-            0,
-            0
+            coordinate
         )
 
-        assertThat(board.squareAt(0, 0).mark)
+        assertThat(board.squareAt(coordinate).mark)
             .isNotEqualTo(SquareMark.CIRCLE)
 
         player.makeMove(move)
 
-        assertThat(board.squareAt(0, 0).mark)
+        assertThat(board.squareAt(coordinate).mark)
             .isEqualTo(SquareMark.CIRCLE)
 
     }
@@ -50,7 +51,7 @@ internal abstract class PlayerTest {
             val move = getRandomMove()
             player.makeMove(move)
 
-            val square = move.board.squareAt(move.row, move.column)
+            val square = move.board.squareAt(move.coordinate)
             assertThat(square.mark)
                 .isEqualTo(move.mark)
         }
@@ -66,7 +67,7 @@ internal abstract class PlayerTest {
         val mark = getRandomMoveMark()
 
         return Move(
-            mark, board, row, column
+            mark, board, Coordinate(column, row)
         )
 
     }

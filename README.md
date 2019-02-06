@@ -4,10 +4,9 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 ## Todo (by no means final)
 ### GUI 
 - [X] Start screen where players can enter their name
-- [ ] Board is a grid-layout (inside main layout)
+- [X] Board is a grid-layout (inside main layout)
 - [ ] Option to play agains AI
 - [ ] Previous players as options on start screen?
-- [ ] Game screen with board
 - [ ] The side of player whose turn it is lights up
 - [ ] Resultscreen with game-history
 - [ ] Change THEME (dark mode++ etc + Fun modes like Streken-mode, Wood-mode, morsomme theme-modes)
@@ -17,7 +16,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Being able to modify board
 - [X] Concept of player (superclass for both AI and human)
 - [X] Board should only be AxA, not AxB
-- [ ] Game class modelling the game
+- [X] Game class modelling the game
 - [ ] Determine if game is over or not
 - [ ] Change board default board dimension
 - [ ] Change n-goal (has to be <= board dimension)
@@ -47,6 +46,8 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
     - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
 - [ ] Named parameters, where and why?
 - [ ] Use of comments
+- [ ] Refactor alltid når det er noe som føles mer riktig -> Råd fra tidligere undervisning (Finn artikler om det samme)
+- [ ] om bruk av "="-funksjoner (slå opp term)
 
 
 ## Naming (by no means final)
