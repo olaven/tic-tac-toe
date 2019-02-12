@@ -20,6 +20,7 @@ class Game(val board: Board, private val player1: Player, private val player2: P
 
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
+        activePlayer = playerDependent(player2, player1)
     }
 
     fun playerWinning() {

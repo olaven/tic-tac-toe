@@ -6,7 +6,8 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Start screen where players can enter their name
 - [X] Board is a grid-layout (inside main layout)
 - [X] Board should update on changes!
-- [ ] Grid should display icons, not textviews
+- [X] Start screen should use spinners
+- [ ] Grid should display icons, not textviews (perhaps even just a button, more semantically correct?)
 - [ ] Option to play agains AI
 - [ ] Previous players as options on start screen?
 - [ ] The side of player whose turn it is lights up
@@ -19,13 +20,13 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Concept of player (superclass for both AI and human)
 - [X] Board should only be AxA, not AxB
 - [X] Game class modelling the game
-- [ ] Choose users
+- [X] Choose users
 - [ ] Determine if game is over or not
 - [ ] Change board default board dimension
 - [ ] Change n-goal (has to be <= board dimension)
 - [ ] Implement solo play (random moves before AI) 
 ### Other
-- [ ] store users in resources
+- [X] store users in resources
 - [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
 - [ ] Determine android version
