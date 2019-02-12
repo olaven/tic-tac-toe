@@ -12,19 +12,27 @@ import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 
 class GameActivity : AppCompatActivity() {
 
-    private val board = Board()
+    private val game = Game(Board(), HumanPlayer("player 1"), HumanPlayer("player 2"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        val adapter = GameGridAdapter(this, Game(Board(), HumanPlayer("player one"), HumanPlayer("player 2")))
-        // adapter.notifyDataSetChanged()
+        val adapter = GameGridAdapter(this, game)
+        activity_game_grid_view.numColumns = game.board.dimension
         activity_game_grid_view.adapter = adapter
     }
 
+    // TODO: store the current game-object to preserve through breaks?
+    // also, check that pause is correct lifecycle method to do such thing
+    override fun onPause() {
+        super.onPause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+    }
 }
 
 

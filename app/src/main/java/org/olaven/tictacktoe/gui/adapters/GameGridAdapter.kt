@@ -1,6 +1,7 @@
 package org.olaven.tictacktoe.gui.adapters
 
 import android.content.Context
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -25,11 +26,14 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
 
         val textView = TextView(context)
         textView.text = imageFromMark(square.mark)
+        textView.textSize = 30f
+        textView.gravity = Gravity.CENTER
 
         //TODO: Test asserting that only empty squares have listeners
         if (square.mark == SquareMark.EMPTY) {
             textView.setOnClickListener {
                 game.clickAt(coordinate)
+                this.notifyDataSetChanged();
             }
         }
 

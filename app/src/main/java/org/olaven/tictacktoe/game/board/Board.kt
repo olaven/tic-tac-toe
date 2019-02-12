@@ -1,6 +1,6 @@
 package org.olaven.tictacktoe.game.board
 
-class Board(dimension: Int = 3) {
+class Board(val dimension: Int = 3) {
 
     val grid = Grid(
         rows = dimension,
