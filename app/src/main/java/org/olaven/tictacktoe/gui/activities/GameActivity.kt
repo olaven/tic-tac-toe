@@ -19,9 +19,8 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        val adapter = GameGridAdapter(this, game)
-        activity_game_grid_view.numColumns = game.board.dimension
-        activity_game_grid_view.adapter = adapter
+        setupBoard()
+        setupText()
     }
 
     // TODO: store the current game-object to preserve through breaks?
@@ -32,6 +31,19 @@ class GameActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    private fun setupBoard() {
+
+        activity_game_grid_view.adapter = GameGridAdapter(this, game)
+        activity_game_grid_view.numColumns = game.board.dimension
+    }
+
+
+    private fun setupText() {
+
+        activity_game_playertext1.text = game.player1.name
+        activity_game_playertext2.text = game.player2.name
     }
 }
 

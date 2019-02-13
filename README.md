@@ -7,6 +7,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Board is a grid-layout (inside main layout)
 - [X] Board should update on changes!
 - [X] Start screen should use spinners
+- [ ] Player whose turn it is should light up
 - [ ] Grid should display icons, not textviews (perhaps even just a button, more semantically correct?)
 - [ ] Option to play agains AI
 - [ ] Previous players as options on start screen?
@@ -27,6 +28,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Implement solo play (random moves before AI) 
 ### Other
 - [X] store users in resources
+- [ ] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
 - [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
 - [ ] Determine android version

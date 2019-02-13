@@ -5,7 +5,7 @@ import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
 import org.olaven.tictacktoe.game.player.Player
 
-class Game(val board: Board, private val player1: Player, private val player2: Player){
+class Game(val board: Board, val player1: Player, val player2: Player){
 
     var activePlayer = player1
     var gameOver: Boolean = false
