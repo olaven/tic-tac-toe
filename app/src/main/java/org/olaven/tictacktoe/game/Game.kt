@@ -10,6 +10,13 @@ class Game(val board: Board, val player1: Player, val player2: Player){
     var activePlayer = player1
     var gameOver: Boolean = false
         // TODO: getter calculating state if not calculated for this turn (or something similar)
+    /**
+     * Triggered when activePlayer is changed.
+     * Accessible from other class
+     */
+    var onFirstPlayer:  ((player: Player) -> Unit)? = null
+    var onSecondPlayer:  ((player: Player) -> Unit)? = null
+
 
     fun setNextPlayerActive() {
 
@@ -20,7 +27,21 @@ class Game(val board: Board, val player1: Player, val player2: Player){
 
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
+        changePlayer()
+    }
+
+    private fun changePlayer() {
         activePlayer = playerDependent(player2, player1)
+        val listener = playerDependent(
+            {
+                onFirstPlayer?.let { it(activePlayer) }
+            },
+            {
+                onSecondPlayer?.let { it(activePlayer) }
+            }
+        )
+
+        listener()
     }
 
     fun playerWinning() {
@@ -37,4 +58,5 @@ class Game(val board: Board, val player1: Player, val player2: Player){
         else
             onSecond
     }
+
 }

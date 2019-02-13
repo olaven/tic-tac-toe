@@ -1,5 +1,6 @@
 package org.olaven.tictacktoe.gui.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
@@ -21,6 +22,19 @@ class GameActivity : AppCompatActivity() {
 
         setupBoard()
         setupText()
+
+        game.onFirstPlayer = {
+            activity_game_text_player1
+                .setBackgroundColor(Color.GREEN)
+            activity_game_text_player2
+                .setBackgroundColor(Color.BLUE)
+        }
+        game.onSecondPlayer = {
+            activity_game_text_player2
+                .setBackgroundColor(Color.GREEN)
+            activity_game_text_player1
+                .setBackgroundColor(Color.BLUE)
+        }
     }
 
     // TODO: store the current game-object to preserve through breaks?
@@ -42,8 +56,8 @@ class GameActivity : AppCompatActivity() {
 
     private fun setupText() {
 
-        activity_game_playertext1.text = game.player1.name
-        activity_game_playertext2.text = game.player2.name
+        activity_game_text_player1.text = game.player1.name
+        activity_game_text_player2.text = game.player2.name
     }
 }
 

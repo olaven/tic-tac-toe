@@ -5,4 +5,5 @@
     <string name="activity_start_text_button">Start Game!</string>
     <string name="activity_start_text_player1">Player 1:</string>
     <string name="activity_start_text_player2">Player 2:</string>
+    <string name="unloaded">Unloaded</string>
 </resources>

@@ -61,6 +61,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 
 ## Naming (by no means final)
 ### IDs
+* Forsøke å separere spill og GUI
 activity/fragment/etc_type_name
 i.e.
 activity_main_button_sign_in
