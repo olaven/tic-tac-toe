@@ -28,6 +28,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Implement solo play (random moves before AI) 
 ### Other
 - [X] store users in resources
+- [ ] Familiarize with UI testing
 - [ ] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
 - [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
@@ -37,6 +38,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Class diagram
 - [ ] Publish to Play store
 - [ ] Popup when the AI has defeated 10 opponents (exam description)
+- [ ] clean gradle of unused dependencies
 ### AI 
 - [ ] Figure out approach 
 - [ ] How to score different fields (i.e. what is biggest threat)
