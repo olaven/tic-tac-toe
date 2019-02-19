@@ -45,10 +45,11 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] calculation should probably not run in main thread
 ### Testing 
 - [X] use [assertJ](http://joel-costigliola.github.io/assertj)
-- [ ] set up travis or similar
+- [X] set up travis
 - [ ] set up tests for older phones / OS versions
 - [ ] Unit tests 
-- [ ] Android GUI tests 
+- [ ] Android GUI tests
+- [ ] Test on different images on travis
 - [ ] >90% line coverage
 ### Documentation
 - [ ] Convesions
