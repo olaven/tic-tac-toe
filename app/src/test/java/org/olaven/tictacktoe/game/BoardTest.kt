@@ -18,7 +18,12 @@ internal class BoardTest {
     }
 
     @Test
-    fun testDefaultGridIs3x3() {
+    fun shouldFail() {
+        assertThat(true).isFalse();
+    }
+
+    @Test
+    fun DefaultGridIs3x3() {
 
         val count = board.grid.matrix.map { it.count() }.sum()
         Assertions.assertThat(count)
