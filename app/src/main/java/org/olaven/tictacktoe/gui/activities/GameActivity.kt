@@ -3,6 +3,7 @@ package org.olaven.tictacktoe.gui.activities
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.game.board.Board
@@ -24,16 +25,10 @@ class GameActivity : AppCompatActivity() {
         setupText()
 
         game.onFirstPlayer = {
-            activity_game_text_player1
-                .setBackgroundColor(Color.GREEN)
-            activity_game_text_player2
-                .setBackgroundColor(Color.BLUE)
+            Toast.makeText(applicationContext, "first player", Toast.LENGTH_SHORT)
         }
         game.onSecondPlayer = {
-            activity_game_text_player2
-                .setBackgroundColor(Color.GREEN)
-            activity_game_text_player1
-                .setBackgroundColor(Color.BLUE)
+            Toast.makeText(applicationContext, "second player", Toast.LENGTH_SHORT)
         }
     }
 
