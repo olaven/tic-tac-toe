@@ -9,6 +9,6 @@ internal class StartActivityTest {
 
     @Test
     fun test() {
-        onView()
+
     }
 }
