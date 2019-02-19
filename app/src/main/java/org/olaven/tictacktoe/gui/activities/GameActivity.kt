@@ -52,11 +52,13 @@ class GameActivity : AppCompatActivity() {
     private fun setupHighlight() {
 
         game.onFirstPlayer = {
-            Toast.makeText(applicationContext, "first player", Toast.LENGTH_SHORT).show()
+            activity_game_text_player1.setTextColor(Color.GREEN)
+            activity_game_text_player2.setTextColor(Color.BLACK)
         }
 
         game.onSecondPlayer = {
-            Toast.makeText(applicationContext, "second player", Toast.LENGTH_SHORT).show()
+            activity_game_text_player1.setTextColor(Color.BLACK)
+            activity_game_text_player2.setTextColor(Color.GREEN)
         }
     }
 }
