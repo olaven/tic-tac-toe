@@ -23,13 +23,7 @@ class GameActivity : AppCompatActivity() {
 
         setupBoard()
         setupText()
-
-        game.onFirstPlayer = {
-            Toast.makeText(applicationContext, "first player", Toast.LENGTH_SHORT)
-        }
-        game.onSecondPlayer = {
-            Toast.makeText(applicationContext, "second player", Toast.LENGTH_SHORT)
-        }
+        setupHighlight()
     }
 
     // TODO: store the current game-object to preserve through breaks?
@@ -53,6 +47,17 @@ class GameActivity : AppCompatActivity() {
 
         activity_game_text_player1.text = game.player1.name
         activity_game_text_player2.text = game.player2.name
+    }
+
+    private fun setupHighlight() {
+
+        game.onFirstPlayer = {
+            Toast.makeText(applicationContext, "first player", Toast.LENGTH_SHORT).show()
+        }
+
+        game.onSecondPlayer = {
+            Toast.makeText(applicationContext, "second player", Toast.LENGTH_SHORT).show()
+        }
     }
 }
 
