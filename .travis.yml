@@ -15,5 +15,4 @@ cache:
   - $HOME/.android/build-cache
 
 before_install:
-  before_install:
   - yes | sdkmanager "platforms;android-28"
