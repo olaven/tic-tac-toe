@@ -7,7 +7,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Board is a grid-layout (inside main layout)
 - [X] Board should update on changes!
 - [X] Start screen should use spinners
-- [ ] Player whose turn it is should light up
+- [X] Player whose turn it is should light up
 - [ ] Grid should display icons, not textviews (perhaps even just a button, more semantically correct?)
 - [ ] Option to play agains AI
 - [ ] Previous players as options on start screen?
@@ -57,6 +57,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
     - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
 - [ ] Named parameters, where and why?
 - [ ] Use of comments
+- [ ] Multithreading
 - [ ] Comment the use of CanCopy -> krøkkete å vite om noe er data class -> unngå bug hvor alle i grid har samme refereranse
 - [ ] Refactor alltid når det er noe som føles mer riktig -> Råd fra tidligere undervisning (Finn artikler om det samme)
 - [ ] om bruk av "="-funksjoner (slå opp term)

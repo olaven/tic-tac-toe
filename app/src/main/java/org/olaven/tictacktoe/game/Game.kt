@@ -3,6 +3,7 @@ package org.olaven.tictacktoe.game
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
+import org.olaven.tictacktoe.game.player.BotPlayer
 import org.olaven.tictacktoe.game.player.Player
 
 class Game(val board: Board, val player1: Player, val player2: Player){
@@ -16,6 +17,10 @@ class Game(val board: Board, val player1: Player, val player2: Player){
      */
     var onFirstPlayer:  ((player: Player) -> Unit)? = null
     var onSecondPlayer:  ((player: Player) -> Unit)? = null
+    /**
+     * Triggered when one player has won
+     */
+    var onGameOver:  ((result: Result) -> Unit)? = null
 
 
     fun setNextPlayerActive() {
@@ -24,6 +29,8 @@ class Game(val board: Board, val player1: Player, val player2: Player){
     }
 
     fun clickAt(coordinate: Coordinate) {
+
+        if (activePlayer is BotPlayer) return // only HumanPlayers may click
 
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
