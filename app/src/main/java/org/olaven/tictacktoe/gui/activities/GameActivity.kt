@@ -14,15 +14,15 @@ import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 
 class GameActivity : AppCompatActivity() {
 
-    var game: Game? = null
+    val game: Game by lazy {
+        initializeGame()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-
-        setupGame()
         setupBoardView()
         setupText()
         setupHighlight()
@@ -38,7 +38,49 @@ class GameActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    private fun setupGame() {
+    private fun setupBoardView() {
+
+        game.apply {
+
+            activity_game_grid_view.adapter = GameGridAdapter(applicationContext, this)
+            activity_game_grid_view.numColumns = board.dimension
+        }
+
+    }
+
+
+    private fun setupText() {
+
+        game.apply {
+
+            activity_game_text_player1.text = player1.name
+            activity_game_text_player2.text = player2.name
+        }
+    }
+
+    private fun setupHighlight() {
+
+        game.apply {
+
+            onFirstPlayer = {
+
+                activity_game_text_player1.setTextColor(Color.GREEN)
+                activity_game_text_player2.setTextColor(Color.BLACK)
+            }
+
+            onSecondPlayer = {
+
+                activity_game_text_player1.setTextColor(Color.BLACK)
+                activity_game_text_player2.setTextColor(Color.GREEN)
+
+                if (it is BotPlayer) {
+                    it.makeMove()
+                }
+            }
+        }
+    }
+
+    private fun initializeGame(): Game {
 
         val player1Name = intent.extras["player1"] as String
         val player2Name = intent.extras["player2"] as String
@@ -51,45 +93,9 @@ class GameActivity : AppCompatActivity() {
         }
 
 
-        game = Game(Board(), player1, player2)
+        return Game(Board(), player1, player2)
     }
 
-    private fun setupBoardView() {
-
-        game?.let {
-            activity_game_grid_view.adapter = GameGridAdapter(this, it)
-            activity_game_grid_view.numColumns = it.board.dimension
-        }
-    }
-
-
-    private fun setupText() {
-
-        game?.let {
-            activity_game_text_player1.text = it.player1.name
-            activity_game_text_player2.text = it.player2.name
-        }
-    }
-
-    private fun setupHighlight() {
-
-        game?.let {
-            it.onFirstPlayer = { player ->
-                activity_game_text_player1.setTextColor(Color.GREEN)
-                activity_game_text_player2.setTextColor(Color.BLACK)
-            }
-
-            it.onSecondPlayer = { player ->
-                activity_game_text_player1.setTextColor(Color.BLACK)
-                activity_game_text_player2.setTextColor(Color.GREEN)
-
-                if (player is BotPlayer) {
-                    player.makeMove()
-                }
-            }
-        }
-
-    }
 }
 
 
