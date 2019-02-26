@@ -28,8 +28,6 @@ class GameActivity : AppCompatActivity() {
         setupHighlight()
     }
 
-    // TODO: store the current game-object to preserve through breaks?
-    // also, check that pause is correct lifecycle method to do such thing
     override fun onPause() {
         super.onPause()
     }
@@ -37,6 +35,8 @@ class GameActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
     }
+
+
 
     private fun setupBoardView() {
 
@@ -74,7 +74,8 @@ class GameActivity : AppCompatActivity() {
                 activity_game_text_player2.setTextColor(Color.GREEN)
 
                 if (it is BotPlayer) {
-                    it.makeMove()
+                    val coordinate = it.selectCoordinate(board)
+                    game.clickAt(coordinate)
                 }
             }
         }

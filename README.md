@@ -22,6 +22,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Board should only be AxA, not AxB
 - [X] Game class modelling the game
 - [X] Choose users
+- [ ] lagre spillstate
 - [ ] Determine if game is over or not
 - [ ] Change board default board dimension
 - [ ] Change n-goal (has to be <= board dimension)
@@ -30,6 +31,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] store users in resources
 - [ ] Familiarize with UI testing
 - [ ] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
+- [ ] Finne bruk av public directories (Photos, Downloads etc.) -> kanskje profilbilder?
 - [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
 - [ ] Determine android version
@@ -39,23 +41,38 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Publish to Play store
 - [ ] Popup when the AI has defeated 10 opponents (exam description)
 - [ ] clean gradle of unused dependencies
-### AI 
+### AI
+- [ ] AI should make some move
 - [ ] Figure out approach 
 - [ ] How to score different fields (i.e. what is biggest threat)
 - [ ] calculation should probably not run in main thread
 ### Testing 
 - [X] use [assertJ](http://joel-costigliola.github.io/assertj)
 - [X] set up travis
+- [ ] vurder https://google.github.io/truth/ fremfor assertj
+- [ ] Skill på ulike testkategorier som beskrevet https://developer.android.com/training/testing/fundamentals
+- [ ] @LargeTest og lignende.
+- [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals
 - [ ] set up tests for older phones / OS versions
 - [ ] Unit tests 
 - [ ] Android GUI tests
 - [ ] Test on different images on travis
 - [ ] >90% line coverage
 ### Documentation
+- [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
 - [ ] Convesions
     - [ ] lyttere i kode, ikke XML -> ryddigere
     - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
 - [ ] Named parameters, where and why?
+- [ ] Hvorfor lagres data på måten det gjøres (shared preferences, fil, database)
+- [ ] Håndtering av API-nøkler
+- [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals
+- [ ] V-modell
+- [ ] Reflekter rundt hvorfor assertj/https://google.github.io/truth/ ble valgt
+- [ ] Målsetninger om hvorfor man tester og hvorfor på forskjellig nivå
+    - [ ] Bottom up?
+    - [ ] GOogles filosofi (video fra undervisningsforum)
+- [ ] Gå over dokumentasajonsliste i modulist og agenda
 - [ ] Use of comments
 - [ ] Multithreading
 - [ ] Comment the use of CanCopy -> krøkkete å vite om noe er data class -> unngå bug hvor alle i grid har samme refereranse

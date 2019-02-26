@@ -30,8 +30,6 @@ class Game(val board: Board, val player1: Player, val player2: Player){
 
     fun clickAt(coordinate: Coordinate) {
 
-        if (activePlayer is BotPlayer) return // only HumanPlayers may click
-
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
         changePlayer()

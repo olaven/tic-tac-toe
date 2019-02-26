@@ -15,9 +15,8 @@ class Board(val dimension: Int = 3) {
 
 
     fun markSquareAt(coordinate: Coordinate, newMark: SquareMark) {
+
         val square = squareAt(coordinate)
         square.mark = newMark
     }
-
-
 }

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import org.olaven.tictacktoe.game.Game
-import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
+import org.olaven.tictacktoe.positionToCoordinates
 
 
 class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapter() {
@@ -21,7 +21,7 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
-        val coordinate = positionToCoordinates(position)
+        val coordinate = positionToCoordinates(position, game.board.grid)
         val square = game.board.squareAt(coordinate)
 
         val textView = TextView(context)
@@ -46,13 +46,6 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
             SquareMark.CROSS -> "X"
             SquareMark.EMPTY -> "_"
         }
-    }
-
-    private fun positionToCoordinates(position: Int): Coordinate {
-        val row = position / game.board.grid.rows
-        val column = position % game.board.grid.columns
-
-        return Coordinate(row, column)
     }
 
 }

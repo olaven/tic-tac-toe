@@ -1,11 +1,25 @@
 package org.olaven.tictacktoe.game.player
 
+import org.olaven.tictacktoe.game.Move
+import org.olaven.tictacktoe.game.board.Board
+import org.olaven.tictacktoe.game.board.Coordinate
+import org.olaven.tictacktoe.game.board.Square
+import org.olaven.tictacktoe.game.board.SquareMark
+import org.olaven.tictacktoe.positionToCoordinates
+
 class BotPlayer: Player("TTTBot") {
 
-    fun makeMove() {
+    fun selectCoordinate(board: Board): Coordinate {
         // TODO: Find the next best move based on the board and make it.
         // Finding of move on different thread.
         // making the move with inherited makemove(move) has to be done on UI Thread again
-        Runnable { print("find move here and access main thread afterwards") }.run()
+
+        board.grid.forEachIndexed { index, square ->
+            if (square.mark == SquareMark.EMPTY) {
+                return positionToCoordinates(index, board.grid)
+            }
+        }
+
+        return Coordinate(0, 0)
     }
 }
