@@ -23,7 +23,7 @@ internal class BoardTest {
     }
 
     @Test
-    fun DefaultGridIs3x3() {
+    fun defaultGridIs3x3() {
 
         val count = board.grid.matrix.map { it.count() }.sum()
         Assertions.assertThat(count)

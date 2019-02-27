@@ -29,7 +29,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Implement solo play (random moves before AI) 
 ### Other
 - [X] store users in resources
-- [ ] Familiarize with UI testing
+- [X] Familiarize with UI testing
 - [ ] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
 - [ ] Finne bruk av public directories (Photos, Downloads etc.) -> kanskje profilbilder?
 - [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
@@ -59,13 +59,18 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Test on different images on travis
 - [ ] >90% line coverage
 ### Documentation
+- [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
 - [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
 - [ ] Convesions
     - [ ] lyttere i kode, ikke XML -> ryddigere
     - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
 - [ ] Named parameters, where and why?
+- [ ] Multithreading 
+  - [ ] Hvor 
+  - [ ] Hvorfor viktig (ytelse, UI-lag, mobil osv.)
 - [ ] Hvorfor lagres data på måten det gjøres (shared preferences, fil, database)
 - [ ] Håndtering av API-nøkler
+- [ ] bruk testdefinisjoner fra https://developer.android.com/training/testing/fundamentals
 - [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals
 - [ ] V-modell
 - [ ] Reflekter rundt hvorfor assertj/https://google.github.io/truth/ ble valgt
@@ -74,6 +79,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
     - [ ] GOogles filosofi (video fra undervisningsforum)
 - [ ] Gå over dokumentasajonsliste i modulist og agenda
 - [ ] Use of comments
+- [ ] testnavn
 - [ ] Multithreading
 - [ ] Comment the use of CanCopy -> krøkkete å vite om noe er data class -> unngå bug hvor alle i grid har samme refereranse
 - [ ] Refactor alltid når det er noe som føles mer riktig -> Råd fra tidligere undervisning (Finn artikler om det samme)

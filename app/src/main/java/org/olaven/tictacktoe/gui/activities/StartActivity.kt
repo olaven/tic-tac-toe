@@ -35,7 +35,7 @@ class StartActivity : AppCompatActivity() {
 
             if (player1 == player2) {
                 activity_start_spinner_player2.performClick()
-                Toast.makeText(applicationContext, "Players cannot be the same", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(R.string.same_user_message), Toast.LENGTH_SHORT).show()
             } else {
                 val gameIntent = Intent(applicationContext, GameActivity::class.java).apply {
                     putExtra("player1", player1)
