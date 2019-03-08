@@ -2,6 +2,7 @@ package org.olaven.tictacktoe.gui.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import org.olaven.tictacktoe.R
@@ -25,18 +26,8 @@ class GameActivity : AppCompatActivity() {
 
         setupBoardView()
         setupText()
-        setupHighlight()
+        setupOnPlayerActions()
     }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-
 
     private fun setupBoardView() {
 
@@ -58,7 +49,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupHighlight() {
+    private fun setupOnPlayerActions() {
 
         game.apply {
 

@@ -3,10 +3,10 @@ package org.olaven.tictacktoe.game
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
-import org.olaven.tictacktoe.game.player.BotPlayer
 import org.olaven.tictacktoe.game.player.Player
+import java.io.Serializable
 
-class Game(val board: Board, val player1: Player, val player2: Player){
+class Game(val board: Board, val player1: Player, val player2: Player): Serializable {
 
     var activePlayer = player1
     var gameOver: Boolean = false

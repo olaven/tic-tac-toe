@@ -7,4 +7,5 @@
     <string name="activity_start_text_player2">Player 2:</string>
     <string name="unloaded">Unloaded</string>
     <string name="same_user_message">Players cannot be the same</string>
+    <string name="player2">player2</string>
 </resources>

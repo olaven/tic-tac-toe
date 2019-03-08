@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="player1_position">player1_position</string>
+    <string name="player2_position">player2_position</string>
+    <string name="player1">player1</string>
+</resources>

@@ -42,7 +42,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Popup when the AI has defeated 10 opponents (exam description)
 - [ ] clean gradle of unused dependencies
 ### AI
-- [ ] AI should make some move
+- [X] AI should make some move
 - [ ] Figure out approach 
 - [ ] How to score different fields (i.e. what is biggest threat)
 - [ ] calculation should probably not run in main thread
@@ -61,6 +61,9 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 ### Documentation
 - [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
 - [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
+- [ ] Metoder for restoring av state: (onSaveInstanceState / onRestoreInstanceState og onCreate https://stackoverflow.com/questions/12683779/are-oncreate-and-onrestoreinstancestate-mutually-exclusive)
+- [ ] state i start-activity https://developer.android.com/topic/libraries/architecture/saving-states#options_for_preserving_ui_state
+- [ ] bruk sharedprefs for innstillinger. Hvorfor? https://stackoverflow.com/questions/24822101/when-to-use-getsharedpreferences-vs-savedinstancestate
 - [ ] Convesions
     - [ ] lyttere i kode, ikke XML -> ryddigere
     - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
