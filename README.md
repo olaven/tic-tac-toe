@@ -72,6 +72,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
   - [ ] Hvor 
   - [ ] Hvorfor viktig (ytelse, UI-lag, mobil osv.)
 - [ ] Hvorfor lagres data på måten det gjøres (shared preferences, fil, database)
+- [ ] teamer -> https://material.io/tools/color/#!/?view.left=0&view.right=0
 - [ ] Håndtering av API-nøkler
 - [ ] bruk testdefinisjoner fra https://developer.android.com/training/testing/fundamentals
 - [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals

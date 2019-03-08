@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="black">#000000</color>
+    <!-- DefaultTheme -->
+    <color name="defaultPrimary">#008577</color>
+    <color name="defaultPrimaryDark">#00574B</color>
+    <color name="defaultAccent">#D81B60</color>
+
+    <!-- DarkTheme -->
+    <color name="darkPrimary">#212121</color>
+    <color name="darkPrimaryDark">#000000</color>
+    <color name="darkAccent">#484848</color>
+
+    <!-- FruitTheme -->
+    <color name="fruitPrimary">#00e676</color>
+    <color name="fruitPrimaryDark">#00b248</color>
+    <color name="fruitAccent">#ff1744</color>
+
+    <!-- CabinTheme -->
+    <color name="cabinPrimary">#ff7043</color>
+    <color name="cabinPrimaryDark">#33691e</color>
+    <color name="cabinAccent">#629749</color>
 </resources>
