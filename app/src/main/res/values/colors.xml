@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- non-theme -->
+    <color name="black">#000000</color>
+
     <!-- DefaultTheme -->
     <color name="defaultPrimary">#008577</color>
     <color name="defaultPrimaryDark">#00574B</color>
@@ -7,6 +11,7 @@
 
     <!-- DarkTheme -->
     <color name="darkPrimary">#212121</color>
+    <!-- same value as "black", but separate for semantic reasons -->
     <color name="darkPrimaryDark">#000000</color>
     <color name="darkAccent">#484848</color>
 

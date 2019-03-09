@@ -30,7 +30,8 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 ### Other
 - [X] store users in resources
 - [X] Familiarize with UI testing
-- [ ] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
+- [ ] Splitte opp activities i mindre klasser
+- [X] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
 - [ ] Finne bruk av public directories (Photos, Downloads etc.) -> kanskje profilbilder?
 - [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
@@ -61,6 +62,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 ### Documentation
 - [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
 - [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
+- [ ] Holdt meg unna heavy rammeverk (med untak av Room) -> hvorfor?
 - [ ] Metoder for restoring av state: (onSaveInstanceState / onRestoreInstanceState og onCreate https://stackoverflow.com/questions/12683779/are-oncreate-and-onrestoreinstancestate-mutually-exclusive)
 - [ ] state i start-activity https://developer.android.com/topic/libraries/architecture/saving-states#options_for_preserving_ui_state
 - [ ] bruk sharedprefs for innstillinger. Hvorfor? https://stackoverflow.com/questions/24822101/when-to-use-getsharedpreferences-vs-savedinstancestate
@@ -74,6 +76,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Hvorfor lagres data på måten det gjøres (shared preferences, fil, database)
 - [ ] teamer -> https://material.io/tools/color/#!/?view.left=0&view.right=0
 - [ ] hvorfor lagre konstante strings i resources
+- [ ] BaseActivity og arv (mht felles funksjonalitet)
 - [ ] Håndtering av API-nøkler
 - [ ] bruk testdefinisjoner fra https://developer.android.com/training/testing/fundamentals
 - [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals

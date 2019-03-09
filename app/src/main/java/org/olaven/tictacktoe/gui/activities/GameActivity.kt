@@ -13,7 +13,7 @@ import org.olaven.tictacktoe.game.player.HumanPlayer
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 
 
-class GameActivity : AppCompatActivity() {
+class GameActivity : BaseActivity() {
 
     val game: Game by lazy {
         initializeGame()
