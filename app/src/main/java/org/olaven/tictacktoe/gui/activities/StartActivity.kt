@@ -126,7 +126,7 @@ class StartActivity : BaseActivity() {
 
     private fun changeTheme(themeName: String) {
 
-        setPreference(themeName)
+        setThemePreference(themeName)
 
         Snackbar.make(activity_start, "Restart for changes to take effect", Snackbar.LENGTH_LONG).apply {
             this.setAction("restart") {
