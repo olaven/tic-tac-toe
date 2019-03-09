@@ -1,10 +1,8 @@
 package org.olaven.tictacktoe.gui.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
@@ -113,7 +111,8 @@ class StartActivity : BaseActivity() {
         PopupMenu(applicationContext, activity_start).apply {
 
             setOnMenuItemClickListener {
-                changeTheme(it)
+                val themeName = it.title.toString()
+                changeTheme(themeName)
                 true
             }
             inflate(R.menu.menu_theme)
@@ -125,13 +124,9 @@ class StartActivity : BaseActivity() {
         return true
     }
 
-    private fun changeTheme(item: MenuItem) {
+    private fun changeTheme(themeName: String) {
 
-        val editor = getSharedPreferences(getString(R.string.theme_preference), Context.MODE_PRIVATE).edit()
-        val value = item.title.toString()
-
-        editor.putString(getString(R.string.theme_key), value)
-        editor.apply()
+        setPreference(themeName)
 
         Snackbar.make(activity_start, "Restart for changes to take effect", Snackbar.LENGTH_LONG).apply {
             this.setAction("restart") {

@@ -2,8 +2,6 @@ package org.olaven.tictacktoe.gui.activities
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.game.board.Board

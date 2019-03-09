@@ -13,7 +13,13 @@ open class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
+    protected fun setPreference(name: String) {
 
+        val editor = getSharedPreferences(getString(R.string.theme_preference), Context.MODE_PRIVATE).edit()
+
+        editor.putString(getString(R.string.theme_key), name)
+        editor.apply()
+    }
 
     private fun applyTheme() {
 
