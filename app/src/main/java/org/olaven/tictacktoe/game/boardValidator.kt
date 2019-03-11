@@ -3,47 +3,66 @@ package org.olaven.tictacktoe.game
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
-
-fun hasWinner(board: Board): Boolean =
-        verticalWinner(board) || horizontalWinner(board) || diagonalWinner(board)
-
-
-private fun verticalWinner(board: Board): Boolean =
-        straightWinner(Direction.VERTICAL, board)
+import android.R.attr.y
+import android.R.attr.x
 
 
-private fun horizontalWinner(board: Board): Boolean =
-        straightWinner(Direction.HORIZONTAL, board)
 
-private fun diagonalWinner(board: Board): Boolean =
-        false
+fun hasWinner(coordinate: Coordinate, board: Board): Boolean =
+        verticalWinner(coordinate, board) || horizontalWinner(coordinate, board) || diagonalWinner(board)
 
 
-private fun straightWinner(direction: Direction, board: Board): Boolean {
-    for(i in 0 until board.dimension) {
+private fun verticalWinner(coordinate: Coordinate, board: Board): Boolean =
+        straightWinner(Direction.VERTICAL, coordinate, board)
 
-        var previous: SquareMark? = null
-        for(j in 0 until board.dimension) {
 
-            val coordinate= when (direction) {
-                Direction.HORIZONTAL -> Coordinate(i, j)
-                Direction.VERTICAL -> Coordinate(j, i)
-            }
+private fun horizontalWinner(coordinate: Coordinate, board: Board): Boolean =
+        straightWinner(Direction.HORIZONTAL, coordinate, board)
 
-            val current = board.squareAt(coordinate).mark
-            if (previous == null) previous = current
+private fun diagonalWinner(board: Board): Boolean {
 
-            if (previous != current) {
-                continue
-            }
+    for(i in 1 until board.dimension) {
 
-            if (j == board.dimension - 1) {
-                return true
-            }
-        }
+        val previous = board.squareAt(Coordinate(i - 1, i - 1)).mark
+        val current = board.squareAt(Coordinate(i, i)).mark
+
+        if (previous != current)
+            return false
+
     }
 
-    return false
+    var y = 1
+    for(x in board.dimension downTo 1) {
+
+        val previous = board.squareAt(Coordinate(x, y - 1))
+        val current = board.squareAt(Coordinate(x, y))
+
+        if (previous != current)
+            return false
+
+        y++
+    }
+
+    return true
+}
+
+
+private fun straightWinner(direction: Direction, coordinate: Coordinate, board: Board): Boolean {
+
+    for(i in 1 until board.dimension) {
+
+        val current = board.squareAt(coordinate).mark
+        val previous = when (direction) {
+            Direction.VERTICAL -> board.squareAt(Coordinate(i, coordinate.y)).mark
+            Direction.HORIZONTAL -> board.squareAt(Coordinate(coordinate.x, i)).mark
+        }
+
+        if (current != previous)
+            return false
+
+    }
+
+    return true
 }
 
 private enum class Direction {

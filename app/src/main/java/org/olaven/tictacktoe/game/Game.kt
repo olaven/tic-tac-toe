@@ -39,15 +39,15 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
             clickCount++
         }
 
-        checkGameOver()
+        checkGameOver(coordinate)
     }
 
-    private fun checkGameOver() {
+    private fun checkGameOver(latest: Coordinate) {
         // TODO: Run in different thread
 
 
 
-        val winner = hasWinner(board)
+        val winner = hasWinner(latest, board)
 
         if (winner) {
             val result = playerDependent(Result.FIRST, Result.SECOND)
