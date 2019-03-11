@@ -63,6 +63,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
 - [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
 - [ ] Holdt meg unna heavy rammeverk (med untak av Room) -> hvorfor?
+- [ ] Særlig testing av selve spillogikken; det er det som er kjernen i appen
 - [ ] Metoder for restoring av state: (onSaveInstanceState / onRestoreInstanceState og onCreate https://stackoverflow.com/questions/12683779/are-oncreate-and-onrestoreinstancestate-mutually-exclusive)
 - [ ] state i start-activity https://developer.android.com/topic/libraries/architecture/saving-states#options_for_preserving_ui_state
 - [ ] bruk sharedprefs for innstillinger. Hvorfor? https://stackoverflow.com/questions/24822101/when-to-use-getsharedpreferences-vs-savedinstancestate

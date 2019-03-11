@@ -1,6 +1,7 @@
 package org.olaven.tictacktoe.game
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.olaven.tictacktoe.game.board.Board
@@ -20,6 +21,12 @@ internal class GameTest {
         player1 = HumanPlayer("player1")
         player2 = HumanPlayer("player2")
         game = Game(Board(), player1, player2)
+    }
+
+    @AfterEach
+    fun tearDown() {
+
+        game.onGameOver = null
     }
 
     @Test

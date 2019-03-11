@@ -43,8 +43,18 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
     }
 
     private fun checkGameOver() {
+        // TODO: Run in different thread
+
+
+
+        val winner = hasWinner(board)
+
+        if (winner) {
+            val result = playerDependent(Result.FIRST, Result.SECOND)
+            onGameOver?.invoke(result)
+        }
         if (clickCount >= board.size) {
-            onGameOver?.let { it(Result.DRAW) }
+            onGameOver?.invoke(Result.DRAW)
         }
     }
 

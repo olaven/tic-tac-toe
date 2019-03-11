@@ -27,5 +27,6 @@
     <!-- Shared preferences -->
     <string name="theme_key">theme_key</string>
     <string name="theme_preference">theme_preference</string>
+    <string name="game_over_message">The game is over</string>
 
 </resources>

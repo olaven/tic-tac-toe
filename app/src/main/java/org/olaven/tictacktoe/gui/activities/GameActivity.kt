@@ -1,7 +1,10 @@
 package org.olaven.tictacktoe.gui.activities
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.game.board.Board
@@ -25,6 +28,27 @@ class GameActivity : BaseActivity() {
         setupBoardView()
         setupText()
         setupOnPlayerActions()
+        setupOnGameOver()
+    }
+
+    private fun setupOnGameOver() {
+
+        game.onGameOver = {
+
+            val alert = AlertDialog.Builder(this)
+
+            alert.apply {
+                setTitle(getString(R.string.game_over_message))
+                setPositiveButton("New game") { _, _ ->
+                    val intent = Intent(applicationContext, StartActivity::class.java)
+                    startActivity(intent)
+                }
+                setNeutralButton("See high scores") { _, _ ->
+                    Toast.makeText(applicationContext, "Create leaderboards!", Toast.LENGTH_SHORT).show()
+                }
+                show()
+            }
+        }
     }
 
     private fun setupBoardView() {
