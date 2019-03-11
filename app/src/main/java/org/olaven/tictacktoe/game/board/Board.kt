@@ -7,6 +7,8 @@ class Board(val dimension: Int = 3) {
         columns = dimension,
         defaultContent = Square(SquareMark.EMPTY)
     )
+    val size: Int
+        get() = dimension * dimension
 
     fun squareAt(coordinate: Coordinate): Square {
 
@@ -19,4 +21,5 @@ class Board(val dimension: Int = 3) {
         val square = squareAt(coordinate)
         square.mark = newMark
     }
+
 }

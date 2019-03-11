@@ -13,7 +13,7 @@ import org.olaven.tictacktoe.positionToCoordinates
 
 class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapter() {
 
-    override fun getCount(): Int = game.board.dimension * game.board.dimension
+    override fun getCount(): Int = game.board.size
 
     override fun getItem(position: Int): Any? = null
 

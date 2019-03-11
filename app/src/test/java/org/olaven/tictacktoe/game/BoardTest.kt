@@ -31,6 +31,16 @@ internal class BoardTest {
     }
 
     @Test
+    fun sizeIsDimensionSquared() {
+
+        val dimension = 12
+        board = Board(dimension)
+
+        assertThat(board.size)
+            .isEqualTo(dimension * dimension)
+    }
+
+    @Test
     fun canMarkCircleAtCoordinate() {
         val coordinate = Coordinate(0, 0)
 

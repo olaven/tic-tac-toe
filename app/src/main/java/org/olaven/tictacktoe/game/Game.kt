@@ -9,8 +9,8 @@ import java.io.Serializable
 class Game(val board: Board, val player1: Player, val player2: Player): Serializable {
 
     var activePlayer = player1
-    var gameOver: Boolean = false
-        // TODO: getter calculating state if not calculated for this turn (or something similar)
+    var clickCount = 0
+
     /**
      * Triggered when activePlayer is changed.
      * Accessible from other class
@@ -33,9 +33,23 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
         changePlayer()
+
+
+        if (board.squareAt(coordinate).mark != SquareMark.EMPTY) {
+            clickCount++
+        }
+
+        checkGameOver()
+    }
+
+    private fun checkGameOver() {
+        if (clickCount >= board.size) {
+            onGameOver?.let { it(Result.DRAW) }
+        }
     }
 
     private fun changePlayer() {
+
         activePlayer = playerDependent(player2, player1)
         val listener = playerDependent(
             {
@@ -49,9 +63,6 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
         listener()
     }
 
-    fun playerWinning() {
-
-    }
 
     /**
      * Returns first argument if activePlayer is player1
