@@ -1,5 +1,6 @@
 package org.olaven.tictacktoe.gui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -21,19 +22,27 @@ class StartActivity : BaseActivity() {
 
         setupSpinners()
         setupButton()
-        restoreSpinners(savedInstanceState)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onStart() {
 
-        super.onSaveInstanceState(outState)
-        Toast.makeText(applicationContext, "saving state", Toast.LENGTH_SHORT).show()
-        outState?.let {
-            it.putInt(getString(R.string.player1_position_key), activity_start_spinner_player1.selectedItemPosition)
-            it.putInt(getString(R.string.player2_position_key), activity_start_spinner_player2.selectedItemPosition)
-        }
+        restoreSpinners()
+        super.onStart()
     }
 
+    override fun onStop() {
+
+        Toast.makeText(applicationContext, "stopper", Toast.LENGTH_SHORT).show()
+        val editor = getPreferences(Context.MODE_PRIVATE).edit()
+
+        editor
+            .putInt(getString(R.string.player1_position_key), activity_start_spinner_player1.selectedItemPosition)
+            .apply()
+        editor
+            .putInt(getString(R.string.player2_position_key), activity_start_spinner_player2.selectedItemPosition)
+            .apply()
+        super.onStop()
+    }
 
     private fun setupSpinners() {
 
@@ -65,19 +74,16 @@ class StartActivity : BaseActivity() {
     }
 
 
-    private fun restoreSpinners(savedInstanceState: Bundle?) {
+    private fun restoreSpinners() {
 
-        Toast.makeText(applicationContext, "oncreate kjører", Toast.LENGTH_SHORT).show()
-        Toast.makeText(applicationContext, "savedInstanceState: ${savedInstanceState != null}", Toast.LENGTH_SHORT)
-            .show()
-        savedInstanceState?.let {
-            Toast.makeText(applicationContext, "restoring state", Toast.LENGTH_SHORT).show()
-            val player1Position = it.getInt(getString(R.string.player1_position_key))
-            val player2Position = it.getInt(getString(R.string.player2_position_key))
+        Toast.makeText(applicationContext, "Restorings pinners", Toast.LENGTH_SHORT).show()
+        val preferences = getPreferences(Context.MODE_PRIVATE)
 
-            activity_start_spinner_player1.setSelection(player1Position)
-            activity_start_spinner_player2.setSelection(player2Position)
-        }
+        val firstPosition = preferences.getInt(getString(R.string.player1_position_key), 0)
+        val secondPosition= preferences.getInt(getString(R.string.player2_position_key), 0)
+
+        activity_start_spinner_player1.setSelection(firstPosition)
+        activity_start_spinner_player2.setSelection(secondPosition)
     }
 
 
