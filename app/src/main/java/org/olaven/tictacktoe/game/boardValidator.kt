@@ -9,7 +9,7 @@ import org.olaven.tictacktoe.game.board.SquareMark
 * Passing the latest move as well. That allows me to limit the search space
 * */
 fun hasWinner(latestMove: Coordinate, board: Board): Boolean =
-        verticalWinner(latestMove, board) || horizontalWinner(latestMove, board) || diagonalWinner(board)
+        verticalWinner(latestMove, board) || horizontalWinner(latestMove, board) || diagonalWinnerLeftDown(board) || diagonalWinnerLeftUp(board)
 
 
 private fun verticalWinner(coordinate: Coordinate, board: Board) =
@@ -19,33 +19,39 @@ private fun verticalWinner(coordinate: Coordinate, board: Board) =
 private fun horizontalWinner(coordinate: Coordinate, board: Board) =
     straightWinner(Direction.HORIZONTAL, coordinate, board)
 
-private fun diagonalWinner(board: Board): Boolean {
-    return false
-    /*
+private fun diagonalWinnerLeftDown(board: Board): Boolean {
+
     for(i in 1 until board.dimension) {
 
         val previous = board.squareAt(Coordinate(i - 1, i - 1)).mark
         val current = board.squareAt(Coordinate(i, i)).mark
 
-        if (previous != current)
+        if (previous == SquareMark.EMPTY || current == SquareMark.EMPTY)
             return false
-
-    }
-
-    var y = 1
-    for(x in board.dimension downTo 1) {
-
-        val previous = board.squareAt(Coordinate(x, y - 1))
-        val current = board.squareAt(Coordinate(x, y))
-
-        if (previous != current)
+        if (current != previous)
             return false
-
-        y++
     }
 
     return true
-    */
+}
+
+private fun diagonalWinnerLeftUp(board: Board): Boolean {
+
+    val limit = board.dimension - 1
+    for(x in 1 until board.dimension) {
+
+        val y = limit - x
+
+        val previous = board.squareAt(Coordinate(x - 1, y + 1)).mark
+        val current = board.squareAt(Coordinate(x, y)).mark
+
+        if (previous == SquareMark.EMPTY || current == SquareMark.EMPTY)
+            return false
+        if (current != previous)
+            return false
+    }
+
+    return true
 }
 
 

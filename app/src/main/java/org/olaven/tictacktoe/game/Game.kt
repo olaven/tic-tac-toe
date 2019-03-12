@@ -9,7 +9,6 @@ import java.io.Serializable
 class Game(val board: Board, val player1: Player, val player2: Player): Serializable {
 
     var activePlayer = player1
-    var clickCount = 0
 
     /**
      * Triggered when activePlayer is changed.
@@ -34,11 +33,6 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
         board.markSquareAt(coordinate, mark)
         changePlayer()
 
-
-        if (board.squareAt(coordinate).mark != SquareMark.EMPTY) {
-            clickCount++
-        }
-
         checkGameOver(coordinate)
     }
 
@@ -53,6 +47,8 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
             val result = playerDependent(Result.FIRST, Result.SECOND)
             onGameOver?.invoke(result)
         }
+
+        val clickCount = board.grid.filter { it.mark != SquareMark.EMPTY }.count()
         if (clickCount >= board.size) {
             onGameOver?.invoke(Result.DRAW)
         }
