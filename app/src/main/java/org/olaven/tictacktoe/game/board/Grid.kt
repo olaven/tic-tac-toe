@@ -5,8 +5,8 @@ import org.olaven.tictacktoe.game.CanCopy
 class Grid<T: CanCopy<T>>(val rows: Int, val columns: Int, defaultContent: T): Iterable<T> {
 
 
-    val matrix = List(rows) {
-        List(columns) {
+    val matrix = List(columns) {
+        List(rows) {
             defaultContent.copy()
         }
     }

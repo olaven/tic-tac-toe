@@ -3,24 +3,25 @@ package org.olaven.tictacktoe.game
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
-import android.R.attr.y
-import android.R.attr.x
 
 
-
-fun hasWinner(coordinate: Coordinate, board: Board): Boolean =
-        verticalWinner(coordinate, board) || horizontalWinner(coordinate, board) || diagonalWinner(board)
-
-
-private fun verticalWinner(coordinate: Coordinate, board: Board): Boolean =
-        straightWinner(Direction.VERTICAL, coordinate, board)
+/*
+* Passing the latest move as well. That allows me to limit the search space
+* */
+fun hasWinner(latestMove: Coordinate, board: Board): Boolean =
+        verticalWinner(latestMove, board) || horizontalWinner(latestMove, board) || diagonalWinner(board)
 
 
-private fun horizontalWinner(coordinate: Coordinate, board: Board): Boolean =
-        straightWinner(Direction.HORIZONTAL, coordinate, board)
+private fun verticalWinner(coordinate: Coordinate, board: Board) =
+    straightWinner(Direction.VERTICAL, coordinate, board)
+
+
+private fun horizontalWinner(coordinate: Coordinate, board: Board) =
+    straightWinner(Direction.HORIZONTAL, coordinate, board)
 
 private fun diagonalWinner(board: Board): Boolean {
-
+    return false
+    /*
     for(i in 1 until board.dimension) {
 
         val previous = board.squareAt(Coordinate(i - 1, i - 1)).mark
@@ -44,24 +45,34 @@ private fun diagonalWinner(board: Board): Boolean {
     }
 
     return true
+    */
 }
 
 
-private fun straightWinner(direction: Direction, coordinate: Coordinate, board: Board): Boolean {
+private fun straightWinner(direction: Direction, latestMove: Coordinate, board: Board): Boolean {
 
     for(i in 1 until board.dimension) {
 
-        val current = board.squareAt(coordinate).mark
-        val previous = when (direction) {
-            Direction.VERTICAL -> board.squareAt(Coordinate(i, coordinate.y)).mark
-            Direction.HORIZONTAL -> board.squareAt(Coordinate(coordinate.x, i)).mark
+        val currentCoordinate = when(direction) {
+            Direction.HORIZONTAL -> Coordinate(i, latestMove.y)
+            Direction.VERTICAL -> Coordinate(latestMove.x, i)
         }
 
+        val previousCoordinate = when(direction) {
+            Direction.HORIZONTAL -> Coordinate(i - 1, latestMove.y)
+            Direction.VERTICAL -> Coordinate(latestMove.x, i)
+        }
+
+        val current = board.squareAt(currentCoordinate).mark
+        val previous = board.squareAt(previousCoordinate).mark
+
+
+
+        if (previous == SquareMark.EMPTY || current == SquareMark.EMPTY)
+            return false
         if (current != previous)
             return false
-
     }
-
     return true
 }
 
