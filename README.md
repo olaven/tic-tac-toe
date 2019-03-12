@@ -22,7 +22,6 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Board should only be AxA, not AxB
 - [X] Game class modelling the game
 - [X] Choose users
-- [ ] lagre spillstate
 - [ ] Determine if game is over or not
 - [ ] Change board default board dimension
 - [ ] Change n-goal (has to be <= board dimension)
@@ -33,9 +32,9 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Splitte opp activities i mindre klasser
 - [X] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
 - [ ] Finne bruk av public directories (Photos, Downloads etc.) -> kanskje profilbilder?
-- [ ] clean up in x/y, row/column getting mixed! x = column, y = row!
+- [X] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
-- [ ] Determine android version
+- [X] Determine android version
 - [ ] Records of previous games stored in local db
 - [ ] Changing default dimension in settings
 - [ ] Class diagram
@@ -63,6 +62,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
 - [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
 - [ ] Holdt meg unna heavy rammeverk (med untak av Room) -> hvorfor?
+- [ ] Hvorfor lagre spiller-option i preferences? Hvorfor ikke lagre spill-state?
 - [ ] Særlig testing av selve spillogikken; det er det som er kjernen i appen
 - [ ] Metoder for restoring av state: (onSaveInstanceState / onRestoreInstanceState og onCreate https://stackoverflow.com/questions/12683779/are-oncreate-and-onrestoreinstancestate-mutually-exclusive)
 - [ ] state i start-activity https://developer.android.com/topic/libraries/architecture/saving-states#options_for_preserving_ui_state
