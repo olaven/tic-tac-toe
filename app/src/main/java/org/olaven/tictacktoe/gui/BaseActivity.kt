@@ -34,12 +34,12 @@ open class BaseActivity: AppCompatActivity() {
 
         super.onSaveInstanceState(outState)
         val key = getString(R.string.fragment_state_key)
-        outState?.putString(key, getString(R.string.fragment_state))
+        outState?.putString(key, "CURRENT FRAGMENT") //TODO: FIX ME 
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
 
-        super.onRestoreInstanceState(savedInstanceState)
+        //TODO: String (37) should be set as the current actiivty name
         val key = getString(R.string.fragment_state_key)
         val state = savedInstanceState?.getString(key)
 
@@ -49,8 +49,10 @@ open class BaseActivity: AppCompatActivity() {
         } else {
             replaceMainFragment(StartFragment())
         }
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
+    //TODO: Find out if I should use this or not (used in fragments only, should it go through activity?)
     private fun setupSharedDataListener() {
 
         val sharedViewModel = ViewModelProviders.of(this).get(SharedModel::class.java)

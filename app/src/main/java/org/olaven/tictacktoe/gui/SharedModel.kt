@@ -7,4 +7,6 @@ class SharedModel: ViewModel() {
 
     val player1Name = MutableLiveData<String>()
     val player2Name = MutableLiveData<String>()
+
+    val fragment = MutableLiveData<String>()
 }
