@@ -1,14 +1,19 @@
-package org.olaven.tictacktoe.gui.activities
+package org.olaven.tictacktoe.gui
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.PopupMenu
+import kotlinx.android.synthetic.main.activity_base.*
 import org.olaven.tictacktoe.R
-import org.olaven.tictacktoe.gui.SharedModel
 import org.olaven.tictacktoe.gui.fragments.GameFragment
 import org.olaven.tictacktoe.gui.fragments.StartFragment
 
@@ -71,47 +76,56 @@ open class BaseActivity: AppCompatActivity() {
         transaction.commit()
     }
 
-    /*
-    override fun onStart() {
-
-        // restoreSpinners()
-        super.onStart()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
-    override fun onStop() {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        Toast.makeText(applicationContext, "stopper", Toast.LENGTH_SHORT).show()
-        val editor = getPreferences(Context.MODE_PRIVATE).edit()
+        return when(item?.itemId) {
 
-        editor
-            .putInt(getString(R.string.player1_position_key), activity_start_spinner_player1.selectedItemPosition)
-            .apply()
-        editor
-            .putInt(getString(R.string.player2_position_key), activity_start_spinner_player2.selectedItemPosition)
-            .apply()
-        super.onStop()
+            R.id.menu_theme_cabin -> {
+                changeTheme(getString(R.string.cabin_theme))
+                return true
+            }
+            R.id.menu_theme_default -> {
+                changeTheme(getString(R.string.default_theme))
+                return true
+            }
+            R.id.menu_theme_dark -> {
+                changeTheme(getString(R.string.dark_theme))
+                return true
+            }
+            R.id.menu_theme_fruit -> {
+                changeTheme(getString(R.string.fruit_theme))
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
-    private fun restoreSpinners() {
+    private fun changeTheme(themeName: String) {
 
-        Toast.makeText(applicationContext, "Restorings pinners", Toast.LENGTH_SHORT).show()
-        val preferences = getPreferences(Context.MODE_PRIVATE)
+        setThemePreference(themeName)
 
-        val firstPosition = preferences.getInt(getString(R.string.player1_position_key), 0)
-        val secondPosition= preferences.getInt(getString(R.string.player2_position_key), 0)
-
-        activity_start_spinner_player1.setSelection(firstPosition)
-        activity_start_spinner_player2.setSelection(secondPosition)
+        Snackbar.make(activity_base_frame_layout, "Restart for changes to take effect", Snackbar.LENGTH_LONG).apply {
+            this.setAction("restart") {
+                restart()
+            }
+            show()
+        }
     }
 
-    protected fun setThemePreference(name: String) {
+
+    private fun setThemePreference(name: String) {
 
         val editor = getSharedPreferences(getString(R.string.theme_preference), Context.MODE_PRIVATE).edit()
 
         editor.putString(getString(R.string.theme_key), name)
         editor.apply()
     }
-    */
+
 
     private fun applyTheme() {
 
@@ -126,6 +140,21 @@ open class BaseActivity: AppCompatActivity() {
                 getString(R.string.fruit_theme)   -> setTheme(R.style.FruitTheme)
                 getString(R.string.cabin_theme)   -> setTheme(R.style.CabinTheme)
             }
+        }
+    }
+
+    private fun restart() {
+
+
+        Handler().post {
+            val intent = intent
+            intent.addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        or Intent.FLAG_ACTIVITY_NO_ANIMATION
+            )
+
+            finish()
+            startActivity(intent)
         }
     }
 }

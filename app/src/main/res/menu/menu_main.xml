@@ -6,6 +6,28 @@
         android:id="@+id/menu_main_add_user"
         android:title="@string/add_user"/>
     <item
-        android:id="@+id/menu_theme_dark"
-        android:title="@string/change_theme"/>
+            android:id="@+id/menu_main_show_leaderboard"
+            android:title="@string/show_leaderboard"/>
+    <item
+        android:title="Themes">
+        <menu
+                android:id="@+id/menu_main_theme">
+            <item
+                    android:id="@+id/menu_theme_default"
+                    android:title="@string/default_theme"/>
+            <item
+                    android:id="@+id/menu_theme_dark"
+                    android:title="@string/dark_theme"/>
+
+            <item
+                    android:id="@+id/menu_theme_fruit"
+                    android:title="@string/fruit_theme"/>
+
+            <item
+                    android:id="@+id/menu_theme_cabin"
+                    android:title="@string/cabin_theme"/>
+        </menu>
+    </item>
+
+
 </menu>

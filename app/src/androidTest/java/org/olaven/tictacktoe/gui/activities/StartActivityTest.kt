@@ -27,7 +27,7 @@ class StartActivityTest {
     @Test
     fun canChooseElement() {
 
-        val id = R.id.activity_start_spinner_player2
+        val id = R.id.fragment_start_spinner_player2
         val text = "AI"
         onView(withId(id))
             .perform(click())
@@ -42,7 +42,7 @@ class StartActivityTest {
     @Test
     fun sameUserResultsInToast() {
 
-        onView(withId(R.id.activity_start_button_start))
+        onView(withId(R.id.fragment_start_button_start))
             .perform(click())
 
         onView(withText(R.string.same_user_message))
@@ -53,8 +53,8 @@ class StartActivityTest {
     @Test
     fun differentUserDoesNotToast() {
 
-        val spinner = R.id.activity_start_spinner_player2
-        val button = R.id.activity_start_button_start
+        val spinner = R.id.fragment_start_spinner_player2
+        val button = R.id.fragment_start_button_start
         val message = R.string.same_user_message
 
 
@@ -76,8 +76,8 @@ class StartActivityTest {
     @Test
     fun differentUserLaunchesNewActivity() {
 
-        val spinner = R.id.activity_start_spinner_player2
-        val button = R.id.activity_start_button_start
+        val spinner = R.id.fragment_start_spinner_player2
+        val button = R.id.fragment_start_button_start
 
         onView(withId(spinner))
             .perform(click())

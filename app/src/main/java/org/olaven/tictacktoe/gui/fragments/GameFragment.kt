@@ -3,7 +3,6 @@ package org.olaven.tictacktoe.gui.fragments
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,15 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_game.*
-
+import kotlinx.android.synthetic.main.fragment_game.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.game.Game
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.player.BotPlayer
 import org.olaven.tictacktoe.game.player.HumanPlayer
 import org.olaven.tictacktoe.gui.SharedModel
-import org.olaven.tictacktoe.gui.activities.BaseActivity
+import org.olaven.tictacktoe.gui.BaseActivity
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 
 
@@ -113,8 +111,8 @@ class GameFragment : Fragment() {
 
         game.apply {
 
-            activity_game_grid_view.adapter = GameGridAdapter(context!!, this)
-            activity_game_grid_view.numColumns = board.dimension
+            fragment_game_grid_view.adapter = GameGridAdapter(context!!, this)
+            fragment_game_grid_view.numColumns = board.dimension
         }
 
     }
@@ -124,8 +122,8 @@ class GameFragment : Fragment() {
 
         game.apply {
 
-            activity_game_text_player1.text = player1.name
-            activity_game_text_player2.text = player2.name
+            fragment_game_text_player1.text = player1.name
+            fragment_game_text_player2.text = player2.name
         }
     }
 
@@ -135,14 +133,14 @@ class GameFragment : Fragment() {
 
             onFirstPlayer = {
 
-                activity_game_text_player1.setTextColor(Color.GREEN)
-                activity_game_text_player2.setTextColor(Color.BLACK)
+                fragment_game_text_player1.setTextColor(Color.GREEN)
+                fragment_game_text_player2.setTextColor(Color.BLACK)
             }
 
             onSecondPlayer = {
 
-                activity_game_text_player1.setTextColor(Color.BLACK)
-                activity_game_text_player2.setTextColor(Color.GREEN)
+                fragment_game_text_player1.setTextColor(Color.BLACK)
+                fragment_game_text_player2.setTextColor(Color.GREEN)
 
                 if (it is BotPlayer) {
                     val coordinate = it.selectCoordinate(board)

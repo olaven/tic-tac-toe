@@ -9,14 +9,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <GridView
-                android:id="@+id/activity_game_grid_view"
+                android:id="@+id/fragment_game_grid_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/activity_game_text_player2"
-                app:layout_constraintBottom_toTopOf="@id/activity_game_text_player1"/>
+                app:layout_constraintTop_toBottomOf="@id/fragment_game_text_player2"
+                app:layout_constraintBottom_toTopOf="@id/fragment_game_text_player1"/>
 
         <TextView
-                android:id="@+id/activity_game_text_player2"
+                android:id="@+id/fragment_game_text_player2"
                 android:textColor="@color/black"
                 android:text="@string/unloaded"
                 android:textSize="30sp"
@@ -29,7 +29,7 @@
                 app:layout_constraintStart_toStartOf="parent"
         />
         <TextView
-                android:id="@+id/activity_game_text_player1"
+                android:id="@+id/fragment_game_text_player1"
                 android:textColor="@color/black"
                 android:text="@string/unloaded"
                 android:textSize="30sp"

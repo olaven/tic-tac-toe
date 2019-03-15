@@ -1,6 +1,5 @@
 package org.olaven.tictacktoe.gui.fragments
 
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_start.*
+import kotlinx.android.synthetic.main.fragment_start.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.gui.SharedModel
-import org.olaven.tictacktoe.gui.activities.BaseActivity
+import org.olaven.tictacktoe.gui.BaseActivity
 
 
 class StartFragment : Fragment() {
@@ -37,18 +36,18 @@ class StartFragment : Fragment() {
         val humanPlayers = resources.getStringArray(R.array.humanPlayers)
         val aiPlayers = resources.getStringArray(R.array.aiPlayers)
 
-        activity_start_spinner_player1.adapter = getAdapter(humanPlayers)
-        activity_start_spinner_player2.adapter = getAdapter(humanPlayers + aiPlayers)
+        fragment_start_spinner_player1.adapter = getAdapter(humanPlayers)
+        fragment_start_spinner_player2.adapter = getAdapter(humanPlayers + aiPlayers)
     }
 
     private fun setupButton() {
-        activity_start_button_start.setOnClickListener {
+        fragment_start_button_start.setOnClickListener {
 
-            val player1 = activity_start_spinner_player1.selectedItem.toString()
-            val player2 = activity_start_spinner_player2.selectedItem.toString()
+            val player1 = fragment_start_spinner_player1.selectedItem.toString()
+            val player2 = fragment_start_spinner_player2.selectedItem.toString()
 
             if (player1 == player2) {
-                activity_start_spinner_player2.performClick()
+                fragment_start_spinner_player2.performClick()
                 Toast.makeText(context, getString(R.string.same_user_message), Toast.LENGTH_SHORT).show()
             } else {
 
