@@ -13,7 +13,7 @@ import org.olaven.tictacktoe.game.player.BotPlayer
 import org.olaven.tictacktoe.game.player.HumanPlayer
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 
-
+/*
 class GameActivity : BaseActivity() {
 
     val game: Game by lazy {
@@ -111,6 +111,6 @@ class GameActivity : BaseActivity() {
     }
 
 }
-
+*/
 
 

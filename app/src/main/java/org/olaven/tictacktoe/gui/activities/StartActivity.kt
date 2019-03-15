@@ -13,6 +13,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_start.*
 import org.olaven.tictacktoe.R
 
+/*
 class StartActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,7 +114,6 @@ class StartActivity : BaseActivity() {
 
     private fun showChangeThemeMenu(): Boolean {
 
-
         PopupMenu(applicationContext, activity_start).apply {
 
             setOnMenuItemClickListener {
@@ -154,3 +154,4 @@ class StartActivity : BaseActivity() {
     }
 
 }
+*/
