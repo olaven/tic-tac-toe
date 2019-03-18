@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.PopupMenu
 import kotlinx.android.synthetic.main.activity_base.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.gui.fragments.GameFragment
@@ -26,31 +25,31 @@ open class BaseActivity: AppCompatActivity() {
         replaceMainFragment(StartFragment())
         setupSharedDataListener()
         setContentView(R.layout.activity_base)
-
+        savedInstanceState?.let { restoreFragment(it) }
     }
+
+    private fun restoreFragment(savedInstanceState: Bundle) {
+
+        val key = getString(R.string.fragment_state_key)
+        val fragmentName = savedInstanceState.getString(key)
+
+        if (fragmentName == GameFragment().toString())
+            replaceMainFragment(GameFragment())
+        else
+            replaceMainFragment(StartFragment()) //NOTE: Swapped for testing
+    }
+
+
 
 
     override fun onSaveInstanceState(outState: Bundle?) {
 
+        val fragmentName = supportFragmentManager.findFragmentById(R.id.activity_base_frame_layout)
+        val key = getString(R.string.fragment_state_key)
+        outState?.putString(key, fragmentName.toString())
         super.onSaveInstanceState(outState)
-        val key = getString(R.string.fragment_state_key)
-        outState?.putString(key, "CURRENT FRAGMENT") //TODO: FIX ME 
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-
-        //TODO: String (37) should be set as the current actiivty name
-        val key = getString(R.string.fragment_state_key)
-        val state = savedInstanceState?.getString(key)
-
-        if (state.equals("game")) {
-
-            replaceMainFragment(GameFragment())
-        } else {
-            replaceMainFragment(StartFragment())
-        }
-        super.onRestoreInstanceState(savedInstanceState)
-    }
 
     //TODO: Find out if I should use this or not (used in fragments only, should it go through activity?)
     private fun setupSharedDataListener() {
