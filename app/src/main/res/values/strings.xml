@@ -14,8 +14,8 @@
     <string name="player2_position_key">player2_position</string>
 
     <!-- Menu, main -->
-    <string name="add_user">Add user</string>
     <string name="change_theme">Change theme</string>
+    <string name="show_leaderboard">Show leaderboard</string>
 
     <!-- Menu, theme -->
     <string name="default_theme">Default</string>
@@ -27,12 +27,12 @@
     <!-- Shared preferences -->
     <string name="theme_key">theme_key</string>
     <string name="theme_preference">theme_preference</string>
+
+    <!-- Messages -->
     <string name="game_over_message">The game is over</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Related to fragments -->
     <string name="fragment_state_key">fragment_state_key</string>
     <string name="fragment_state">start</string>
-    <string name="show_leaderboard">Show leaderboard</string>
 
 </resources>

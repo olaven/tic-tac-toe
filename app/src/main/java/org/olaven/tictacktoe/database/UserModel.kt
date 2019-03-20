@@ -24,8 +24,8 @@ class UserModel(application: Application): AndroidViewModel(application) {
     val allUsers = repository.allUsers
 
 
-    fun insert(person: User) = scope.launch(Dispatchers.IO) {
-        repository.insert(person)
+    fun insert(user: User) = scope.launch(Dispatchers.IO) {
+        repository.insert(user)
     }
 
     fun delete(user: User) = scope.launch(Dispatchers.IO) {
