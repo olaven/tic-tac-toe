@@ -3,16 +3,12 @@ package org.olaven.tictacktoe.gui.fragments
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_start.*
@@ -35,43 +31,50 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setupUserObserver()
-        setupSpinners()
-        setupButton()
         setupFab()
     }
 
     private fun setupUserObserver() {
         UserModel(activity!!.application).allUsers.observe(this, Observer {
             it?.let { users ->
+
                 this.users = users
+                displayAddUsersMessage()
+                updateSpinners()
+                updateButton()
             }
         })
     }
 
-    private fun setupSpinners() {
+    private fun displayAddUsersMessage() {
+        if (users.count() <= 0) {
+            val alert = AlertDialog.Builder(activity)
+            alert.apply {
+                setTitle("Please add some users (◕ᴥ◕)")
+                setPositiveButton("Will do:") { _, _ ->
+                    showAddUserDialog()
+                }
+            }.show()
+        }
+    }
+
+
+    private fun updateSpinners() {
         
         UserModel(activity!!.application).allUsers.observe(this, Observer {
+
             it?.let { users ->
 
-                if (users.count() <= 0) {
-                    val alert = AlertDialog.Builder(activity)
-                    alert.apply {
-                        setTitle("Please add some users (◕ᴥ◕)")
-                        setPositiveButton("Will do:") { _, _ ->
-                            showAddUserDialog()
-                        }
-                    }.show()
-                } else {
-                    val names = users.map { user -> user.name }
+                val names = users.map { user -> user.name }
 
-                    fragment_start_spinner_player1.adapter = getAdapter(names)
-                    fragment_start_spinner_player2.adapter = getAdapter(names + "AI")
-                }
+                fragment_start_spinner_player1.adapter = getAdapter(names)
+                fragment_start_spinner_player2.adapter = getAdapter((names + "AI").reversed())
             }
         })
     }
 
-    private fun setupButton() {
+    private fun updateButton() {
+
         fragment_start_button_start.setOnClickListener {
 
             val player1 = fragment_start_spinner_player1.selectedItem.toString()
@@ -93,6 +96,7 @@ class StartFragment : Fragment() {
                     .replaceMainFragment(GameFragment())
             }
         }
+        fragment_start_button_start.isEnabled = users.count() >= 1
     }
 
 
