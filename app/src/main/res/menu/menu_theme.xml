@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_theme_default"
+        android:id="@+id/menu_main_theme_default"
         android:title="@string/default_theme"/>
     <item
-        android:id="@+id/menu_theme_dark"
+        android:id="@+id/menu_main_theme_dark"
         android:title="@string/dark_theme"/>
 
     <item
-        android:id="@+id/menu_theme_fruit"
+        android:id="@+id/menu_main_theme_fruit"
         android:title="@string/fruit_theme"/>
 
     <item
-        android:id="@+id/menu_theme_cabin"
+        android:id="@+id/menu_main_theme_cabin"
         android:title="@string/cabin_theme"/>
 
 </menu>

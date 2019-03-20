@@ -17,4 +17,7 @@ interface UserDAO {
 
     @Query("select * from User")
     fun getAll(): LiveData<List<User>>
+
+    @Query("delete from User")
+    fun deleteAll()
 }

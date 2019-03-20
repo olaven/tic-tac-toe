@@ -13,16 +13,18 @@
     <string name="player1_position_key">player1_position</string>
     <string name="player2_position_key">player2_position</string>
 
-    <!-- Menu, main -->
+    <!-- Menu -->
     <string name="change_theme">Change theme</string>
     <string name="show_leaderboard">Show leaderboard</string>
 
-    <!-- Menu, theme -->
+    <string name="main_menu_themes">Themes</string>
     <string name="default_theme">Default</string>
     <string name="dark_theme">Dark</string>
     <string name="fruit_theme">Fruit</string>
     <string name="cabin_theme">Cabin</string>
 
+    <string name="menu_main_clear_users">Clear all users.</string>
+    <string name="menu_main_admin">Admin options</string>
 
     <!-- Shared preferences -->
     <string name="theme_key">theme_key</string>
@@ -34,5 +36,6 @@
     <!-- Related to fragments -->
     <string name="fragment_state_key">fragment_state_key</string>
     <string name="fragment_state">start</string>
+
 
 </resources>

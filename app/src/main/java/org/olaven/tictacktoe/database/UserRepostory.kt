@@ -15,4 +15,8 @@ class UserRepostory(val dao: UserDAO) {
     suspend fun delete(user: User) =
         dao.delete(user)
 
+    @WorkerThread
+    suspend fun deleteAll() =
+            dao.deleteAll()
+
 }

@@ -1,5 +1,6 @@
 package org.olaven.tictacktoe.gui
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -8,11 +9,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_base.*
 import org.olaven.tictacktoe.R
+import org.olaven.tictacktoe.database.UserModel
 import org.olaven.tictacktoe.gui.fragments.GameFragment
 import org.olaven.tictacktoe.gui.fragments.StartFragment
 
@@ -86,24 +89,49 @@ open class BaseActivity: AppCompatActivity() {
 
         return when(item?.itemId) {
 
-            R.id.menu_theme_cabin -> {
+            R.id.menu_main_show_leaderboard -> {
+                showLeaderBoard()
+                return true
+            }
+            R.id.menu_main_theme_cabin -> {
                 changeTheme(getString(R.string.cabin_theme))
                 return true
             }
-            R.id.menu_theme_default -> {
+            R.id.menu_main_theme_default -> {
                 changeTheme(getString(R.string.default_theme))
                 return true
             }
-            R.id.menu_theme_dark -> {
+            R.id.menu_main_theme_dark -> {
                 changeTheme(getString(R.string.dark_theme))
                 return true
             }
-            R.id.menu_theme_fruit -> {
+            R.id.menu_main_theme_fruit -> {
                 changeTheme(getString(R.string.fruit_theme))
+                return true
+            }
+            R.id.menu_main_admin_clear_users -> {
+                clearAllUsers()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun clearAllUsers() {
+        AlertDialog.Builder(this).apply {
+
+            setTitle("Do you want to permanently delete all users?")
+
+            setPositiveButton("Yes, I am sure") { _, _ ->
+                UserModel(application).deleteAll()
+            }
+
+            setNegativeButton("Cancel") { _, _ -> }
+        }.show()
+    }
+
+    private fun showLeaderBoard() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun changeTheme(themeName: String) {
@@ -133,14 +161,12 @@ open class BaseActivity: AppCompatActivity() {
         val preferences = getSharedPreferences(getString(R.string.theme_preference), Context.MODE_PRIVATE);
         val key = getString(R.string.theme_key)
 
-        val present = preferences.contains(key)
-        if (present) {
-            when(preferences.getString(key, "default")) {
-                getString(R.string.default_theme) -> setTheme(R.style.DefaultTheme)
-                getString(R.string.dark_theme)    -> setTheme(R.style.DarkTheme)
-                getString(R.string.fruit_theme)   -> setTheme(R.style.FruitTheme)
-                getString(R.string.cabin_theme)   -> setTheme(R.style.CabinTheme)
-            }
+
+        when(preferences.getString(key, getString(R.string.default_theme))) {
+            getString(R.string.default_theme) -> setTheme(R.style.DefaultTheme)
+            getString(R.string.dark_theme)    -> setTheme(R.style.DarkTheme)
+            getString(R.string.fruit_theme)   -> setTheme(R.style.FruitTheme)
+            getString(R.string.cabin_theme)   -> setTheme(R.style.CabinTheme)
         }
     }
 

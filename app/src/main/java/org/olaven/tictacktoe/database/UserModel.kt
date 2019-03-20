@@ -2,6 +2,7 @@ package org.olaven.tictacktoe.database
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import android.support.annotation.RestrictTo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -30,6 +31,10 @@ class UserModel(application: Application): AndroidViewModel(application) {
 
     fun delete(user: User) = scope.launch(Dispatchers.IO) {
         repository.delete(user)
+    }
+
+    fun deleteAll() = scope.launch(Dispatchers.IO) {
+        repository.deleteAll()
     }
 
 }
