@@ -60,17 +60,11 @@ class StartFragment : Fragment() {
 
 
     private fun updateSpinners() {
-        
-        UserModel(activity!!.application).allUsers.observe(this, Observer {
 
-            it?.let { users ->
+        val names = users.map { user -> user.name }
 
-                val names = users.map { user -> user.name }
-
-                fragment_start_spinner_player1.adapter = getAdapter(names)
-                fragment_start_spinner_player2.adapter = getAdapter((names + "AI").reversed())
-            }
-        })
+        fragment_start_spinner_player1.adapter = getAdapter(names)
+        fragment_start_spinner_player2.adapter = getAdapter((names + "AI").reversed())
     }
 
     private fun updateButton() {
