@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".gui.fragments.LeaderboardFragment">
+
+    <TableLayout
+            android:id="@+id/fragment_leaderboard_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TableRow>
+            <TextView
+                    android:id="@+id/fragment_leaderboard_name"
+                    android:text="Name"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+            <TextView
+                    android:id="@+id/fragment_leaderboard_wins"
+                    android:text="Wins"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+            <TextView
+                    android:id="@+id/fragment_leaderboard_losses"
+                    android:text="Losses"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+        </TableRow>
+
+    </TableLayout>
+
+</FrameLayout>

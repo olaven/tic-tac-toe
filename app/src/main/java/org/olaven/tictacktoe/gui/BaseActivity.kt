@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_base.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.database.UserModel
 import org.olaven.tictacktoe.gui.fragments.GameFragment
+import org.olaven.tictacktoe.gui.fragments.LeaderboardFragment
 import org.olaven.tictacktoe.gui.fragments.StartFragment
 
 open class BaseActivity: AppCompatActivity() {
@@ -131,7 +132,7 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     private fun showLeaderBoard() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        replaceMainFragment(LeaderboardFragment()) 
     }
 
     private fun changeTheme(themeName: String) {
