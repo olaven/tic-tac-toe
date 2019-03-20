@@ -99,11 +99,11 @@ class GameFragment : Fragment() {
                     (activity as BaseActivity)
                         .replaceMainFragment(GameFragment())
                 }
-                setNeutralButton("See high scores") { _, _ ->
-                    Toast.makeText(context, "Create leaderboards!", Toast.LENGTH_SHORT).show()
+                setNeutralButton("View leaderboard") { _, _ ->
+                    (activity as BaseActivity)
+                        .replaceMainFragment(LeaderboardFragment())
                 }
-                show()
-            }
+            }.show()
         }
     }
 

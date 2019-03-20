@@ -39,7 +39,10 @@ class LeaderboardFragment : Fragment() {
         users.forEach {user ->
 
             val row = customRow(
-                user.name, user.wins.toString(), user.losses.toString()
+                user.name,
+                user.wins.toString(),
+                user.losses.toString(),
+                user.draws.toString()
             )
 
             fragment_leaderboard_table.addView(row)

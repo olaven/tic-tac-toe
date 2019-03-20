@@ -32,6 +32,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"/>
+            <TextView
+                    android:id="@+id/fragment_leaderboard_draws"
+                    android:text="Draws"
+                    android:textSize="24sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
         </TableRow>
 
     </TableLayout>

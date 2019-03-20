@@ -8,6 +8,7 @@ data class User(
     var name: String,
     var losses: Int = 0,
     var wins: Int = 0,
+    var draws: Int = 0,
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 )

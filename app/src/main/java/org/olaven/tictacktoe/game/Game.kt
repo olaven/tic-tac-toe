@@ -39,8 +39,6 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
     private fun checkGameOver(latest: Coordinate) {
         // TODO: Run in different thread
 
-
-
         val winner = hasWinner(latest, board)
 
         if (winner) {
