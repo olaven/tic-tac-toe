@@ -14,18 +14,21 @@
             <TextView
                     android:id="@+id/fragment_leaderboard_name"
                     android:text="Name"
+                    android:textSize="24sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"/>
             <TextView
                     android:id="@+id/fragment_leaderboard_wins"
                     android:text="Wins"
+                    android:textSize="24sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"/>
             <TextView
                     android:id="@+id/fragment_leaderboard_losses"
                     android:text="Losses"
+                    android:textSize="24sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"/>

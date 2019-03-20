@@ -60,10 +60,11 @@ class LeaderboardFragment : Fragment() {
 
                 val width = TableRow.LayoutParams.MATCH_PARENT
                 val height = TableRow.LayoutParams.WRAP_CONTENT
-                this.layoutParams = TableRow.LayoutParams(width, height)
-
 
                 this.text = text
+                layoutParams = TableRow.LayoutParams(width, height, 1f)
+
+                gravity = Gravity.CENTER
                 gravity = Gravity.CENTER
             }
 }
