@@ -29,6 +29,7 @@ internal class BoardValidatorKtTest {
 
         lateinit var coordinate: Coordinate
         for (i in 0 until board.dimension) {
+
             coordinate = Coordinate(i, 0)
             board.markSquareAt(coordinate, SquareMark.CROSS)
         }

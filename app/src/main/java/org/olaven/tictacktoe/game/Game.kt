@@ -31,9 +31,9 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
 
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
-        changePlayer()
 
         checkGameOver(coordinate)
+        changePlayer()
     }
 
     private fun checkGameOver(latest: Coordinate) {
@@ -55,16 +55,15 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
     private fun changePlayer() {
 
         activePlayer = playerDependent(player2, player1)
-        val listener = playerDependent(
+
+        playerDependent(
             {
                 onFirstPlayer?.let { it(activePlayer) }
             },
             {
                 onSecondPlayer?.let { it(activePlayer) }
             }
-        )
-
-        listener()
+        )()
     }
 
 

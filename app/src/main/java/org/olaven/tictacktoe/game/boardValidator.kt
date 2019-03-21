@@ -66,7 +66,7 @@ private fun straightWinner(direction: Direction, latestMove: Coordinate, board: 
 
         val previousCoordinate = when(direction) {
             Direction.HORIZONTAL -> Coordinate(i - 1, latestMove.y)
-            Direction.VERTICAL -> Coordinate(latestMove.x, i)
+            Direction.VERTICAL -> Coordinate(latestMove.x, i - 1)
         }
 
         val current = board.squareAt(currentCoordinate).mark
