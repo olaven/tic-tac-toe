@@ -5,6 +5,8 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.SystemClock
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import org.olaven.tictacktoe.game.player.Player
 import org.olaven.tictacktoe.gui.SharedModel
 import org.olaven.tictacktoe.gui.BaseActivity
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
+import java.util.*
 
 //TODO: Timer for spillet
 //TODO: stats for gjennomsnitlig spilletid
@@ -29,8 +32,10 @@ import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 class GameFragment : Fragment() {
 
     lateinit var game: Game
+
     private var player1: Player? = null
     private var player2: Player? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -105,16 +110,21 @@ class GameFragment : Fragment() {
                 setupOnGameOver()
                 setupOnPlayerActions()
                 setupText()
+                fragment_game_chronometer.start()
             }
         }
 
     }
+
 
     private fun setupOnGameOver() {
 
         game.onGameOver = {
 
             registerResult(it)
+
+            fragment_game_chronometer.base = SystemClock.elapsedRealtime()
+            fragment_game_chronometer.stop()
 
             val alert = AlertDialog.Builder(activity)
 
