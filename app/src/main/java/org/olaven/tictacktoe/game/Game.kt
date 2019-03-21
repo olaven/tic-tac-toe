@@ -69,7 +69,7 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
 
 
     /**
-     * Returns first argument if activePlayer is player1
+     * Returns first argument if activePlayer is user1Name
      * and second argument otherwise
      */
     private fun<T> playerDependent(onFirst: T, onSecond: T): T {

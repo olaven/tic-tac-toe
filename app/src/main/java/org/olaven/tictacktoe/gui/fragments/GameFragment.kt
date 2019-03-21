@@ -9,21 +9,28 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.olaven.tictacktoe.R
+import org.olaven.tictacktoe.database.UserModel
 import org.olaven.tictacktoe.game.Game
+import org.olaven.tictacktoe.game.Result
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.player.BotPlayer
 import org.olaven.tictacktoe.game.player.HumanPlayer
+import org.olaven.tictacktoe.game.player.Player
 import org.olaven.tictacktoe.gui.SharedModel
 import org.olaven.tictacktoe.gui.BaseActivity
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
 
+//TODO: Timer for spillet
+//TODO: stats for gjennomsnitlig spilletid
+//TODO: setting for antall ruter
 
 class GameFragment : Fragment() {
 
     lateinit var game: Game
+    private var player1: Player? = null
+    private var player2: Player? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -43,36 +50,48 @@ class GameFragment : Fragment() {
 
             val sharedData = ViewModelProviders.of(it).get(SharedModel::class.java)
 
-            var player1Name: String? = null
-            var player2Name: String? = null
 
-            sharedData.player1Name.observe(it, Observer {
+            sharedData.user1Name.observe(it, Observer {
 
-                player1Name = it
-                startGameIfReady(player1Name, player2Name)
+                it?.let {name ->
+
+                    UserModel(activity!!.application).getByName(name).observe(this, Observer {
+                        it?.let {user ->
+                            player1 = HumanPlayer(user)
+                            startGameIfReady()
+                        }
+                    })
+
+                }
             })
 
-            sharedData.player2Name.observe(it, Observer {
+            sharedData.user2Name.observe(it, Observer {
 
-                player2Name = it
-                startGameIfReady(player1Name, player2Name)
+                it?.let {name ->
+
+                    val aiName = getString(R.string.AI_name)
+
+                    if (name.startsWith(aiName)) {
+                        player2 = BotPlayer(aiName)
+                        startGameIfReady()
+                    } else {
+                        UserModel(activity!!.application).getByName(name).observe(this, Observer {
+                            it?.let { user ->
+                                player2 = HumanPlayer(user)
+                                startGameIfReady()
+                            }
+                        })
+                    }
+                }
             })
         }
     }
 
-    private fun startGameIfReady(player1Name: String?, player2Name: String?) {
+    private fun startGameIfReady() {
 
         // Start game only if nececary data is recieved
-        player1Name?.let {player1Name ->
-            player2Name?.let { player2Name ->
-
-                val player1 = HumanPlayer(player1Name)
-                val player2 = if (player2Name.startsWith("AI")) {
-                    BotPlayer()
-                } else {
-                    HumanPlayer(player2Name)
-                }
-
+        player1?.let { player1 ->
+            player2?.let { player2 ->
 
                 this.game = Game(Board(), player1, player2)
 
@@ -88,6 +107,8 @@ class GameFragment : Fragment() {
     private fun setupOnGameOver() {
 
         game.onGameOver = {
+
+            registerResult(it)
 
             val alert = AlertDialog.Builder(activity)
 
@@ -106,6 +127,24 @@ class GameFragment : Fragment() {
             }.show()
         }
     }
+
+    private fun registerResult(result: Result) {
+
+        when(result) {
+            Result.FIRST -> {
+
+                val user = (player1 as HumanPlayer).user
+                user.wins
+            }
+            Result.SECOND -> {
+
+            }
+            Result.DRAW -> {
+
+            }
+        }
+    }
+
 
     private fun setupBoardView() {
 

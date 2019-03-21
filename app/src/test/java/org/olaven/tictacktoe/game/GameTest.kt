@@ -11,15 +11,15 @@ import org.olaven.tictacktoe.game.player.Player
 
 internal class GameTest {
 
-    var player1 = HumanPlayer("player1")
-    var player2 = HumanPlayer("player2")
+    var player1 = HumanPlayer("user1Name")
+    var player2 = HumanPlayer("user2Name")
     var game = Game(Board(), player1, player2)
 
     @BeforeEach
     fun init() {
 
-        player1 = HumanPlayer("player1")
-        player2 = HumanPlayer("player2")
+        player1 = HumanPlayer("user1Name")
+        player2 = HumanPlayer("user2Name")
         game = Game(Board(), player1, player2)
     }
 

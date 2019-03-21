@@ -1,6 +1,5 @@
 package org.olaven.tictacktoe.gui
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -60,13 +59,13 @@ open class BaseActivity: AppCompatActivity() {
 
         val sharedViewModel = ViewModelProviders.of(this).get(SharedModel::class.java)
 
-        sharedViewModel.player1Name.observe(this, Observer {
+        sharedViewModel.user1Name.observe(this, Observer {
             it?.let {
                 // do some thing with the number
             }
         })
 
-        sharedViewModel.player2Name.observe(this, Observer {
+        sharedViewModel.user2Name.observe(this, Observer {
             it?.let {
 
             }

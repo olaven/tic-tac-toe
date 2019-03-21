@@ -19,4 +19,8 @@ class UserRepostory(val dao: UserDAO) {
     suspend fun deleteAll() =
             dao.deleteAll()
 
+    @WorkerThread
+    fun getByName(name: String) =
+            dao.getByName(name)
+
 }

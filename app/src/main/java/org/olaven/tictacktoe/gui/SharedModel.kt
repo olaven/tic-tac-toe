@@ -5,6 +5,6 @@ import android.arch.lifecycle.ViewModel
 
 class SharedModel: ViewModel() {
 
-    val player1Name = MutableLiveData<String>()
-    val player2Name = MutableLiveData<String>()
+    val user1Name = MutableLiveData<String>()
+    val user2Name = MutableLiveData<String>()
 }

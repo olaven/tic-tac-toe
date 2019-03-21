@@ -1,5 +1,5 @@
 package org.olaven.tictacktoe.game.player
 
-class HumanPlayer(name: String) : Player(name) {
-    //TODO: Human specific stuff
-}
+import org.olaven.tictacktoe.database.User
+
+class HumanPlayer(val user: User) : Player(user.name)

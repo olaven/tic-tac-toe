@@ -37,4 +37,6 @@ class UserModel(application: Application): AndroidViewModel(application) {
         repository.deleteAll()
     }
 
+    fun getByName(name: String) =
+        repository.getByName(name)
 }

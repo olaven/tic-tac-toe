@@ -39,11 +39,24 @@ class StartFragment : Fragment() {
             it?.let { users ->
 
                 this.users = users
+                addAIIfNotpresent()
                 displayAddUsersMessage()
                 updateSpinners()
                 updateButton()
             }
         })
+    }
+
+    private fun addAIIfNotpresent() {
+
+        val present = users.
+            map { it.name }
+            .filter { it == getString(R.string.AI_name) }
+            .count() > 0
+        if (!present) {
+            UserModel(activity!!.application)
+                .insert(User(getString(R.string.AI_name)))
+        }
     }
 
     private fun displayAddUsersMessage() {
@@ -63,18 +76,20 @@ class StartFragment : Fragment() {
 
         val names = users.map { user -> user.name }
 
-        fragment_start_spinner_player1.adapter = getAdapter(names)
-        fragment_start_spinner_player2.adapter = getAdapter((names + "AI").reversed())
+        fragment_start_spinner_player1.adapter = getAdapter(names.filter { !it.startsWith("AI") })
+        fragment_start_spinner_player2.adapter = getAdapter((names))
     }
 
     private fun updateButton() {
 
         fragment_start_button_start.setOnClickListener {
 
-            val player1 = fragment_start_spinner_player1.selectedItem.toString()
-            val player2 = fragment_start_spinner_player2.selectedItem.toString()
+            val player1Name = fragment_start_spinner_player1.selectedItem.toString()
+            val player2Name = fragment_start_spinner_player2.selectedItem.toString()
 
-            if (player1 == player2) {
+
+
+            if (player1Name == player2Name) {
                 fragment_start_spinner_player2.performClick()
                 Toast.makeText(context, getString(R.string.same_user_message), Toast.LENGTH_SHORT).show()
             } else {
@@ -82,8 +97,8 @@ class StartFragment : Fragment() {
                 activity?.let {
 
                     val sharedData = ViewModelProviders.of(it).get(SharedModel::class.java)
-                    sharedData.player1Name.postValue(player1)
-                    sharedData.player2Name.postValue(player2)
+                    sharedData.user1Name.postValue(player1Name)
+                    sharedData.user2Name.postValue(player2Name)
 
                 }
                 (activity as BaseActivity)
