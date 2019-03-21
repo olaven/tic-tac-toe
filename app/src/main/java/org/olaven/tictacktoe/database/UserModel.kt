@@ -33,6 +33,10 @@ class UserModel(application: Application): AndroidViewModel(application) {
         repository.delete(user)
     }
 
+    fun update(user: User) = scope.launch(Dispatchers.IO) {
+        repository.update(user)
+    }
+
     fun deleteAll() = scope.launch(Dispatchers.IO) {
         repository.deleteAll()
     }

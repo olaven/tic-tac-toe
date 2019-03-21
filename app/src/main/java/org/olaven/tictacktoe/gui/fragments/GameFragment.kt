@@ -44,6 +44,8 @@ class GameFragment : Fragment() {
 
     }
 
+
+    // TODO: Refactor this function
     private fun initializeGame() {
 
         activity!!.let {
@@ -72,8 +74,12 @@ class GameFragment : Fragment() {
                     val aiName = getString(R.string.AI_name)
 
                     if (name.startsWith(aiName)) {
-                        player2 = BotPlayer(aiName)
-                        startGameIfReady()
+                        UserModel(activity!!.application).getByName(name).observe(this, Observer {
+                            it?.let { user ->
+                                player2 = BotPlayer(user)
+                                startGameIfReady()
+                            }
+                        })
                     } else {
                         UserModel(activity!!.application).getByName(name).observe(this, Observer {
                             it?.let { user ->
@@ -132,17 +138,23 @@ class GameFragment : Fragment() {
 
         when(result) {
             Result.FIRST -> {
-
-                val user = (player1 as HumanPlayer).user
-                user.wins
+                player1!!.user.wins += 1
+                player2!!.user.losses += 1
             }
             Result.SECOND -> {
-
+                player2!!.user.wins += 1
+                player1!!.user.losses += 1;
             }
             Result.DRAW -> {
-
+                player1!!.user.draws += 1
+                player2!!.user.draws += 1
             }
         }
+
+        UserModel(activity!!.application)
+            .update(player1!!.user)
+        UserModel(activity!!.application)
+            .update(player2!!.user)
     }
 
 
@@ -161,8 +173,8 @@ class GameFragment : Fragment() {
 
         game.apply {
 
-            fragment_game_text_player1.text = player1.name
-            fragment_game_text_player2.text = player2.name
+            fragment_game_text_player1.text = player1.user.name
+            fragment_game_text_player2.text = player2.user.name
         }
     }
 

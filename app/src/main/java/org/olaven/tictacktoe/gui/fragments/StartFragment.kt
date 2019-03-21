@@ -76,7 +76,7 @@ class StartFragment : Fragment() {
 
         val names = users.map { user -> user.name }
 
-        fragment_start_spinner_player1.adapter = getAdapter(names.filter { !it.startsWith("AI") })
+        fragment_start_spinner_player1.adapter = getAdapter(names.filter { !it.startsWith(getString(R.string.AI_name)) })
         fragment_start_spinner_player2.adapter = getAdapter((names))
     }
 

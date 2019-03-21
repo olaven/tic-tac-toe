@@ -1,10 +1,7 @@
 package org.olaven.tictacktoe.database
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 
 @Dao
 interface UserDAO {
@@ -14,6 +11,9 @@ interface UserDAO {
 
     @Delete
     fun delete(user: User)
+
+    @Update
+    fun update(user: User)
 
     @Query("select * from User")
     fun getAll(): LiveData<List<User>>

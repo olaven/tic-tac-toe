@@ -78,6 +78,7 @@ open class BaseActivity: AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.activity_base_frame_layout, fragment)
         transaction.commit()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

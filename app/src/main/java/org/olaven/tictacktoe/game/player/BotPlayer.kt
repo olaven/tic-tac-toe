@@ -2,12 +2,13 @@ package org.olaven.tictacktoe.game.player
 
 import android.provider.Settings.Global.getString
 import org.olaven.tictacktoe.R
+import org.olaven.tictacktoe.database.User
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
 import org.olaven.tictacktoe.positionToCoordinates
 
-class BotPlayer(name: String): Player(name) {
+class BotPlayer(user: User): Player(user) {
 
     fun selectCoordinate(board: Board): Coordinate {
         // TODO: Run searching on different thread!
