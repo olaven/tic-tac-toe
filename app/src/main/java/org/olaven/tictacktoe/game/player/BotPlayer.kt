@@ -16,6 +16,7 @@ class BotPlayer(user: User): Player(user) {
         // Finding of move on different thread.
         // making the move with inherited makemove(move) has to be done on UI Thread again
 
+
         board.grid.forEachIndexed { index, square ->
             if (square.mark == SquareMark.EMPTY) {
                 return positionToCoordinates(index, board.grid)
@@ -24,4 +25,13 @@ class BotPlayer(user: User): Player(user) {
 
         return Coordinate(0, 0)
     }
+
+    /*private fun findWin(board: Board): Coordinate {
+
+        for (i in 0 until board.grid.rows){
+
+        }
+    }*/
+
+
 }

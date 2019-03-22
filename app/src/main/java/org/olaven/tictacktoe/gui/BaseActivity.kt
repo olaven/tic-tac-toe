@@ -76,6 +76,7 @@ open class BaseActivity: AppCompatActivity() {
     fun replaceMainFragment(fragment: Fragment) {
 
         val transaction = supportFragmentManager.beginTransaction()
+        transaction.addToBackStack(null)
         transaction.replace(R.id.activity_base_frame_layout, fragment)
         transaction.commit()
 

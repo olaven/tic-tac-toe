@@ -1,6 +1,9 @@
 package org.olaven.tictacktoe.game.board
 
-class Board(val dimension: Int = 3) {
+import org.olaven.tictacktoe.game.CanCopy
+import org.olaven.tictacktoe.positionToCoordinates
+
+class Board(val dimension: Int = 3): CanCopy<Board> {
 
     val grid = Grid(
         rows = dimension,
@@ -22,4 +25,13 @@ class Board(val dimension: Int = 3) {
         square.mark = newMark
     }
 
+
+    override fun copy(): Board {
+        val board = Board(this.dimension)
+        board.grid.mapIndexed { index, square ->
+            //val coordinate = positionToCoordinates(index)
+
+        }
+        return board
+    }
 }
