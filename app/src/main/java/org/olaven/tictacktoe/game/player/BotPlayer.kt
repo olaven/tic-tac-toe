@@ -6,13 +6,11 @@ import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
 import org.olaven.tictacktoe.game.hasWinner
 import org.olaven.tictacktoe.positionToCoordinates
-import java.lang.IllegalStateException
 
 class BotPlayer(user: User): Player(user) {
 
     fun selectCoordinate(board: Board): Coordinate {
         // TODO: Run searching on different thread!
-        // TODO: Find the next best move based on the currentBoard and make it.
         // Finding of move on different thread.
         // making the move with inherited makemove(move) has to be done on UI Thread again
 
@@ -21,14 +19,12 @@ class BotPlayer(user: User): Player(user) {
             return it
         }
 
-        //just pick one at random
-        board.grid.forEachIndexed { index, square ->
-            if (square.mark == SquareMark.EMPTY) {
-                return positionToCoordinates(index, board.grid)
-            }
-        }
-
-        throw IllegalStateException("Searching for a move, but board is full and game is over.")
+        // Pick random empty
+        return board.grid.mapIndexed { index, _ ->
+            positionToCoordinates(index, board.grid)
+        }.filter {coordinate ->
+            board.squareAt(coordinate).mark == SquareMark.EMPTY
+        }.random()
     }
 
     //NOTE: a critical point is a point where all are equal except an empty square, meaning next move is eather win or loss
