@@ -21,6 +21,8 @@ import org.olaven.tictacktoe.gui.BaseActivity
 
 class StartFragment : Fragment() {
 
+    //TODO: Legg til seekbar som endrer board dimension, min 3, max 8
+    // de kan legges i shareddata (og her kan man bruke listener)
     private var users = emptyList<User>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
