@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.SeekBar
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.olaven.tictacktoe.R
@@ -21,27 +22,39 @@ import org.olaven.tictacktoe.gui.BaseActivity
 
 class StartFragment : Fragment() {
 
-    //TODO: Legg til seekbar som endrer board dimension, min 3, max 8
-    // de kan legges i shareddata (og her kan man bruke listener)
     private var users = emptyList<User>()
+    private lateinit var sharedModel: SharedModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+        sharedModel = (activity as BaseActivity).getSharedModel()
         return inflater.inflate(R.layout.fragment_start, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        setupUserObserver()
+        setupDatabaseObserver()
+        setupSeekbar()
         setupFab()
+        setupDimension()
+        setupDimensionTextListener()
     }
 
-    private fun setupUserObserver() {
+
+    private fun setupDimension() {
+
+        val dimension = fragment_start_seekbar_dimension.progress
+
+        sharedModel.dimension
+            .postValue(dimension)
+    }
+
+    private fun setupDatabaseObserver() {
         UserModel(activity!!.application).allUsers.observe(this, Observer {
             it?.let { users ->
 
                 this.users = users
-                addAIIfNotpresent()
+                addBotifNotPresent()
                 displayAddUsersMessage()
                 updateSpinners()
                 updateButton()
@@ -49,7 +62,30 @@ class StartFragment : Fragment() {
         })
     }
 
-    private fun addAIIfNotpresent() {
+    private fun setupSeekbar() {
+
+        fragment_start_seekbar_dimension.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+                sharedModel.dimension.postValue(progress)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
+
+    private fun setupDimensionTextListener() {
+
+        sharedModel.dimension.observe(this, Observer {
+            it?.let { dimension ->
+                fragment_start_text_dimension.text = "Board: ${dimension}x${dimension}"
+            }
+        })
+    }
+
+
+    private fun addBotifNotPresent() {
 
         val present = users.
             map { it.name }
@@ -96,13 +132,9 @@ class StartFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.same_user_message), Toast.LENGTH_SHORT).show()
             } else {
 
-                activity?.let {
+                sharedModel.user1Name.postValue(player1Name)
+                sharedModel.user2Name.postValue(player2Name)
 
-                    val sharedData = ViewModelProviders.of(it).get(SharedModel::class.java)
-                    sharedData.user1Name.postValue(player1Name)
-                    sharedData.user2Name.postValue(player2Name)
-
-                }
                 (activity as BaseActivity)
                     .replaceMainFragment(GameFragment())
             }

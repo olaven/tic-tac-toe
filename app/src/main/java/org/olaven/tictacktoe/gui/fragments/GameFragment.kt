@@ -32,9 +32,11 @@ import java.util.*
 class GameFragment : Fragment() {
 
     lateinit var game: Game
+    private lateinit var sharedModel: SharedModel
 
     private var player1: Player? = null
     private var player2: Player? = null
+    private var dimension: Int? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,6 +46,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        sharedModel = (activity as BaseActivity).getSharedModel()
         initializeGame()
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,14 +58,21 @@ class GameFragment : Fragment() {
 
         activity!!.let {
 
-            val sharedData = ViewModelProviders.of(it).get(SharedModel::class.java)
+            sharedModel.dimension.observe(it, Observer {
 
+                it?.let { dimension ->
 
-            sharedData.user1Name.observe(it, Observer {
+                    this.dimension = dimension
+                    startGameIfReady()
+                }
+            })
+
+            sharedModel.user1Name.observe(it, Observer {
 
                 it?.let {name ->
 
                     UserModel(activity!!.application).getByName(name).observe(this, Observer {
+
                         it?.let {user ->
                             player1 = HumanPlayer(user)
                             startGameIfReady()
@@ -72,7 +82,7 @@ class GameFragment : Fragment() {
                 }
             })
 
-            sharedData.user2Name.observe(it, Observer {
+            sharedModel.user2Name.observe(it, Observer {
 
                 it?.let {name ->
 
@@ -80,6 +90,7 @@ class GameFragment : Fragment() {
 
                     if (name.startsWith(aiName)) {
                         UserModel(activity!!.application).getByName(name).observe(this, Observer {
+
                             it?.let { user ->
                                 player2 = BotPlayer(user)
                                 startGameIfReady()
@@ -87,6 +98,7 @@ class GameFragment : Fragment() {
                         })
                     } else {
                         UserModel(activity!!.application).getByName(name).observe(this, Observer {
+
                             it?.let { user ->
                                 player2 = HumanPlayer(user)
                                 startGameIfReady()
@@ -103,14 +115,17 @@ class GameFragment : Fragment() {
         // Start game only if nececary data is recieved
         player1?.let { player1 ->
             player2?.let { player2 ->
+                dimension?.let { dimension ->
 
-                this.game = Game(Board(), player1, player2)
 
-                setupBoardView()
-                setupOnGameOver()
-                setupOnPlayerActions()
-                setupText()
-                fragment_game_chronometer.start()
+                    this.game = Game(Board(dimension), player1, player2)
+
+                    setupBoardView()
+                    setupOnGameOver()
+                    setupOnPlayerActions()
+                    setupText()
+                    fragment_game_chronometer.start()
+                }
             }
         }
 
@@ -210,6 +225,4 @@ class GameFragment : Fragment() {
             }
         }
     }
-
-
 }

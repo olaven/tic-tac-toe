@@ -1,6 +1,7 @@
 package org.olaven.tictacktoe.gui
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
@@ -41,8 +42,6 @@ open class BaseActivity: AppCompatActivity() {
         else
             replaceMainFragment(StartFragment()) //NOTE: Swapped for testing
     }
-
-
 
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -186,4 +185,9 @@ open class BaseActivity: AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    public fun getSharedModel() =
+            ViewModelProviders
+                .of(this)
+                .get(SharedModel::class.java)
 }

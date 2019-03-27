@@ -7,4 +7,5 @@ class SharedModel: ViewModel() {
 
     val user1Name = MutableLiveData<String>()
     val user2Name = MutableLiveData<String>()
+    val dimension = MutableLiveData<Int>()
 }

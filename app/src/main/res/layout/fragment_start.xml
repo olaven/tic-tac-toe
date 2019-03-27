@@ -66,6 +66,28 @@
                 app:layout_constraintTop_toBottomOf="@+id/fragment_start_spinner_player1"
                 app:layout_constraintStart_toStartOf="parent"/>
 
+
+        <TextView
+                android:id="@+id/fragment_start_text_dimension"
+                android:text="@string/unloaded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="1.0" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_start_button_start"/>
+
+        <SeekBar
+                android:id="@+id/fragment_start_seekbar_dimension"
+                android:min="3"
+                android:max="8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_start_text_dimension" android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+        />
+
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fragment_start_fab_add_user"
                 android:layout_width="wrap_content"
