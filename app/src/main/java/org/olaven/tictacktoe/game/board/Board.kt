@@ -29,8 +29,9 @@ class Board(val dimension: Int = 3): CanCopy<Board> {
     override fun copy(): Board {
         val board = Board(this.dimension)
         board.grid.mapIndexed { index, square ->
-            //val coordinate = positionToCoordinates(index)
-
+            val coordinate = positionToCoordinates(index, board.grid)
+            val mark = this.squareAt(coordinate).mark
+            board.markSquareAt(coordinate, mark)
         }
         return board
     }

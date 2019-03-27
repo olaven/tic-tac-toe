@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
 import org.olaven.tictacktoe.game.board.SquareMark
+import org.olaven.tictacktoe.positionToCoordinates
 
 internal class BoardTest {
 
@@ -90,5 +91,22 @@ internal class BoardTest {
             .isEqualTo(countBefore - 1)
     }
 
+    @Test
+    fun copyingWorks() {
+
+        val board = Board()
+        board.markSquareAt(Coordinate(2, 2), SquareMark.CROSS)
+        board.markSquareAt(Coordinate(2, 1), SquareMark.CROSS)
+        board.markSquareAt(Coordinate(1, 2), SquareMark.CIRCLE)
+
+        val copy = board.copy()
+        board.grid.mapIndexed { index, square ->
+            val coordinate = positionToCoordinates(index, board.grid)
+            val mark = copy.squareAt(coordinate).mark
+
+            assertThat(mark)
+                .isEqualTo(square.mark)
+        }
+    }
 
 }
