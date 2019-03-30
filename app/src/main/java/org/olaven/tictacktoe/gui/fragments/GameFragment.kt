@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.database.UserModel
@@ -117,14 +118,17 @@ class GameFragment : Fragment() {
             player2?.let { player2 ->
                 dimension?.let { dimension ->
 
+                    // prevents setting up when user replaces fragment just after starting it, which resulted in crashes.
+                    val fragment = activity?.supportFragmentManager?.findFragmentById(R.id.activity_base_frame_layout)
+                    if (fragment is GameFragment) {
 
-                    this.game = Game(Board(dimension), player1, player2)
-
-                    setupBoardView()
-                    setupOnGameOver()
-                    setupOnPlayerActions()
-                    setupText()
-                    fragment_game_chronometer.start()
+                        this.game = Game(Board(dimension), player1, player2)
+                        setupBoardView()
+                        setupOnGameOver()
+                        setupOnPlayerActions()
+                        setupText()
+                        fragment_game_chronometer.start()
+                    }
                 }
             }
         }
