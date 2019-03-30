@@ -64,6 +64,7 @@ class StartFragment : Fragment() {
 
     private fun setupSeekbar() {
 
+        fragment_start_seekbar_dimension.thumbOffset = 0
         fragment_start_seekbar_dimension.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {

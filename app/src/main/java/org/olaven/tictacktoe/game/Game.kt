@@ -32,24 +32,19 @@ class Game(val board: Board, val player1: Player, val player2: Player): Serializ
         val mark = playerDependent(SquareMark.CROSS, SquareMark.CIRCLE)
         board.markSquareAt(coordinate, mark)
 
-        checkGameOver(coordinate)
-        changePlayer()
-    }
-
-    private fun checkGameOver(latest: Coordinate) {
-        // TODO: Run in different thread
-
-        val winner = hasWinner(latest, board)
-
-        if (winner) {
+        if (hasWinner(coordinate, board)) {
             val result = playerDependent(Result.FIRST, Result.SECOND)
             onGameOver?.invoke(result)
+            return
         }
 
-        val clickCount = board.grid.filter { it.mark != SquareMark.EMPTY }.count()
-        if (clickCount >= board.size) {
+        val moveCount = board.grid.filter { it.mark != SquareMark.EMPTY }.count()
+        if (moveCount >= board.size) {
             onGameOver?.invoke(Result.DRAW)
+            return
         }
+
+        changePlayer()
     }
 
     private fun changePlayer() {
