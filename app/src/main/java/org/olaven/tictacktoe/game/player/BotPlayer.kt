@@ -1,5 +1,8 @@
 package org.olaven.tictacktoe.game.player
 
+import android.os.SystemClock
+import android.support.annotation.WorkerThread
+import android.util.Log
 import org.olaven.tictacktoe.database.User
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate
@@ -10,28 +13,26 @@ import org.olaven.tictacktoe.positionToCoordinates
 class BotPlayer(user: User): Player(user) {
 
     fun selectCoordinate(board: Board): Coordinate {
-        // TODO: Run searching on different thread!
-        // Finding of move on different thread.
-        // making the move with inherited makemove(move) has to be done on UI Thread again
 
         // find a necessary move
         findCriticalPoint(board)?.let {
+
             return it
         }
 
         // Pick random empty
-        return board.grid.mapIndexed { index, _ ->
+        val random = board.grid.mapIndexed { index, _ ->
             positionToCoordinates(index, board.grid)
         }.filter {coordinate ->
             board.squareAt(coordinate).mark == SquareMark.EMPTY
         }.random()
+
+        return random
     }
 
     //NOTE: a critical point is a point where all are equal except an empty square, meaning next move is eather win or loss
-    // Go through all points, find one where game _would be_ over, and make that move 
+    // Go through all points, find one where game _would be_ over, and make that move
     private fun findCriticalPoint(board: Board): Coordinate? {
-
-
 
         board.grid.forEachIndexed { index, square ->
 

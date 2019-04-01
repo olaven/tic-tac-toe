@@ -40,7 +40,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        //name is stored in a temp var to avoid crashes when reading getString in other parts of lifecycle 
+        //name is stored in a temp var to avoid crashes when reading getString in other parts of lifecycle
         aiName = getString(R.string.AI_name)
         sharedModel = (activity as BaseActivity).getSharedModel()
         setupDataObservers()
