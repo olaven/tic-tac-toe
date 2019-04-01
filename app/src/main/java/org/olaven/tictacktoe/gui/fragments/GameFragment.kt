@@ -27,11 +27,11 @@ class GameFragment : Fragment() {
 
     lateinit var game: Game
     private lateinit var sharedModel: SharedModel
+    private lateinit var aiName: String
 
     private var player1: Player? = null
     private var player2: Player? = null
     private var dimension: Int? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -40,6 +40,8 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        //name is stored in a temp var to avoid crashes when reading getString in other parts of lifecycle 
+        aiName = getString(R.string.AI_name)
         sharedModel = (activity as BaseActivity).getSharedModel()
         setupDataObservers()
         super.onViewCreated(view, savedInstanceState)
@@ -79,8 +81,6 @@ class GameFragment : Fragment() {
             sharedModel.user2Name.observe(activity, Observer {
 
                 it?.let {name ->
-
-                    val aiName = getString(R.string.AI_name)
 
                     if (name.startsWith(aiName)) {
                         UserModel(activity.application).getByName(name).observe(this, Observer {
