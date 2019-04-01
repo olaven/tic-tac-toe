@@ -1,8 +1,5 @@
 package org.olaven.tictacktoe.game.player
 
-import android.os.SystemClock
-import android.support.annotation.WorkerThread
-import android.util.Log
 import org.olaven.tictacktoe.database.User
 import org.olaven.tictacktoe.game.board.Board
 import org.olaven.tictacktoe.game.board.Coordinate

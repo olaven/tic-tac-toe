@@ -43,10 +43,15 @@ class StartFragment : Fragment() {
 
     private fun setupDimension() {
 
-        val dimension = fragment_start_seekbar_dimension.progress
+        val dimension = convertProgressToDimension(fragment_start_seekbar_dimension.progress)
 
         sharedModel.dimension
             .postValue(dimension)
+    }
+
+    private fun convertProgressToDimension(progress: Int): Int {
+
+        return (progress / 10)
     }
 
     private fun setupDatabaseObserver() {
@@ -69,7 +74,8 @@ class StartFragment : Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
-                sharedModel.dimension.postValue(progress)
+                val dimension = convertProgressToDimension(progress)
+                sharedModel.dimension.postValue(dimension)
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
