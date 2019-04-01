@@ -99,7 +99,8 @@ class StartFragment : Fragment() {
     }
 
     private fun displayAddUsersMessage() {
-        if (users.count() <= 0) {
+        // i.e. only bot is added
+        if (users.count() <= 1) {
             val alert = AlertDialog.Builder(activity)
             alert.apply {
                 setTitle("Please add some users (◕ᴥ◕)")

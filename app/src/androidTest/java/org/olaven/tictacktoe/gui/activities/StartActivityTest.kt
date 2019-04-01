@@ -1,42 +1,41 @@
 package org.olaven.tictacktoe.gui.activities
 
+import android.os.SystemClock
 import android.support.test.espresso.Espresso.onData
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.RootMatchers.withDecorView
 import android.support.test.espresso.matcher.ViewMatchers.*
-import org.hamcrest.CoreMatchers.containsString
-import org.hamcrest.Matchers.hasToString
 import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.olaven.tictacktoe.R
+import org.olaven.tictacktoe.gui.BaseActivity
 
 
 class StartActivityTest {
 
     // specifying activity to run before each test
     @get:Rule
-    var intentsTestRule = IntentsTestRule(StartActivity::class.java)
+    var intentsTestRule = IntentsTestRule(BaseActivity::class.java)
 
     @Test
     fun canChooseElement() {
 
         val id = R.id.fragment_start_spinner_player2
-        val text = "AI"
+        val name = R.string.AI_name
         onView(withId(id))
             .perform(click())
 
-        onData(hasToString(text))
+
+        onData(withText(name))
             .perform(click())
 
         onView(withId(id))
-            .check(matches(withSpinnerText(containsString(text))))
+            .check(matches(withSpinnerText(name)))
     }
 
     @Test
@@ -61,7 +60,7 @@ class StartActivityTest {
         onView(withId(spinner))
             .perform(click())
 
-        onData(hasToString("AI"))
+        onData(withText(R.string.AI_name))
             .perform(click())
 
 
@@ -82,14 +81,14 @@ class StartActivityTest {
         onView(withId(spinner))
             .perform(click())
 
-        onData(hasToString("AI"))
+        onData(withText(R.string.AI_name))
             .perform(click())
 
         onView(withId(button))
             .perform(click())
 
-        intended(IntentMatchers.hasComponent(GameActivity::class.qualifiedName))
-
+        onView(withId(R.id.fragment_game_grid_view))
+            .check(matches(isDisplayed()))
     }
 
 }

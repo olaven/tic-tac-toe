@@ -1,7 +1,6 @@
 package org.olaven.tictacktoe.gui
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
@@ -37,7 +36,7 @@ open class BaseActivity: AppCompatActivity() {
         val key = getString(R.string.fragment_state_key)
         val fragmentName = savedInstanceState.getString(key)
 
-        if (fragmentName == GameFragment().toString())
+        if (fragmentName == GameFragment::class.simpleName)
             replaceMainFragment(GameFragment())
         else
             replaceMainFragment(StartFragment()) //NOTE: Swapped for testing
@@ -46,7 +45,7 @@ open class BaseActivity: AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle?) {
 
-        val fragmentName = supportFragmentManager.findFragmentById(R.id.activity_base_frame_layout)
+        val fragmentName = supportFragmentManager.findFragmentById(R.id.activity_base_frame_layout)!!::class.simpleName
         val key = getString(R.string.fragment_state_key)
         outState?.putString(key, fragmentName.toString())
         super.onSaveInstanceState(outState)
@@ -74,12 +73,10 @@ open class BaseActivity: AppCompatActivity() {
 
     fun replaceMainFragment(fragment: Fragment) {
 
-        val transaction = supportFragmentManager.beginTransaction()
-
-        transaction.addToBackStack(null)
-        transaction.replace(R.id.activity_base_frame_layout, fragment)
-        transaction.commit()
-
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.activity_base_frame_layout, fragment)
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -187,7 +184,7 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    public fun getSharedModel() =
+    fun getSharedModel() =
             ViewModelProviders
                 .of(this)
                 .get(SharedModel::class.java)

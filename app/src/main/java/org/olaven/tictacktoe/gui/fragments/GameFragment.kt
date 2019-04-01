@@ -2,16 +2,13 @@ package org.olaven.tictacktoe.gui.fragments
 
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Color
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.SystemClock
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.database.UserModel
@@ -24,11 +21,7 @@ import org.olaven.tictacktoe.game.player.Player
 import org.olaven.tictacktoe.gui.SharedModel
 import org.olaven.tictacktoe.gui.BaseActivity
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
-import java.util.*
 
-//TODO: Timer for spillet
-//TODO: stats for gjennomsnitlig spilletid
-//TODO: setting for antall ruter
 
 class GameFragment : Fragment() {
 
@@ -48,18 +41,18 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         sharedModel = (activity as BaseActivity).getSharedModel()
-        initializeGame()
+        setupDataObservers()
         super.onViewCreated(view, savedInstanceState)
 
     }
 
 
     // TODO: Refactor this function
-    private fun initializeGame() {
+    private fun setupDataObservers() {
 
-        activity!!.let {
+        activity?.let { activity ->
 
-            sharedModel.dimension.observe(it, Observer {
+            sharedModel.dimension.observe(activity, Observer {
 
                 it?.let { dimension ->
 
@@ -68,11 +61,11 @@ class GameFragment : Fragment() {
                 }
             })
 
-            sharedModel.user1Name.observe(it, Observer {
+            sharedModel.user1Name.observe(activity, Observer {
 
                 it?.let {name ->
 
-                    UserModel(activity!!.application).getByName(name).observe(this, Observer {
+                    UserModel(activity.application).getByName(name).observe(this, Observer {
 
                         it?.let {user ->
                             player1 = HumanPlayer(user)
@@ -83,14 +76,14 @@ class GameFragment : Fragment() {
                 }
             })
 
-            sharedModel.user2Name.observe(it, Observer {
+            sharedModel.user2Name.observe(activity, Observer {
 
                 it?.let {name ->
 
                     val aiName = getString(R.string.AI_name)
 
                     if (name.startsWith(aiName)) {
-                        UserModel(activity!!.application).getByName(name).observe(this, Observer {
+                        UserModel(activity.application).getByName(name).observe(this, Observer {
 
                             it?.let { user ->
                                 player2 = BotPlayer(user)
@@ -98,7 +91,7 @@ class GameFragment : Fragment() {
                             }
                         })
                     } else {
-                        UserModel(activity!!.application).getByName(name).observe(this, Observer {
+                        UserModel(activity.application).getByName(name).observe(this, Observer {
 
                             it?.let { user ->
                                 player2 = HumanPlayer(user)
@@ -113,7 +106,7 @@ class GameFragment : Fragment() {
 
     private fun startGameIfReady() {
 
-        // Start game only if nececary data is recieved
+        // Start game only if necessary data is received
         player1?.let { player1 ->
             player2?.let { player2 ->
                 dimension?.let { dimension ->
@@ -150,15 +143,17 @@ class GameFragment : Fragment() {
             alert.apply {
 
                 setTitle(getString(R.string.game_over_message))
-                setPositiveButton("New game") { _, _ ->
+                setPositiveButton("Start over") { _, _ ->
 
                     (activity as BaseActivity)
-                        .replaceMainFragment(GameFragment())
+                        .replaceMainFragment(StartFragment())
                 }
+
                 setNeutralButton("View leaderboard") { _, _ ->
                     (activity as BaseActivity)
                         .replaceMainFragment(LeaderboardFragment())
                 }
+
             }.show()
         }
     }
@@ -209,18 +204,24 @@ class GameFragment : Fragment() {
 
     private fun setupOnPlayerActions() {
 
+        val activePlayerColor = Color.BLACK
+        val waitingPlayerColor = Color.GRAY
+
         game.apply {
+
+            //fragment_start_text_player1.setTextColor(activePlayerColor)
+            //fragment_start_text_player2.setTextColor(waitingPlayerColor)
 
             onFirstPlayer = {
 
-                fragment_game_text_player1.setTextColor(Color.GREEN)
-                fragment_game_text_player2.setTextColor(Color.BLACK)
+                fragment_game_text_player1.setTextColor(activePlayerColor)
+                fragment_game_text_player2.setTextColor(waitingPlayerColor)
             }
 
             onSecondPlayer = {
 
-                fragment_game_text_player1.setTextColor(Color.BLACK)
-                fragment_game_text_player2.setTextColor(Color.GREEN)
+                fragment_game_text_player1.setTextColor(waitingPlayerColor)
+                fragment_game_text_player2.setTextColor(activePlayerColor)
 
                 if (it is BotPlayer) {
                     val coordinate = it.selectCoordinate(board)

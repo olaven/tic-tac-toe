@@ -11,11 +11,11 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] Grid should display icons, not textviews (perhaps even just a button, more semantically correct?)
 - [X] Option to play agains AI
 - [ ] Bytt til fragments
-- [ ] Del data mellom fragments på riktig måte
-- [ ] Previous players as options on start screen?
+- [X] Del data mellom fragments på riktig måte
+- [X] Previous players as options on start screen?
 - [ ] The side of player whose turn it is lights up
-- [ ] Resultscreen with game-history
-- [ ] Change THEME (dark mode++ etc + Fun modes like Streken-mode, Wood-mode, morsomme theme-modes)
+- [X] Resultscreen with game-history
+- [X] Change THEME (dark mode++ etc + Fun modes like Streken-mode, Wood-mode, morsomme theme-modes)
 - [ ] Icon
 ### Game 
 - [X] Representation of a board with squares
@@ -24,28 +24,28 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] Board should only be AxA, not AxB
 - [X] Game class modelling the game
 - [X] Choose users
-- [ ] Determine if game is over or not
-- [ ] Change board default board dimension
-- [ ] Change n-goal (has to be <= board dimension)
-- [ ] Implement solo play (random moves before AI) 
+- [X] Determine if game is over or not
+- [X] Change board default board dimension
+- [X] Change n-goal (has to be <= board dimension)
+- [X] Implement solo play (random moves before AI)
 ### Other
 - [X] store users in resources
 - [X] Familiarize with UI testing
-- [ ] Splitte opp activities i mindre klasser
+- [ ] Splitte opp fragments i mindre klasser
 - [X] brukerinput på start må lagres midlertidig ved onPause og vises igjen ved onResume
 - [ ] Finne bruk av public directories (Photos, Downloads etc.) -> kanskje profilbilder?
 - [X] clean up in x/y, row/column getting mixed! x = column, y = row!
 - [ ] Use life-cycle-methods correctly!
 - [X] Determine android version
-- [ ] Records of previous games stored in local db
-- [ ] Changing default dimension in settings
+- [X] Records of previous games stored in local db
+- [X] Changing default dimension in settings
 - [ ] Class diagram
 - [ ] Publish to Play store
 - [ ] Popup when the AI has defeated 10 opponents (exam description)
 - [ ] clean gradle of unused dependencies
 ### AI
 - [X] AI should make some move
-- [ ] Figure out approach 
+- [X] Figure out approach
 - [ ] How to score different fields (i.e. what is biggest threat)
 - [ ] calculation should probably not run in main thread
 ### Testing 
@@ -106,4 +106,5 @@ activity/fragment/etc_type_name
 i.e.
 activity_main_button_sign_in
 
-## Notes on AI / Game rules
+
+
