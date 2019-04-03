@@ -45,7 +45,6 @@ class GameFragment : Fragment() {
         sharedModel = (activity as BaseActivity).getSharedModel()
         setupDataObservers()
         super.onViewCreated(view, savedInstanceState)
-
     }
 
 
@@ -125,7 +124,6 @@ class GameFragment : Fragment() {
                 }
             }
         }
-
     }
 
 
