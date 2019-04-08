@@ -11,7 +11,7 @@ import org.olaven.tictacktoe.game.board.SquareMark
 import org.olaven.tictacktoe.positionToCoordinates
 
 
-class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapter() {
+class GameGridAdapter(private val context: Context, val game: Game): BaseAdapter() {
 
     override fun getCount(): Int = game.board.size
 
@@ -29,11 +29,10 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
         textView.textSize = 30f
         textView.gravity = Gravity.CENTER
 
-        //TODO: Test asserting that only empty squares have listeners
         if (square.mark == SquareMark.EMPTY) {
             textView.setOnClickListener {
                 game.clickAt(coordinate)
-                this.notifyDataSetChanged();
+                this.notifyDataSetChanged()
             }
         }
 
@@ -47,5 +46,4 @@ class GameGridAdapter(private val context: Context, val game: Game) : BaseAdapte
             SquareMark.EMPTY -> "_"
         }
     }
-
 }

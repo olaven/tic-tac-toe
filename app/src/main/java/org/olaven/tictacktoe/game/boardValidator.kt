@@ -11,7 +11,6 @@ import org.olaven.tictacktoe.game.board.SquareMark
 fun hasWinner(latestMove: Coordinate, board: Board): Boolean =
         verticalWinner(latestMove, board) || horizontalWinner(latestMove, board) || diagonalWinnerLeftDown(board) || diagonalWinnerLeftUp(board)
 
-
 private fun verticalWinner(coordinate: Coordinate, board: Board) =
     straightWinner(Direction.VERTICAL, coordinate, board)
 
