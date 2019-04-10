@@ -23,7 +23,7 @@ class BotPlayer(user: User): Player(user) {
             return it
         }
 
-        findRandomNotSpoiled(board).let {
+        findRandomNotSpoiled(board)?.let {
 
             return it
         }
@@ -91,12 +91,21 @@ class BotPlayer(user: User): Player(user) {
         return false
     }
 
-    private fun findRandomNotSpoiled(board: Board): Coordinate =
-        board.grid.mapIndexed { index, square ->
+    private fun findRandomNotSpoiled(board: Board): Coordinate? {
+
+        val unspoiled = board.grid.mapIndexed { index, square ->
             positionToCoordinates(index, board.grid)
         }.filter {
             !spoiledRow(it, board)
-        }.random()
+        }
+
+        return if (unspoiled.isEmpty()) {
+            null
+        } else {
+            unspoiled.random()
+        }
+    }
+
 
     //NOTE: a critical point is a point where all are equal except an empty square, meaning next move is eather win or loss
     // Go through all points, find one where game _would be_ over, and make that move
