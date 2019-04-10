@@ -132,6 +132,11 @@ class GameFragment : Fragment() {
         game.onGameOver = {
 
             registerResult(it)
+            val message = if (it == Result.DRAW) {
+                "It ended in a draw"
+            } else {
+                "${game.activePlayer.user.name} won the game!"
+            }
 
             fragment_game_chronometer.base = SystemClock.elapsedRealtime()
             fragment_game_chronometer.stop()
@@ -141,6 +146,7 @@ class GameFragment : Fragment() {
             alert.apply {
 
                 setTitle(getString(R.string.game_over_message))
+                setMessage(message)
                 setPositiveButton("Start over") { _, _ ->
 
                     (activity as BaseActivity)
