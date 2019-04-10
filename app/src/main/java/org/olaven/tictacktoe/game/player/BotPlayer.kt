@@ -18,7 +18,12 @@ class BotPlayer(user: User): Player(user) {
             return it
         }
 
-        findLongestBuildingPoint(board)?.let {
+        findNeighbourNotSpoiled(board)?.let {
+
+            return it
+        }
+
+        findRandomNotSpoiled(board).let {
 
             return it
         }
@@ -29,7 +34,7 @@ class BotPlayer(user: User): Player(user) {
         }
     }
 
-    private fun findLongestBuildingPoint(board: Board): Coordinate? {
+    private fun findNeighbourNotSpoiled(board: Board): Coordinate? {
 
         board.grid.forEachIndexed {index, square ->
 
@@ -38,10 +43,6 @@ class BotPlayer(user: User): Player(user) {
 
                 val neighbourIsMine = neighbourBelongsToAI(coordinate, board)
                 val spoiled = spoiledRow(coordinate, board)
-
-                if (!spoiled) {
-                    println("Got here");
-                }
 
                 if (neighbourIsMine && !spoiled) {
                     return coordinate
@@ -77,21 +78,25 @@ class BotPlayer(user: User): Player(user) {
     // no way the game can be won on it
     private fun spoiledRow(coordinate: Coordinate, board: Board): Boolean {
 
-        val x = coordinate.x
-        val y = coordinate.y
-
         for(i in 0 until board.dimension) {
 
-            val horizontal = board.squareAt(Coordinate(x, i)).mark
-            val vertical = board.squareAt(Coordinate(i, y)).mark
-            val diagonal = board.squareAt(Coordinate(x, y)).mark //TODO: Check diagonal
+            val horizontal = board.squareAt(Coordinate(coordinate.x, i)).mark
+            val vertical = board.squareAt(Coordinate(i, coordinate.y)).mark
+            val diagonal = board.squareAt(Coordinate(coordinate.x, coordinate.y)).mark
 
-            if (horizontal == SquareMark.CROSS && vertical == SquareMark.CROSS) {
+            if (horizontal == SquareMark.CROSS || vertical == SquareMark.CROSS || diagonal == SquareMark.CROSS) {
                 return true 
             }
         }
         return false
     }
+
+    private fun findRandomNotSpoiled(board: Board): Coordinate =
+        board.grid.mapIndexed { index, square ->
+            positionToCoordinates(index, board.grid)
+        }.filter {
+            !spoiledRow(it, board)
+        }.random()
 
     //NOTE: a critical point is a point where all are equal except an empty square, meaning next move is eather win or loss
     // Go through all points, find one where game _would be_ over, and make that move
