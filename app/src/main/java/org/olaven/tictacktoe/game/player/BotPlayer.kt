@@ -39,6 +39,10 @@ class BotPlayer(user: User): Player(user) {
                 val neighbourIsMine = neighbourBelongsToAI(coordinate, board)
                 val spoiled = spoiledRow(coordinate, board)
 
+                if (!spoiled) {
+                    println("Got here");
+                }
+
                 if (neighbourIsMine && !spoiled) {
                     return coordinate
                 }
@@ -69,22 +73,22 @@ class BotPlayer(user: User): Player(user) {
         return false
     }
 
+    // the coordinate is on a spoiled row, there is
+    // no way the game can be won on it
     private fun spoiledRow(coordinate: Coordinate, board: Board): Boolean {
 
-        for (i in 0 until board.dimension) {
+        val x = coordinate.x
+        val y = coordinate.y
 
-            val vertical = board.squareAt(Coordinate(coordinate.x, i))
-            val horizontal = board.squareAt(Coordinate(i, coordinate.y))
+        for(i in 0 until board.dimension) {
 
-            if (vertical.mark != SquareMark.CIRCLE) {
-                return true
-            }
+            val horizontal = board.squareAt(Coordinate(x, i)).mark
+            val vertical = board.squareAt(Coordinate(i, y)).mark
 
-            if (horizontal.mark != SquareMark.CIRCLE) {
-                return true
+            if (horizontal == SquareMark.CROSS && vertical == SquareMark.CROSS) {
+                return true 
             }
         }
-
         return false
     }
 
