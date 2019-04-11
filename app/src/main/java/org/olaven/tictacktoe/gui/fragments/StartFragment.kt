@@ -51,7 +51,7 @@ class StartFragment : Fragment() {
 
     private fun convertProgressToDimension(progress: Int): Int {
 
-        return (progress / 10)
+        return (progress / 10) + 3
     }
 
     private fun setupDatabaseObserver() {

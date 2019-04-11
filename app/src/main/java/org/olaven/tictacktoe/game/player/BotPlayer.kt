@@ -10,6 +10,16 @@ import java.lang.Exception
 
 class BotPlayer(user: User): Player(user) {
 
+    /**
+     * The strategy:
+     * 1: If a move leads to game over, take it
+     * 2: Try to build on an existing Circle, if that row is unspoiled
+     * 3: Get a random and unspoiled square
+     * 4: Get a random square, as last resort
+     *
+     * NOTE: a row is spoiled if there is no potential for a bot to win
+     * (i.e. some square on it is marked by opponent)
+     */
     fun selectCoordinate(board: Board): Coordinate {
 
         // find a necessary move
