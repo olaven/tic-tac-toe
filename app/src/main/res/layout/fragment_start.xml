@@ -12,6 +12,15 @@
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
 
+        <TextView
+                android:text="@string/fragment_start_text_select_players"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_start_text_select_users" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
         <Button
                 android:text="@string/fragment_start_text_button"
                 android:layout_width="wrap_content"
@@ -50,11 +59,9 @@
                 android:text="@string/fragment_start_text_player1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_start_text_select_users"/>
         <TextView
                 android:id="@+id/fragment_start_text_player2"
                 android:text="@string/fragment_start_text_player2"
@@ -80,6 +87,18 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/fragment_start_button_start"/>
 
+
+        <TextView
+                android:text="@string/fragment_start_text_select_dimension"
+                android:id="@+id/fragment_start_text_select_dimension"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_start_seekbar_dimension"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
         <SeekBar
                 android:id="@+id/fragment_start_seekbar_dimension"
                 android:layout_width="match_parent"
@@ -90,7 +109,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/fragment_start_text_dimension"/>
+                app:layout_constraintBottom_toTopOf="@+id/fragment_start_text_dimension"
+        />
 
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fragment_start_fab_add_user"
@@ -100,6 +120,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

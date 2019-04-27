@@ -216,9 +216,6 @@ class GameFragment : Fragment() {
 
         game.apply {
 
-            //fragment_start_text_player1.setTextColor(activePlayerColor)
-            //fragment_start_text_player2.setTextColor(waitingPlayerColor)
-
             onFirstPlayer = {
 
                 fragment_game_text_player1.setTextColor(activePlayerColor)
