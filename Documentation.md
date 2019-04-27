@@ -1,6 +1,6 @@
 # Dokumentasjon - Tic Tac Toe
 
-`- [Dokumentasjon - Tic Tac Toe](#dokumentasjon---tic-tac-toe)
+- [Dokumentasjon - Tic Tac Toe](#dokumentasjon---tic-tac-toe)
   - [Generelt](#generelt)
   - [Om oppgaven](#om-oppgaven)
   - [Flyt i applikasjonen (hva mapper til hva i oppgaveteksten)](#flyt-i-applikasjonen-hva-mapper-til-hva-i-oppgaveteksten)
@@ -10,18 +10,22 @@
     - [Statistikkskjerm - skjermbilde](#statistikkskjerm---skjermbilde)
   - [Arkitektur](#arkitektur)
     - [Fragments](#fragments)
+    - [Deling av data](#deling-av-data)
+    - [Room](#room)
     - [Spillogikk](#spillogikk)
   - [AI](#ai)
   - [Brukertest](#brukertest)
   - [Versjoner](#versjoner)
   - [Biblioteker](#biblioteker)
-  - [Ikon](#ikon)
-  - [Play store](#play-store)
+  - [Visuelt](#visuelt)
+  - [Navngivning](#navngivning)
+  - [Publisering](#publisering)
   - [Skjermbilder](#skjermbilder)
     - [Bilde Startskjerm](#bilde-startskjerm)
     - [Bilde Spillskjerm](#bilde-spillskjerm)
     - [Bilde Statistikkskjerm](#bilde-statistikkskjerm)
   - [Kildeliste](#kildeliste)
+
 
 ## Generelt
 Jeg har bygget en implementasjon av _Tic Tac Toe_, slik oppgaven beskriver.
@@ -79,13 +83,19 @@ fun replaceMainFragment(fragment: Fragment) {
 }
 ```
 
+### Deling av data 
+TODO SKRIV / vis kode (sjekk todo fra readme om dette)
+
+### Room 
+TODO DIAGRAM 
+
 ### Spillogikk
 Spillogikken ligger separat fra GUI. 
 
 ![Sekvensdiagram for game-listeners](./photos/diagrams/game-listener-sequence.png)
 Jegh har forsoekt aa skille logikken for spillet fra GUI. Faktisk implemetnerte jeg selve logikken i foer jeg i det hele tatt tenkte paa hvordan det skulle rendres. Problemstillingen jeg moette da jeg startet med GUI var foelgende: hvordan skal GUI si ifra til spillogikken at noe skal oppdateres og motsatt. Etter hvert kom jeg frem til loesningen som er modellert over: 
 
-`Game.kt` har tre public klassevariable som er mutable: 
+`Game.kt` har tre public klassevariable som er "mutable": 
 
 ```kotlin
 //Game.kt
@@ -166,10 +176,14 @@ Da jeg testet hadde jeg heller ikke noen tekst som forklart de forksjellige inpu
 Appen har foerst og fremst blitt kjoert paa min egen [Moto E Play](https://www.motorola.com/us/products/moto-e-play-gen-5).
 
 ## Versjoner
-I appens '.gradle'-fil staar target-versjonen paa API-nivaa 28. Dette er for aa foelge Google sitt kommende krav
-om at alle alle nye apper som skal publiseres paa Play Store maa ha denne versjonen eller hoeyere[<sup>3</sup>](#4). https://developer.android.com/distribute/best-practices/develop/target-sdk
+![Fragmentering av Androi sin brukerbase](photos/android-market-share.png)
+(Grafen er hentet fra _Statistia_[<sup>4</sup>](#4))
 
-TODO: mer om minimumskrav -> hvor mange som stoettes
+I appens '.gradle'-fil staar target-versjonen paa API-nivaa 28. Dette er for aa foelge Google sitt kommende krav om at alle alle nye apper som skal publiseres paa Play Store maa ha denne versjonen eller hoeyere[<sup>5</sup>](#5). 
+
+Brukere paa Android er svaert spredt. Derfor har valget av versjon en del aa si for hvilke brukere som har mulighet til aa bruke appen. Jeg har valgt aa kode opp mot noe som er relativt moderne
+
+Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg paa en ganske oppdatert versjon, samtidig som jeg dekker store deler av (den svaert spredte) brukerbasen. De siste tallene paa android sine utvikler-sider tilsier faktisk at API-nivaa 21 skal stoette 88,9% av telefonbrukere globalt.[<sup>6</sup>](#6). 
 
 
 ## Biblioteker
@@ -227,7 +241,6 @@ Hva navngivning av XML-id'er har jeg ikke vaert like tradisjonell. Her har det v
 
 Sammensatte ord separeres ogsaa med understrek ("activity_demo_text_welcome_message", ikke _activity_demo_text_welcomeMessage"). Det kan vaere litt forvirrende, men mitt personlige inntrykk var at dette var bedre aa forholde seg til det oerlille usikkerhetsmomentet enn aa ha bladningen av store og smaa bokstaver der jeg allerde separerte med "_". 
 
-TODO: skriv mer om navn
 
 ## Publisering 
 TODO: playstore 
@@ -245,4 +258,6 @@ Prosjektet ligger ogsaa paa et [github-repo](https://github.com/olaven/tic-tac-t
 * <span id="1">1:</span> Uspesifiert forfatter, Google. 2019. “Floating Action Buttons”. https://material.io/develop/android/components/floating-action-button/ (lastet ned 27. April 2019)
 * <span id="2">2:</span> UMarcos Placona. 10 Mai 2018. “Functions are first-class citizens in Kotlin”. https://realkotlin.com/tutorials/2018-05-10-functions-are-first-class-citizens-in-kotlin/ (lastet ned 27. April 2019)
 *  <span id="3">3:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
-* <span id="4">4:</span> Uspesifiert forfatter, Google. 2019. “Meet Google Play's target API level requirement.” Google, March 8, 2017. https://developer.android.com/distribute/best-practices/develop/target-sdk (lastet ned 11. April 2019)
+*  <span id="4">4:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
+*  <span id="5">5:</span> Android. October 2018. “Android version market share distribution among smartphone owners as of September 2018". https://www.statista.com/statistics/271774/share-of-android-platforms-on-mobile-devices-with-android-os/ (lastet ned 27. April 2019)
+* <span id="6">6:</span> Uspesifiert forfatter, Google. 2019. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
