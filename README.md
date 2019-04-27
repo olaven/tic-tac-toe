@@ -52,14 +52,7 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [X] use [assertJ](http://joel-costigliola.github.io/assertj)
 - [X] set up travis
 - [ ] vurder https://google.github.io/truth/ fremfor assertj
-- [ ] Skill på ulike testkategorier som beskrevet https://developer.android.com/training/testing/fundamentals
-- [ ] @LargeTest og lignende.
-- [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals
-- [ ] set up tests for older phones / OS versions
-- [ ] Unit tests 
-- [ ] Android GUI tests
-- [ ] Test on different images on travis
-- [ ] >90% line coverage
+
 ### Documentation
 - [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
 - [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten

@@ -5,16 +5,22 @@
   - [Om oppgaven](#om-oppgaven)
   - [Flyt i applikasjonen (hva mapper til hva i oppgaveteksten)](#flyt-i-applikasjonen-hva-mapper-til-hva-i-oppgaveteksten)
   - [Skjermer](#skjermer)
-    - [Startskjerm](#startskjerm)
-    - [Spillskjerm](#spillskjerm)
-    - [Statistikkskjerm](#statistikkskjerm)
-  - [Versjoner](#versjoner)
-  - [Biblioteker](#biblioteker)
-  - [Screenshots TODO](#screenshots-todo)
+    - [Startskjerm - skjermbilde](#startskjerm---skjermbilde)
+    - [Spillskjerm - skjermbilde](#spillskjerm---skjermbilde)
+    - [Statistikkskjerm - skjermbilde](#statistikkskjerm---skjermbilde)
   - [Arkitektur](#arkitektur)
     - [Fragments](#fragments)
-    - [Spill-logikk](#spill-logikk)
+    - [Spillogikk](#spillogikk)
+  - [AI](#ai)
+  - [Brukertest](#brukertest)
+  - [Versjoner](#versjoner)
+  - [Biblioteker](#biblioteker)
+  - [Ikon](#ikon)
+  - [Play store](#play-store)
   - [Skjermbilder](#skjermbilder)
+    - [Bilde Startskjerm](#bilde-startskjerm)
+    - [Bilde Spillskjerm](#bilde-spillskjerm)
+    - [Bilde Statistikkskjerm](#bilde-statistikkskjerm)
   - [Kildeliste](#kildeliste)
 
 ## Generelt
@@ -33,8 +39,7 @@ Det foerste som moeter brukeren er [startskjermen](###startskjerm). Her kan spil
 
 ## Skjermer 
 
-### Startskjerm 
-TODO: bildelink 
+### Startskjerm - [skjermbilde](#bilde-startskjerm)
 Denne skjermen er det foerste som moeter en bruker naar appen aapnes. Her velger man to ting: hvem som skal spille og hvor stort brettet skal vaere. 
 
 Spillerene velges gjennom nedtrekkslister("spinners"). Disse er mye brukt i Android, og de gir mulighet for ett valg. Det er akkurat det jeg oensker her. I tillegg til aa vise ordinaere spiller, gir den siste av nedtrekkslistene mulighet for aa velge "TTTBot" som motspiller. Spillerene hentes fra applikasjonens lokale ROOM-database. Dersom man ikke har lagt til noen brukere, faar man varsel om at det maa gjoeres foer man faar lov til aa spille. 
@@ -43,41 +48,133 @@ Brukere legges enkelt til ved aa trykke paa en _Floating Action Button_ ("FAB").
 
 Hovedfunksjonaliteten gjoeres ved den store "Start Game"-knappen. Den var tydelig for alle jeg viste appen til. 
 
-### Spillskjerm 
-TODO: bildelink 
+### Spillskjerm - [skjermbilde](#bilde-spillskjerm)
 Her foregaar selve spillet. Spillet vises paa et kvadratisk brett i midten. Hver "rute" paa brettet starter med aa innehodle "_". For aa gjoere trekk, trykker spilleren bare der trekket skal gjoeres. 
 
-Under og over spillet vises de to spillernavnene. Paa denne maaten kan man legge telefonen mellom seg, som med et tradisjonelt brettspill. Navnet paa spilleren som venter paa motstanderens trekk, vil vaere graatt. 
+Under og over spillet vises de to spillernavnene. Paa denne maaten kan man legge telefonen mellom seg, som med et tradisjonelt brettspill. Navnet paa spilleren som venter paa motstanderens trekk, vil vaere graatt. I utgangspunktet var dette tenkt aa vaere tydeligere (faret bakgrunn/tydeligere tekster). Jeg oppdaget at brukere synes dette var distraherende. Derfor tonet jeg det ned, og har naa kun graatt/svart som bytter. 
 
-### Statistikkskjerm 
-TODO: bildelink 
+### Statistikkskjerm - [skjermbilde](#bilde-statistikkskjerm)
+Her vises alle spillere i en tabell, med kolonner for antall seiere, tap og uavgjort-spill. Dette er ikke en side hvor brukeren skal bruke mye tid. Inntrykket mitt var at brukerene som testet appen, synes siden var morsom i kort tid. Deretter ville de vekk, tilbake til selve spillet. 
 
 
 ## Arkitektur
+
 ### Fragments 
-Programmet bruker en fin og kjapp fragment-arkitektur, slik som 
-oppgaven spesifiserer. 
-### Spill-logikk
-var lur fordi den lot meg sette andre dimensjoner. Den var ogsaa lett a enhetsteste. kunne gjort annerledes, fordeler ulemper 
+Programmet bruker en fragment-arkitektur, slik som 
+oppgaven spesifiserer. Fragments gir en fordel over activities her fordi de er mindre ressurskrevende aa starte opp enn activities. 
+Fragments er mer fleksible enn activities var tenkt til aa vaere. De kan gjenbrukes og, dersom man oensker, kan man ha flere i samme skjerm (f.eks endring ved rotasjon). Det er ikke anbefalt at de skal vaere saa store. De skal dele opp ganske store bolker. 
+
+Jeg bruker kun ett fragment om gangen, og har samme skjerm uavhengig av rotasjon. Derfor er det foerst og fremst kostnaden ved aa starte en fragment som jeg sparer.
+
+![Activity to framgents](photos/diagrams/activity-to-fragment.png)
+
+Hele appen vises i en felles activity. Dersom en ny skjerm skal vises, byttes bare fragmenten som er aktivt. Dette lar meg bruke alle fordelene som fragments gir. Activity-objektet kan naaes gjennom klassevariabler i Fragments.
+```kotlin
+fun replaceMainFragment(fragment: Fragment) {
+
+    supportFragmentManager.beginTransaction()
+        .addToBackStack(null)
+        .replace(R.id.activity_base_frame_layout, fragment)
+        .commit()
+}
+```
+
+### Spillogikk
+Spillogikken ligger separat fra GUI. 
+
+![Sekvensdiagram for game-listeners](./photos/diagrams/game-listener-sequence.png)
+Jegh har forsoekt aa skille logikken for spillet fra GUI. Faktisk implemetnerte jeg selve logikken i foer jeg i det hele tatt tenkte paa hvordan det skulle rendres. Problemstillingen jeg moette da jeg startet med GUI var foelgende: hvordan skal GUI si ifra til spillogikken at noe skal oppdateres og motsatt. Etter hvert kom jeg frem til loesningen som er modellert over: 
+
+`Game.kt` har tre public klassevariable som er mutable: 
+
+```kotlin
+//Game.kt
+var onFirstPlayer:  ((player: Player) -> Unit)? = null
+var onSecondPlayer:  ((player: Player) -> Unit)? = null
+var onGameOver:  ((result: Result) -> Unit)? = null
+```
+
+`GameFragment.kt` (som holder paa et Game-objekt) kan saa sette sine GUI-spesifikke implementasjoner paa disse: 
+```kotlin
+//GameFragment.kt
+game.apply {
+
+    onFirstPlayer = {
+
+        // Gjoer GUI-spesifik ting!
+    }
+
+    onSecondPlayer = {
+
+        // Gjoer GUI-spesifik ting!
+    }
+}
+```
+
+Her kom Kotlin meg til gode. Dette kunne ogsaa vaert gjort i Java, f.eks. med funksjonelle interfaces. Det ble allikevel lettere i Kotlin fordi funksjoner er "first class citizens"[<sup>2</sup>](#2). 
+
+Logikken har vaert bygget slik at den stoetter alle dimensjone, fra start av. Dette gjorde det forholdsvis enkelt for meg aa legge inn mulighet for nettopp flere dimensjoner, ikke bare 3x3.
+
+Selve er strukturert som et 2D-array. Logikken og strukturen rundt, kan sies aa vaere noe "over-engineered" for formaalene denne applikasjonen trengte. Med det sagt, har det gitt noen fordeler ogsaa. Logikken ble laget paa et veldig tidlig stadium i utviklingen. Derfor kunne man tenke seg at det ville vaere vanskelig aa debugge det hele, dersom det ikke var godt strukturert. Her fikk jeg igjen for arbeidet, som gjorde det lett a finne feil. Koden har ogsaa tilhoerende, automatiserte tester, som var kjekt for a se at jeg ikke oedela noe de gangene jeg gjorde endringer.  
+
+## AI 
+Akkurat som med spillogikken, har jeg laget en AI som fungerer, helt uavhengig av dimensjonen paa brettet. Stort sett har jeg gjort slik at AI-koden ikke skal gjoere noe som handler om en spesiell dimensjon. Fordelen med dette, er at den fungerer paa akurat den brettstoerrelsen som oenskes.
+
+Ulempen er at man ikke kan dra nytte av trekk ved spesielle stoerrelser. F.eks. vil man i 3x3 ha et par trekk som er ekstra gode i starten. For aa faa med dette, har jeg med logikk kun for de to foerste trekkene som AI gjoer, ved 3x3. 
+
+Med mindre brettet er 3x3 og det er et av de foerste trekkene, er strategien foelgende: 
+* Hvis et trekk leder til at spillet er over, ta det 
+* Forsoek aa bygge paa eksisterede rekker, hvis det er mulig aa vinne i rekkens retning 
+* Fa en tilfeldig posisjon paa en rekke det er mulig aa vinne paa 
+* Fa en tilfeldig posisjon 
+
+Dette fungerer bra.
+
+
+Algoritmen er ikke ytelsesoptimalisert. For disse formaalene, tenker jeg at det er greit, i og med at jeg ikke lar brukeren velge stoerrelse fullstendig fritt (man kan ikke ha 100x100, f.eks.).
+
+Jeg har ogsaa maalt hastigheten. Google anbefaler at oppgaver skal kjoers i separate traader dersom de tar mer enn 16 millisekunder[<sup>3</sup>](#3). I smaa brettsoerrelser, naar jeg ikke denne grensen. Paa stoerre stoerrelser, gaar jeg derimot langt over. 
+
+Jeg maalte tiden manuelt, med foelgende kode. 
+
+```kotlin 
+var sum = 0.toLong()
+val n = 100
+val before = System.currentTimeMillis()
+for(i in 0..n) {
+
+    it.selectCoordinate(board)
+    val after = System.currentTimeMillis()
+
+    val difference = after - before
+    sum += difference
+}
+
+val average = sum / n
+print(average)
+```
+
+Paa et tidspunkt vurderte jeg aa bruke en kjent algoritme, som MinMax eller noe tilsvarende. Allikevel landet jeg paa aa snekre sammen min egen loesning. Grunnen til det er foerst og fremst at det er morsommere. Slik jeg tolket oppgaven, forstor jeg det ogsaa slik at det var det som var oenskeli; at man skulle lage sin egen. 
 
 ## Brukertest
+Jeg har hatt noen uformelle brukertester med venner og bekjente. Jeg har passet paa aa la baade "tekniske" og "ikke-tekniske" kjente. Det vil si at ogsaa testet folk som ikke er vant til aa bruke mange apper og som sjelden laerer seg aa bruke nye programmer. 
+
+I begynnelsen hadde jeg mye tydeligere, visuell indikator paa hvilken spiller sin tur det var. Noen brukere hang seg opp i at det var distraherende, og at det burde tones ned. Det har jeg gjort i den ferdige versjonen. 
+
+Da jeg testet hadde jeg heller ikke noen tekst som forklart de forksjellige input-feltene paa startskjermen.  Da var det noen av de ikke-teknsike brukerene som ikke skoente at det eksisterte valg de maatte ta stilling til. Dette er ogsaa lagt til i nyere versjoner. 
+
+Appen har foerst og fremst blitt kjoert paa min egen [Moto E Play](https://www.motorola.com/us/products/moto-e-play-gen-5).
 
 ## Versjoner
 I appens '.gradle'-fil staar target-versjonen paa API-nivaa 28. Dette er for aa foelge Google sitt kommende krav
-om at alle alle nye apper som skal publiseres paa Play Store maa ha denne versjonen eller hoeyere[<sup>2</sup>](#2). https://developer.android.com/distribute/best-practices/develop/target-sdk
+om at alle alle nye apper som skal publiseres paa Play Store maa ha denne versjonen eller hoeyere[<sup>3</sup>](#4). https://developer.android.com/distribute/best-practices/develop/target-sdk
 
-Minimumsversjonen er satt til SPOER TM
-
-Minimuns versjonen stoetter X mange
-
-Dersom jeg skulle pushet versjonen enda lavere, ville jeg kommet i konflikt med b.la. support-bibliotekene jeg bruker,
-og jeg konkluderte med at applikasjonen stoettet mer enn bredt nok uten dette. Faktisk anslaar Android Studio at stoetten ligger paa rundt hundre prosent. 
+TODO: mer om minimumskrav -> hvor mange som stoettes
 
 
 ## Biblioteker
 Jeg har valgt aa unngaa bruke tunge rammeverk. Generelt sett har jeg oensket aa holde meg paa ganske "vanilla"-nivaa.
-Det var fordi jeg oensket at oppgaven min skulle passe mer mot pensum, samt at jeg ikke ville pakke bort for mange ting
-foer jeg forsto dem.
+Det var fordi jeg oensket at oppgaven min skulle passe mer mot pensum, samt at jeg ikke ville pakke bort for mange ting foer jeg forsto dem.
 
 Room er et unntak, i og med at det kan beskrives som et rammeverk som abstraherer ganske mye for deg. Jeg oensket allikevel
 aa bruke Room av to grunner:
@@ -87,11 +184,20 @@ de funksjonaliteten ble pakket inn.
 
 TODO: Gjennomgang av alle bibliotek
 
+## Ikon 
+
+## Play store
 
 ## Skjermbilder
+### Bilde Startskjerm
+![startskjerm](./photos/screenshots/startskjerm.png)
+### Bilde Spillskjerm
+![spillskjerm](./photos/screenshots/spillskjerm.png)
+### Bilde Statistikkskjerm
+![statistikkskjerm](./photos/screenshots/statistikkskjerm.png)
 
 ## Kildeliste
 * <span id="1">1:</span> Uspesifiert forfatter, Google. 2019. “Floating Action Buttons”. https://material.io/develop/android/components/floating-action-button/ (lastet ned 27. April 2019)
-* <span id="2">2:</span> Uspesifiert forfatter, Google. 2019. “Meet Google Play's target API level requirement.” Google, March 8, 2017. https://developer.android.com/distribute/best-practices/develop/target-sdk (lastet ned 11. April 2019)
-
-[1]: "her er det noe" 
+* <span id="2">2:</span> UMarcos Placona. 10 Mai 2018. “Functions are first-class citizens in Kotlin”. https://realkotlin.com/tutorials/2018-05-10-functions-are-first-class-citizens-in-kotlin/ (lastet ned 27. April 2019)
+*  <span id="3">3:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
+* <span id="4">4:</span> Uspesifiert forfatter, Google. 2019. “Meet Google Play's target API level requirement.” Google, March 8, 2017. https://developer.android.com/distribute/best-practices/develop/target-sdk (lastet ned 11. April 2019)
