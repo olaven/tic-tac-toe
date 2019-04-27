@@ -19,6 +19,7 @@
 
         <TextView
                 android:id="@+id/fragment_game_text_player2"
+                android:rotation="180"
                 android:textColor="@color/black"
                 android:text="@string/unloaded"
                 android:textSize="30sp"
