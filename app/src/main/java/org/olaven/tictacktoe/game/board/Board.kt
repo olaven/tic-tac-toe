@@ -5,6 +5,8 @@ import org.olaven.tictacktoe.positionToCoordinates
 
 class Board(val dimension: Int = 3): CanCopy<Board> {
 
+    var moveCount = 0
+
     val grid = Grid(
         rows = dimension,
         columns = dimension,
@@ -18,9 +20,9 @@ class Board(val dimension: Int = 3): CanCopy<Board> {
         return grid.matrix[coordinate.x][coordinate.y]
     }
 
-
     fun markSquareAt(coordinate: Coordinate, newMark: SquareMark) {
 
+        moveCount++
         val square = squareAt(coordinate)
         square.mark = newMark
     }

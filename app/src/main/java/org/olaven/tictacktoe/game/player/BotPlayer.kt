@@ -22,6 +22,39 @@ class BotPlayer(user: User): Player(user) {
      */
     fun selectCoordinate(board: Board): Coordinate {
 
+        // Special strategy for 3x3
+        if (board.dimension == 3 && board.moveCount <= 3) {
+
+            val middleMark = board.squareAt(Coordinate(1, 1)).mark
+            when(board.moveCount) {
+                0 -> Coordinate(0, 0)
+                else -> if (middleMark == SquareMark.CROSS) {
+                    if (board.moveCount == 1) {
+                        return Coordinate(0, 2)
+                    } else {
+
+                        if (board.squareAt(Coordinate(0, 0)).mark == SquareMark.EMPTY) {
+                            return Coordinate(0, 0)
+                        }
+                    }
+                } else {
+                    
+                    return if (board.moveCount == 1) {
+                        Coordinate(1, 1)
+                    } else {
+
+                        val firstEdge = board.squareAt(Coordinate(1, 2)).mark
+                        if (firstEdge == SquareMark.EMPTY) {
+                            Coordinate(1, 2)
+                        } else {
+                            Coordinate(0, 1)
+                        }
+                    }
+                }
+            }
+
+        }
+
         // find a necessary move
         findCriticalPoint(board)?.let {
 
@@ -112,7 +145,14 @@ class BotPlayer(user: User): Player(user) {
         return if (unspoiled.isEmpty()) {
             null
         } else {
-            unspoiled.random()
+            try {
+                unspoiled
+                    .filter { board.squareAt(it).mark != SquareMark.CIRCLE }
+                    .random()
+            } catch (error: NoSuchElementException) {
+
+                return null
+            }
         }
     }
 

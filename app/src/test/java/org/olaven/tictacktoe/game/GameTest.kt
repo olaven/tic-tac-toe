@@ -44,28 +44,4 @@ internal class GameTest {
         assertThat(game.activePlayer)
             .isEqualTo(player2)
     }
-
-    @Test
-    fun gameOverWhenAllSquaresAreMarked() {
-
-        var run = false
-        var runCount = 0
-
-        game.onGameOver = {
-            run = true
-            runCount++
-        }
-
-        for(i in 0 until game.board.dimension) {
-            for (j in 0 until game.board.dimension) {
-
-                game.clickAt(Coordinate(i, j))
-            }
-        }
-
-        assertThat(run)
-            .isTrue()
-        assertThat(runCount)
-            .isEqualTo(1)
-    }
 }
