@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_game.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.olaven.tictacktoe.R
 import org.olaven.tictacktoe.database.UserModel
 import org.olaven.tictacktoe.game.Game
@@ -228,10 +230,31 @@ class GameFragment : Fragment() {
                 fragment_game_text_player2.setTextColor(activePlayerColor)
 
                 if (it is BotPlayer) {
-                    val coordinate = it.selectCoordinate(board)
-                    game.clickAt(coordinate)
+
+                    makeMoveAsBot(it)
                 }
             }
+        }
+    }
+
+    private fun makeMoveAsBot(botPlayer: BotPlayer) {
+        
+        if (game.board.dimension > 5) {
+
+            doAsync {
+
+                val coordinate = botPlayer.selectCoordinate(game.board)
+
+                uiThread {
+
+                    game.clickAt(coordinate)
+                    (fragment_game_grid_view.adapter as GameGridAdapter).notifyDataSetChanged()
+                }
+            }
+        } else {
+
+            val coordinate = botPlayer.selectCoordinate(game.board)
+            game.clickAt(coordinate)
         }
     }
 }

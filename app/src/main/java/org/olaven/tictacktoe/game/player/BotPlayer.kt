@@ -7,13 +7,15 @@ import org.olaven.tictacktoe.game.board.SquareMark
 import org.olaven.tictacktoe.game.hasWinner
 import org.olaven.tictacktoe.positionToCoordinates
 import java.lang.Exception
+import java.util.*
+import kotlin.NoSuchElementException
 
 class BotPlayer(user: User): Player(user) {
 
     /**
      * The strategy:
      * 1: If a move leads to game over, take it
-     * 2: Try to build on an existing Circle, if that row is unspoiled
+     * 2: Try to build on an existing square, if that row is unspoiled
      * 3: Get a random and unspoiled square
      * 4: Get a random square, as last resort
      *
@@ -22,37 +24,13 @@ class BotPlayer(user: User): Player(user) {
      */
     fun selectCoordinate(board: Board): Coordinate {
 
-        // Special strategy for 3x3
-        if (board.dimension == 3 && board.moveCount <= 3) {
+        val timeBefore = System.currentTimeMillis()
 
-            val middleMark = board.squareAt(Coordinate(1, 1)).mark
-            when(board.moveCount) {
-                0 -> Coordinate(0, 0)
-                else -> if (middleMark == SquareMark.CROSS) {
-                    if (board.moveCount == 1) {
-                        return Coordinate(0, 2)
-                    } else {
+        threeTimesThreeStrategy(board)?.let {
 
-                        if (board.squareAt(Coordinate(0, 0)).mark == SquareMark.EMPTY) {
-                            return Coordinate(0, 0)
-                        }
-                    }
-                } else {
-                    
-                    return if (board.moveCount == 1) {
-                        Coordinate(1, 1)
-                    } else {
-
-                        val firstEdge = board.squareAt(Coordinate(1, 2)).mark
-                        if (firstEdge == SquareMark.EMPTY) {
-                            Coordinate(1, 2)
-                        } else {
-                            Coordinate(0, 1)
-                        }
-                    }
-                }
+            if (board.squareAt(it).mark == SquareMark.EMPTY) {
+                return it
             }
-
         }
 
         // find a necessary move
@@ -73,9 +51,14 @@ class BotPlayer(user: User): Player(user) {
 
         findRandomPoint(board).let {
 
+            val timeAfter = System.currentTimeMillis()
+            val difference = timeAfter - timeBefore;
+
+            print(difference)
             return it
         }
     }
+
 
     private fun findNeighbourNotSpoiled(board: Board): Coordinate? {
 
@@ -175,6 +158,42 @@ class BotPlayer(user: User): Player(user) {
             }
         }
         return null
+    }
+
+    private fun threeTimesThreeStrategy(board: Board): Coordinate? {
+        // Special strategy for 3x3. A bit ugly, but makes the app better.
+        if (board.dimension == 3 && board.moveCount <= 3) {
+
+            val middleMark = board.squareAt(Coordinate(1, 1)).mark
+            when (board.moveCount) {
+                0 -> Coordinate(0, 0)
+                else -> if (middleMark == SquareMark.CROSS) {
+                    if (board.moveCount == 1) {
+                        return Coordinate(0, 2)
+                    } else {
+
+                        if (board.squareAt(Coordinate(0, 0)).mark == SquareMark.EMPTY) {
+                            return Coordinate(0, 0)
+                        }
+                    }
+                } else {
+
+                    return if (board.moveCount == 1) {
+                        Coordinate(1, 1)
+                    } else {
+
+                        val firstEdge = board.squareAt(Coordinate(1, 2)).mark
+                        if (firstEdge == SquareMark.EMPTY) {
+                            Coordinate(1, 2)
+                        } else {
+                            Coordinate(0, 1)
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     private fun findRandomPoint(board: Board) = board.grid.mapIndexed { index, _ ->
