@@ -2,8 +2,6 @@ package org.olaven.tictacktoe.gui.fragments
 
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.app.Fragment
@@ -11,6 +9,8 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -38,19 +38,20 @@ class GameFragment : Fragment() {
     private var player2: Player? = null
     private var dimension: Int? = null
 
-    private var timerOnPause = 0.toLong()
+    private var timeDifference = 0.toLong()
 
     override fun onResume() {
         super.onResume()
 
-        fragment_game_chronometer.base = timerOnPause
-        timerOnPause = 0
+        val time = timeDifference + SystemClock.elapsedRealtime()
+        fragment_game_chronometer.base = time
     }
 
     override fun onPause() {
         super.onPause()
 
-        timerOnPause = fragment_game_chronometer.base
+        timeDifference = fragment_game_chronometer.base - SystemClock.elapsedRealtime()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -67,8 +68,10 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-
-    // TODO: Refactor this function
+    /**
+     * 1: set listeners on all data
+     * 2: when fetching data, start game if all data is retrieved
+     */
     private fun setupDataObservers() {
 
         activity?.let { activity ->

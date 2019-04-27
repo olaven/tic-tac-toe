@@ -2,7 +2,6 @@ package org.olaven.tictacktoe.database
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.support.annotation.RestrictTo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,11 +16,11 @@ class UserModel(application: Application): AndroidViewModel(application) {
     private val scope = CoroutineScope(coroutineContext)
 
 
-    val personDAO = AppDatabase
+    private val userDAO = AppDatabase
         .getDatabase(application.applicationContext)
         .userDAO()
 
-    val repository = UserRepostory(personDAO)
+    private val repository = UserRepostory(userDAO)
     val allUsers = repository.allUsers
 
 
