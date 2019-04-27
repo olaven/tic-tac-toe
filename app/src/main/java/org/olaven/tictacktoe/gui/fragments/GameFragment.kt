@@ -2,10 +2,12 @@ package org.olaven.tictacktoe.gui.fragments
 
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,7 @@ import org.olaven.tictacktoe.game.player.Player
 import org.olaven.tictacktoe.gui.SharedModel
 import org.olaven.tictacktoe.gui.BaseActivity
 import org.olaven.tictacktoe.gui.adapters.GameGridAdapter
+
 
 
 class GameFragment : Fragment() {
@@ -208,8 +211,8 @@ class GameFragment : Fragment() {
 
     private fun setupOnPlayerActions() {
 
-        val activePlayerColor = Color.BLACK
-        val waitingPlayerColor = Color.GRAY
+        val activePlayerColor = ContextCompat.getColor(context!!, R.color.black)
+        val waitingPlayerColor = ContextCompat.getColor(context!!, R.color.gray)
 
         game.apply {
 

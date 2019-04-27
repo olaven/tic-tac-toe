@@ -3,6 +3,7 @@
 
     <!-- non-theme -->
     <color name="black">#000000</color>
+    <color name="gray">#888888</color>
 
     <!-- DefaultTheme -->
     <color name="defaultPrimary">#008577</color>
