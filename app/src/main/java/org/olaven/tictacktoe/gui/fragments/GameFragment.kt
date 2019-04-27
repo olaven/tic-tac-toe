@@ -238,7 +238,7 @@ class GameFragment : Fragment() {
     }
 
     private fun makeMoveAsBot(botPlayer: BotPlayer) {
-        
+
         if (game.board.dimension > 5) {
 
             doAsync {

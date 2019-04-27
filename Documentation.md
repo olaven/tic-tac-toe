@@ -1,6 +1,6 @@
 # Dokumentasjon - Tic Tac Toe
 
-- [Dokumentasjon - Tic Tac Toe](#dokumentasjon---tic-tac-toe)
+`- [Dokumentasjon - Tic Tac Toe](#dokumentasjon---tic-tac-toe)
   - [Generelt](#generelt)
   - [Om oppgaven](#om-oppgaven)
   - [Flyt i applikasjonen (hva mapper til hva i oppgaveteksten)](#flyt-i-applikasjonen-hva-mapper-til-hva-i-oppgaveteksten)
@@ -182,9 +182,28 @@ aa bruke Room av to grunner:
 2. Jeg har ganske god kjennskap til SQL o.l. fra tidligere kurs og fritidsprosjekter. Derfor var det ikke saa farlig at
 de funksjonaliteten ble pakket inn.
 
-TODO: Gjennomgang av alle bibliotek
+Der jeg skal kjoere kode i flere traader, bruker jeg [Anko](https://github.com/Kotlin/anko) sin `doAsync`. Her kunne jeg gatt for `AsyncTask`, slik som jeg gjoer i Modulist (app nr. 2). Sistnevnte er flott fordi den gir deg en god del kontroll, med forskjellige metoder som lar deg gjoere ting underveis i kjoeringen. `AsyncTask` gir deg ogsaa en ganske eksplisitt maate a definere hva som skal skje paa (med generic-parametere osv.), som jeg har sanasen for. Allikevel gikk jeg for `doAsync`, fordi det kun skulle brukes ett sted. Dessuten ble det kort, fint og lettleselig: 
+```kotlin
+doAsync {
 
-## Ikon 
+  val coordinate = botPlayer.selectCoordinate(game.board)
+
+  uiThread {
+
+      game.clickAt(coordinate)
+      (fragment_game_grid_view.adapter as GameGridAdapter).notifyDataSetChanged()
+  }
+}
+```
+
+## Visuelt
+Jeg har holdt meg til Material Design, og Google sine standard-komponenter. Disse er kjente for brukeren. Det er lagt opp til at brukeren skal kunne endre fargetema gjennom "options-menyen". 
+
+Jeg har ogsaa laget et lite ikon til appen.
+![startskjerm](./photos/icon.png)
+
+## Navngivning 
+TODO skriv her 
 
 ## Play store
 
