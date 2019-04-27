@@ -14,6 +14,7 @@
     - [Room](#room)
     - [Spillogikk](#spillogikk)
   - [AI](#ai)
+  - [Lokal lagring](#lokal-lagring)
   - [Brukertest](#brukertest)
   - [Versjoner](#versjoner)
   - [Biblioteker](#biblioteker)
@@ -87,6 +88,9 @@ fun replaceMainFragment(fragment: Fragment) {
 TODO SKRIV / vis kode (sjekk todo fra readme om dette)
 
 ### Room 
+TODO modeller arkitektur
+
+
 TODO DIAGRAM 
 
 ### Spillogikk
@@ -165,6 +169,17 @@ print(average)
 ```
 
 Paa et tidspunkt vurderte jeg aa bruke en kjent algoritme, som MinMax eller noe tilsvarende. Allikevel landet jeg paa aa snekre sammen min egen loesning. Grunnen til det er foerst og fremst at det er morsommere. Slik jeg tolket oppgaven, forstor jeg det ogsaa slik at det var det som var oenskeli; at man skulle lage sin egen. 
+
+
+## Lokal lagring 
+I min oppgave bruker jeg en SQLLite-database til aa lagre brukere. Jeg kunne potensielt brukt "SharedPreferendes", som er et litt mer lettvekts-alternativ. Allikevel har jeg gaatt for en databaseloesning. Selv om jeg bare har en tabell, er det potensielt snakk om en del data (mange brukere). Der er SQL bedre fordi har mulighet for mer sofistikerte spoerringer. 
+
+I applikasjonens naavaerende tilstand er det kanskje litt overkill. Derimot kan det loenne seg om appen skal videreutvikles over tid. Paa grunn av muligheter for mer avanserte spoerringer o.l, kan man for eksempel tenke seg at SQL-valget vi gi store fordeler om statistikk-skjermen skulle vist mer avaserte ting enn den gjoer i dag (gjennomsnitt, data mot spesifikke spillere, sorterte dta osv.). Da ville man nemlig kunne gjoere spoerringene mot databasen, som er mye mindre ressurskrevende enn aa foerst hente data ut, for saa aa behandle den (som ville vaert alternativet med SharedPreferences). 
+
+Videre er "SharedPreferences" i ment for aa lagre enklere data som `String`, `Int` osv. 
+Man kunne konvertert objektene frem og tilbake til et format som JSON-strings, men det ville forkludret koden unoedvendig mye i forhold til gevinsten, slik jeg vurderte det.  
+
+Shared preferences egner seg derimot godt til klassiske "key-value"-scenarier. Det gaar ogsaa kjappere aa lese fra "SharedPreferences" enn fra en SQL-database. Derfor har jeg valgt aa bruke "SharedPreferences" for aa lagre fargetemaene. 
 
 ## Brukertest
 Jeg har hatt noen uformelle brukertester med venner og bekjente. Jeg har passet paa aa la baade "tekniske" og "ikke-tekniske" kjente. Det vil si at ogsaa testet folk som ikke er vant til aa bruke mange apper og som sjelden laerer seg aa bruke nye programmer. 

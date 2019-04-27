@@ -38,6 +38,21 @@ class GameFragment : Fragment() {
     private var player2: Player? = null
     private var dimension: Int? = null
 
+    private var timerOnPause = 0.toLong()
+
+    override fun onResume() {
+        super.onResume()
+
+        fragment_game_chronometer.base = timerOnPause
+        timerOnPause = 0
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        timerOnPause = fragment_game_chronometer.base
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_game, container, false)
