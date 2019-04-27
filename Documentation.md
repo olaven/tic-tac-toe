@@ -203,9 +203,35 @@ Jeg har ogsaa laget et lite ikon til appen.
 ![startskjerm](./photos/icon.png)
 
 ## Navngivning 
-TODO skriv her 
+Mange av navngivningskonvensjonene jeg har fulgt er veldig vanlige, standard-konvenserjoner. 
+B.la. bruker jeg [Camel Case](https://en.wikipedia.org/wiki/Camel_case) paa de aller fleste variablelnavn. Kosntanter har store bokstaver. 
 
-## Play store
+Hva navngivning av XML-id'er har jeg ikke vaert like tradisjonell. Her har det vaert ekstra viktig aa ha en navngivningskonvensjon som faktisk er _helt_ identifiserende. Dette er fordi at ID'ene er tilgjengelige i globalt scope. Konvensjonen jeg landet paa har foelgende sturktur: "parent, type"\_"parent, navn"\_"element, type"_"element, navn". Under er et eksempel i en activity som heter `DemoActivity`. ID er satt paa `TextView`-tagen: 
+```XML
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".gui.DemoActivity">
+
+     <TextView
+        <!-- ID med min konvensenjon: -->
+        android:id="@+id/activity_demo_text_welcome_message"
+        android:text="Hei, velkommen til min demo!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop-toBottomOf="parent"
+      />
+
+</android.support.constraint.ConstraintLayout>
+```
+
+Sammensatte ord separeres ogsaa med understrek ("activity_demo_text_welcome_message", ikke _activity_demo_text_welcomeMessage"). Det kan vaere litt forvirrende, men mitt personlige inntrykk var at dette var bedre aa forholde seg til det oerlille usikkerhetsmomentet enn aa ha bladningen av store og smaa bokstaver der jeg allerde separerte med "_". 
+
+TODO: skriv mer om navn
+
+## Publisering 
+TODO: playstore 
+Prosjektet ligger ogsaa paa et [github-repo](https://github.com/olaven/tic-tac-toe)
 
 ## Skjermbilder
 ### Bilde Startskjerm
