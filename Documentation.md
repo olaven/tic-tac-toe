@@ -34,7 +34,7 @@ Jeg har bygget en implementasjon av _Tic Tac Toe_, slik oppgaven beskriver.
 I dette dokumetnet skal jeg beskrive løsningen min. Det være seg hvordan koden er strukturert,hvorfor den ser ut som den gjør og hvorfor den treffer målet om å være en god applikasjon.
 
 ## Om oppgaven 
-Oppgaven her var å skrive en appliksasjon som implementerte _Tic Tac Toe_ ("bondesjakke"). I tillegg var det krav om følgende: 
+Oppgaven her var å skrive en appliksasjon som implementerte _Tic Tac Toe_ ("bondesjakk"). I tillegg var det krav om følgende:
 1. Applikasjonen skal ha en fragment-struktur ([les mer](#fragments))
 2. Applikasjonen skal gjøre bruk av lokal lagring (les mer [her](#lokal-lagring) og [her](room-database))
 3. Applikasjonen skal ha logikk for å kunne spille alene mot telefonen. (les mer [her](#ai))
@@ -272,6 +272,8 @@ Jeg har også laget et lite ikon til appen.
 ![startskjerm](./photos/icon.png)
 
 ## Navngivning 
+(samme som i _Modulist_)
+
 Mange av navngivningskonvensjonene jeg har fulgt er veldig vanlige, standard-konvenserjoner. 
 B.la. bruker jeg [Camel Case](https://en.wikipedia.org/wiki/Camel_case) på de aller fleste variablelnavn. Kosntanter har store bokstaver. 
 
@@ -314,14 +316,15 @@ Prosjektet ligger også på et [github-repo](https://github.com/olaven/tic-tac-t
 
 
 ## Kildeliste
-* <span id="1">1:</span> Uspesifiert forfatter, Google. 2019. “Floating Action Buttons”. https://material.io/develop/android/components/floating-action-button/ (lastet ned 27. April 2019)
+__note__: Der tilstrekkelig informasjon ikke er oppgitt, kommer det frem i kildehenvisningen.
+* <span id="1">1:</span> Uspesifiert forfatter, Google. NA. “Floating Action Buttons”. https://material.io/develop/android/components/floating-action-button/ (lastet ned 27. April 2019)
 * <span id="2">2:</span> Shalauddin Ahamad Shuza, 9. August 2018. https://medium.com/mindorks/how-to-communicate-between-fragments-and-activity-using-viewmodel-ca733233a51c (lastet ned 15. Mars 2019) 
-* <span id="3">3:</span> Uspesifiert forfatter, Google. 2019. "Save data in a local database using Room" (lastet ned 27. April 2019) 
+* <span id="3">3:</span> Uspesifiert forfatter, Google. NA. "Save data in a local database using Room" (lastet ned 27. April 2019) 
 * <span id="4">4:</span> UMarcos Placona. 10 Mai 2018. “Functions are first-class citizens in Kotlin”. https://realkotlin.com/tutorials/2018-05-10-functions-are-first-class-citizens-in-kotlin/ (lastet ned 27. April 2019)
-*  <span id="5">5:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
+*  <span id="5">5:</span> Uspesifiert forfatter, Google. NA. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
 *  <span id="6">6:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
 *  <span id="7">7:</span> Android. October 2018. “Android version market share distribution among smartphone owners as of September 2018". https://www.statista.com/statistics/271774/share-of-android-platforms-on-mobile-devices-with-android-os/ (lastet ned 27. April 2019)
-* <span id="8">8:</span> Uspesifiert forfatter, Google. 2019. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
+* <span id="8">8:</span> Uspesifiert forfatter, Google. NA. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
 
 ## Vedlegg
 ### Bilde skisse 
