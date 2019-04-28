@@ -3,7 +3,7 @@
 - [Dokumentasjon - Tic Tac Toe](#dokumentasjon---tic-tac-toe)
   - [Generelt](#generelt)
   - [Om oppgaven](#om-oppgaven)
-  - [Flyt i applikasjonen (hva mapper til hva i oppgaveteksten)](#flyt-i-applikasjonen-hva-mapper-til-hva-i-oppgaveteksten)
+  - [Flyt i applikasjonen](#flyt-i-applikasjonen)
   - [Skjermer](#skjermer)
     - [Startskjerm - skjermbilde](#startskjerm---skjermbilde)
     - [Spillskjerm - skjermbilde](#spillskjerm---skjermbilde)
@@ -38,7 +38,7 @@ Oppgaven her var å skrive en appliksasjon som implementerte _Tic Tac Toe_ ("bon
 2. Applikasjonen skal gjøre bruk av lokal lagring 
 3. Applikasjonen skal ha logikk for å kunne spille alene mot telefonen
 
-## Flyt i applikasjonen (hva mapper til hva i oppgaveteksten)
+## Flyt i applikasjonen 
 Det første som møter brukeren er [startskjermen](###startskjerm). Her kan spilleren velge spillere og størrelse på brettet. Når det er gjort, går man videre til [spillskjermen](###spillskjerm). Det er der selve spillet foregår. Når spillet er slutt, får man opp en varselboks med informasjon om spillets resultat. Varselboksen gir mulighet til å starte på nytt eller gå til [statistikkskjermen](###statistikkskjerm). Statistikkskjermen viser en oversikt over samlede resultater for alle brukere. Applikasjonen gir også mulighet for å bytte fargetema, gjennom en standard-meny i app-baren. Det er mulig å nå statistikkskjermen herfra. 
 
 
