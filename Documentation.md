@@ -22,6 +22,7 @@
   - [Navngivning](#navngivning)
   - [Publisering](#publisering)
   - [Skjermbilder](#skjermbilder)
+    - [Bilde skisse](#bilde-skisse)
     - [Bilde Startskjerm](#bilde-startskjerm)
     - [Bilde Spillskjerm](#bilde-spillskjerm)
     - [Bilde Statistikkskjerm](#bilde-statistikkskjerm)
@@ -34,7 +35,7 @@ I dette dokumetnet skal jeg beskrive løsningen min. Det være seg hvordan koden
 
 ## Om oppgaven 
 Oppgaven her var å skrive en appliksasjon som implementerte _Tic Tac Toe_ ("bondesjakke"). I tillegg var det krav om følgende: 
-1. Applikasjøn skal ha en fragment-struktur
+1. Applikasjonen skal ha en fragment-struktur
 2. Applikasjonen skal gjøre bruk av lokal lagring 
 3. Applikasjonen skal ha logikk for å kunne spille alene mot telefonen
 
@@ -43,6 +44,7 @@ Det første som møter brukeren er [startskjermen](###startskjerm). Her kan spil
 
 
 ## Skjermer 
+I denne seksjonen skal jeg ta for meg alle skjermene som møter brukeren. Sammen med bildene fra det ferdige produktet, har jeg også lagt ved en [tidilg skisse](#bilde-skisse) av appen, som ble tegnet omtrent da oppgaven ble utlevert.
 
 ### Startskjerm - [skjermbilde](#bilde-startskjerm)
 Denne skjermen er det første som møter en bruker når appen åpnes. Her velger man to ting: hvem som skal spille og hvor stort brettet skal være. 
@@ -311,6 +313,8 @@ TODO: playstore
 Prosjektet ligger også på et [github-repo](https://github.com/olaven/tic-tac-toe)
 
 ## Skjermbilder
+### Bilde skisse 
+![Tidlig skisse av appen](photos/sketch.png)
 ### Bilde Startskjerm
 ![startskjerm](./photos/screenshots/startskjerm.png)
 ### Bilde Spillskjerm
