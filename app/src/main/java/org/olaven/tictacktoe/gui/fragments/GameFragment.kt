@@ -41,17 +41,16 @@ class GameFragment : Fragment() {
     private var timeDifference = 0.toLong()
 
     override fun onResume() {
+        
         super.onResume()
-
         val time = timeDifference + SystemClock.elapsedRealtime()
         fragment_game_chronometer.base = time
     }
 
     override fun onPause() {
+        
         super.onPause()
-
         timeDifference = fragment_game_chronometer.base - SystemClock.elapsedRealtime()
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

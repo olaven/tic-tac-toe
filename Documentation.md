@@ -21,12 +21,12 @@
   - [Visuelt](#visuelt)
   - [Navngivning](#navngivning)
   - [Publisering](#publisering)
-  - [Skjermbilder](#skjermbilder)
+  - [Kildeliste](#kildeliste)
+  - [Vedlegg](#vedlegg)
     - [Bilde skisse](#bilde-skisse)
     - [Bilde Startskjerm](#bilde-startskjerm)
     - [Bilde Spillskjerm](#bilde-spillskjerm)
     - [Bilde Statistikkskjerm](#bilde-statistikkskjerm)
-  - [Kildeliste](#kildeliste)
 
 
 ## Generelt
@@ -35,9 +35,9 @@ I dette dokumetnet skal jeg beskrive løsningen min. Det være seg hvordan koden
 
 ## Om oppgaven 
 Oppgaven her var å skrive en appliksasjon som implementerte _Tic Tac Toe_ ("bondesjakke"). I tillegg var det krav om følgende: 
-1. Applikasjonen skal ha en fragment-struktur
-2. Applikasjonen skal gjøre bruk av lokal lagring 
-3. Applikasjonen skal ha logikk for å kunne spille alene mot telefonen
+1. Applikasjonen skal ha en fragment-struktur ([les mer](#fragments))
+2. Applikasjonen skal gjøre bruk av lokal lagring (les mer [her](#lokal-lagring) og [her](room-database))
+3. Applikasjonen skal ha logikk for å kunne spille alene mot telefonen. (les mer [her](#ai))
 
 ## Flyt i applikasjonen 
 Det første som møter brukeren er [startskjermen](###startskjerm). Her kan spilleren velge spillere og størrelse på brettet. Når det er gjort, går man videre til [spillskjermen](###spillskjerm). Det er der selve spillet foregår. Når spillet er slutt, får man opp en varselboks med informasjon om spillets resultat. Varselboksen gir mulighet til å starte på nytt eller gå til [statistikkskjermen](###statistikkskjerm). Statistikkskjermen viser en oversikt over samlede resultater for alle brukere. Applikasjonen gir også mulighet for å bytte fargetema, gjennom en standard-meny i app-baren. Det er mulig å nå statistikkskjermen herfra. 
@@ -312,15 +312,6 @@ fragment_game_text_player1.setTextColor(activePlayerColor)
 TODO: playstore 
 Prosjektet ligger også på et [github-repo](https://github.com/olaven/tic-tac-toe)
 
-## Skjermbilder
-### Bilde skisse 
-![Tidlig skisse av appen](photos/sketch.png)
-### Bilde Startskjerm
-![startskjerm](./photos/screenshots/startskjerm.png)
-### Bilde Spillskjerm
-![spillskjerm](./photos/screenshots/spillskjerm.png)
-### Bilde Statistikkskjerm
-![statistikkskjerm](./photos/screenshots/statistikkskjerm.png)
 
 ## Kildeliste
 * <span id="1">1:</span> Uspesifiert forfatter, Google. 2019. “Floating Action Buttons”. https://material.io/develop/android/components/floating-action-button/ (lastet ned 27. April 2019)
@@ -331,3 +322,13 @@ Prosjektet ligger også på et [github-repo](https://github.com/olaven/tic-tac-t
 *  <span id="6">6:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
 *  <span id="7">7:</span> Android. October 2018. “Android version market share distribution among smartphone owners as of September 2018". https://www.statista.com/statistics/271774/share-of-android-platforms-on-mobile-devices-with-android-os/ (lastet ned 27. April 2019)
 * <span id="8">8:</span> Uspesifiert forfatter, Google. 2019. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
+
+## Vedlegg
+### Bilde skisse 
+![Tidlig skisse av appen](photos/sketch.png)
+### Bilde Startskjerm
+![startskjerm](./photos/screenshots/startskjerm.png)
+### Bilde Spillskjerm
+![spillskjerm](./photos/screenshots/spillskjerm.png)
+### Bilde Statistikkskjerm
+![statistikkskjerm](./photos/screenshots/statistikkskjerm.png)

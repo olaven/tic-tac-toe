@@ -54,31 +54,27 @@ An implementation of Tic Tac Toe. Written as part of exam in Android Programming
 - [ ] vurder https://google.github.io/truth/ fremfor assertj
 
 ### Documentation
-- [ ] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
-- [ ] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
-- [ ] Holdt meg unna heavy rammeverk (med untak av Room) -> hvorfor?
-- [ ] Skriv om fragment-arkitektur
+- [X] Hvilken versjon prosjektet er bygget på (bruk statistikk fra statistia)
+- [X] Bare veldig enkle ting (max sharedprefs) onResume/-pause. OnStop/Start resten
+- [X] Holdt meg unna heavy rammeverk (med untak av Room) -> hvorfor?
+- [X] Skriv om fragment-arkitektur
 - [ ] Skriv om deling av data gjennom fragments med kilde: https://medium.com/mindorks/how-to-communicate-between-fragments-and-activity-using-viewmodel-ca733233a51c
 - [ ] Hvorfor lagre spiller-option i preferences? Hvorfor ikke lagre spill-state?
-- [ ] Særlig testing av selve spillogikken; det er det som er kjernen i appen
+- [X] Særlig testing av selve spillogikken; det er det som er kjernen i appen
 - [ ] Metoder for restoring av state: (onSaveInstanceState / onRestoreInstanceState og onCreate https://stackoverflow.com/questions/12683779/are-oncreate-and-onrestoreinstancestate-mutually-exclusive)
 - [ ] state i start-activity https://developer.android.com/topic/libraries/architecture/saving-states#options_for_preserving_ui_state
 - [ ] bruk sharedprefs for innstillinger. Hvorfor? https://stackoverflow.com/questions/24822101/when-to-use-getsharedpreferences-vs-savedinstancestate
-- [ ] Convesions
-    - [ ] lyttere i kode, ikke XML -> ryddigere
-    - [ ] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
-- [ ] Named parameters, where and why?
-- [ ] Multithreading 
-  - [ ] Hvor 
-  - [ ] Hvorfor viktig (ytelse, UI-lag, mobil osv.)
-- [ ] Hvorfor lagres data på måten det gjøres (shared preferences, fil, database)
-- [ ] teamer -> https://material.io/tools/color/#!/?view.left=0&view.right=0
+- [X] Convesions
+    - [X] lyttere i kode, ikke XML -> ryddigere
+    - [X] bruke kotlin sin mapping (navn?) fremfor å bruke findviewbyid
+- [X] Named parameters, where and why?
+- [X] Multithreading 
+  - [X] Hvor 
+  - [X] Hvorfor viktig (ytelse, UI-lag, mobil osv.)
+- [X] Hvorfor lagres data på måten det gjøres (shared preferences, fil, database)
+- [X] teamer -> https://material.io/tools/color/#!/?view.left=0&view.right=0
 - [ ] hvorfor lagre konstante strings i resources
-- [ ] BaseActivity og arv (mht felles funksjonalitet)
-- [ ] Håndtering av API-nøkler
-- [ ] bruk testdefinisjoner fra https://developer.android.com/training/testing/fundamentals
-- [ ] "70 percent small, 20 percent medium, and 10 percent large." - https://developer.android.com/training/testing/fundamentals
-- [ ] V-modell
+- [X] BaseActivity og arv (mht felles funksjonalitet)
 - [ ] Reflekter rundt hvorfor assertj/https://google.github.io/truth/ ble valgt
 - [ ] Målsetninger om hvorfor man tester og hvorfor på forskjellig nivå
     - [ ] Bottom up?
