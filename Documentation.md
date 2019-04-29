@@ -31,7 +31,7 @@
 
 ## Generelt
 Jeg har bygget en implementasjon av _Tic Tac Toe_, slik oppgaven beskriver.
-I dette dokumetnet skal jeg beskrive løsningen min. Det være seg hvordan koden er strukturert,hvorfor den ser ut som den gjør og hvorfor den treffer målet om å være en god applikasjon.
+I dette dokumentet skal jeg beskrive løsningen min. Det være seg hvordan koden er strukturert, hvorfor jeg har tatt de valgene jeg har tatt, og hvorfor den treffer målet om å være en god applikasjon.
 
 ## Om oppgaven 
 Oppgaven her var å skrive en appliksasjon som implementerte _Tic Tac Toe_ ("bondesjakk"). I tillegg var det krav om følgende:
@@ -128,6 +128,7 @@ Dette har jeg valgt bort. I en større applikasjon med flere fragments, vil dett
 
 For å håndtere dette, har jeg brukt arkitekturen som har blitt brukt i forelesning, og som Google har på sine eksempelsider[<sup>3</sup>](#3). Den bygger på [Kotlins "coroutines"](https://kotlinlang.org/docs/reference/coroutines/basics.html) og [@WorkerThread](https://developer.android.com/reference/android/support/annotation/WorkerThread) for å oppnå multithreading. 
 ![Klassediagram for database-arkitektur](./photos/diagrams/database-class-diagram.png)
+
 Den har vært oversiktlig og fin. En ulempe med den er at den er litt vel omfattende; det er ganske mye kode for ganske lite, sammenlignet med å kjøre spørringer på separate tråder, med litt færre abstraksjonslag mellom "funksjonskalleren" og databasen. Jeg har holdt meg til den allikevel, først og fremst fordi den faste strukturen var lett å jobbe med. 
 
 Resonnering rundt selve valget av lagringsmetode kommer [senere](#lokal-lagring) i dokumentasjonen. 
@@ -136,8 +137,9 @@ Resonnering rundt selve valget av lagringsmetode kommer [senere](#lokal-lagring)
 ### Spillogikk
 Spillogikken ligger separat fra GUI. 
 
+Jeg har forsøkt å skille logikken for spillet fra GUI. Faktisk implementerte jeg selve logikken omtrent samtidig som vi fikk oppgaven, før jeg i det hele tatt tenkte på GUI. Problemstillingen jeg møtte da jeg startet med GUI var følgende: hvordan skal GUI si ifra til spillogikken at noe skal oppdateres og motsatt? Etter hvert kom jeg frem til løsningen som er modellert her: 
+
 ![Sekvensdiagram for game-listeners](./photos/diagrams/game-listener-sequence.png)
-Jeg har forsøkt å skille logikken for spillet fra GUI. Faktisk implementerte jeg selve logikken i, før jeg i det hele tatt tenkte på hvordan det skulle rendres. Problemstillingen jeg møtte da jeg startet med GUI var følgende: hvordan skal GUI si ifra til spillogikken at noe skal oppdateres og motsatt. Etter hvert kom jeg frem til løsningen som er modellert over: 
 
 `Game.kt` har tre public klassevariable som er "mutable": 
 
@@ -169,10 +171,10 @@ Her kom Kotlin meg til gode. Dette kunne også vært gjort i Java, f.eks. med fu
 
 Logikken har vært bygget slik at den støtter alle dimensjone, fra starten av. Dette gjorde det forholdsvis enkelt for meg å legge inn mulighet for nettopp flere dimensjoner, ikke bare 3x3.
 
-Selve er strukturert som et 2D-array. Logikken og strukturen rundt, kan sies å være noe "over-engineered" for formålene denne applikasjonen trengte. Med det sagt, har det gitt noen fordeler også. Logikken ble laget på et veldig tidlig stadium i utviklingen. Derfor kunne man tenke seg at det ville være vanskelig å debugge det hele, dersom det ikke var godt strukturert. Her fikk jeg igjen for arbeidet, som gjorde det lett a finne feil. Koden har også tilhørende, automatiserte tester, som var kjekt for a se at jeg ikke ødela noe de gangene jeg gjorde endringer.  
+Selve brettet er strukturert som et 2D-array. Logikken og strukturen rundt kan sies å være noe "over-engineered" for formålene denne applikasjonen trengte. Med det sagt, har det gitt noen fordeler også. Logikken ble som sagt laget på et veldig tidlig stadium i utviklingen. Derfor kunne man tenke seg at det ville være vanskelig å debugge det hele, dersom det ikke var godt strukturert. Her fikk jeg igjen for arbeidet, som gjorde det lett a finne feil. Koden har også tilhørende, automatiserte tester, som var kjekt for a se at jeg ikke ødela noe de gangene jeg gjorde endringer.  
 
 ## AI 
-Akkurat som med spillogikken, har jeg laget en AI som fungerer, helt uavhengig av dimensjonen på brettet. Stort sett har jeg gjort slik at AI-koden ikke skal gjøre noe som handler om en spesiell dimensjon. Fordelen med dette, er at den fungerer på akurat den brettstørrelsen som ønskes.
+Akkurat som med spillogikken, har jeg laget en AI som fungerer helt uavhengig av dimensjonen på brettet. Stort sett har jeg gjort slik at AI-koden ikke skal gjøre noe som handler om en spesiell dimensjon. Fordelen med dette, er at den fungerer på akurat den brettstørrelsen som ønskes.
 
 Ulempen er at man ikke kan dra nytte av trekk ved spesielle størrelser. F.eks. vil man i 3x3 ha et par trekk som er ekstra gode i starten. For å få med dette, har jeg med logikk kun for de to første trekkene som AI gjør, ved 3x3. 
 
@@ -182,14 +184,13 @@ Med mindre brettet er 3x3 og det er et av de første trekkene, er strategien fø
 * Få en tilfeldig posisjon på en rekke det er mulig å vinne på 
 * Få en tilfeldig posisjon 
 
-Dette fungerer bra.
-
+Dette fungerer bra, og strategien er usaaelig i alle >3x3. 
 
 Algoritmen er ikke ytelsesoptimalisert. For disse formålene, tenker jeg at det er greit, i og med at jeg ikke lar brukeren velge størrelse fullstendig fritt (man kan ikke ha 100x100, f.eks.).
 
 Jeg har også målt hastigheten. Google anbefaler at oppgaver skal kjøres i separate tråder dersom de tar mer enn 16 millisekunder[<sup>5</sup>](#5). I små brettsørrelser, når jeg ikke denne grensen. På større størrelser, går jeg derimot langt over. 
 
-Jeg målte tiden manuelt, med følgende kode. 
+Jeg målte tiden med følgende kode. 
 
 ```kotlin 
 var sum = 0.toLong()
@@ -208,11 +209,11 @@ val average = sum / n
 print(average)
 ```
 
-På et tidspunkt vurderte jeg å bruke en kjent algoritme, som MinMax eller noe tilsvarende. Allikevel landet jeg på å snekre sammen min egen løsning. Grunnen til det er først og fremst at det er morsommere. Slik jeg tolket oppgaven, forstor jeg det også slik at det var det som var ønskelig; at man skulle lage sin egen. 
+På et tidspunkt vurderte jeg å bruke en kjent algoritme, som MinMax eller noe tilsvarende. Allikevel landet jeg på å snekre sammen min egen løsning. Grunnen til det er først og fremst at det er morsommere. Slik jeg tolket oppgaven, forsto jeg det også slik at det var det som var ønskelig; at man skulle lage sin egen. 
 
 
 ## Lokal lagring 
-I min oppgave bruker jeg en SQLLite-database til å lagre brukere. Jeg kunne potensielt brukt "SharedPreferendes", som er et litt mer lettvekts-alternativ. Allikevel har jeg gått for en databaseløsning. Selv om jeg bare har en tabell, er det potensielt snakk om en del data (mange brukere). Der er SQL bedre fordi har mulighet for mer sofistikerte spørringer. 
+I min oppgave bruker jeg en SQLLite-database til å lagre brukere. Jeg kunne potensielt brukt "SharedPreferences", som er et litt mer lettvekts-alternativ. Allikevel har jeg gått for en databaseløsning. Selv om jeg bare har en tabell, er det potensielt snakk om en del data (mange brukere). Der er SQL bedre fordi har mulighet for mer sofistikerte spørringer. 
 
 I applikasjonens nåværende tilstand er det kanskje litt overkill. Derimot kan det lønne seg om appen skal videreutvikles over tid. På grunn av muligheter for mer avanserte spørringer o.l, kan man for eksempel tenke seg at SQL-valget vi gi store fordeler om statistikk-skjermen skulle vist mer avaserte ting enn den gjør i dag (gjennomsnitt, data mot spesifikke spillere, sorterte dta osv.). Da ville man nemlig kunne gjøre spørringene mot databasen, som er mye mindre ressurskrevende enn å først hente data ut, for så å behandle den (som ville vært alternativet med SharedPreferences). 
 
@@ -222,7 +223,7 @@ Man kunne konvertert objektene frem og tilbake til et format som JSON-strings, m
 Shared preferences egner seg derimot godt til klassiske "key-value"-scenarier. Det går også kjappere å lese fra "SharedPreferences" enn fra en SQL-database. Derfor har jeg valgt å bruke "SharedPreferences" for å lagre fargetemaene. 
 
 ## Brukertest
-Jeg har hatt noen uformelle brukertester med venner og bekjente. Jeg har passet på å la både "tekniske" og "ikke-tekniske" kjente. Det vil si at jeg også testet folk som ikke er vant til å bruke mange apper og som sjelden lærer seg å bruke nye programmer. 
+Jeg har hatt noen uformelle brukertester med venner og bekjente. Jeg har passet på å la både "tekniske" og "ikke-tekniske" kjente bruke appen. Det vil si at jeg også testet folk som ikke er vant til å bruke mange apper og som sjelden lærer seg å bruke nye dataprogrammer. 
 
 I begynnelsen hadde jeg mye tydeligere, visuell indikator på hvilken spiller sin tur det var. Noen brukere hang seg opp i at det var distraherende, og at det burde tones ned. Det har jeg gjort i den ferdige versjonen. 
 
@@ -238,7 +239,7 @@ I appens '.gradle'-fil står target-versjonen på API-nivå 28. Dette er for å 
 
 Brukere på Android er svært spredt. Derfor har valget av versjon en del å si for hvilke brukere som har mulighet til å bruke appen. Jeg har valgt å kode opp mot noe som er relativt moderne
 
-Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg på en ganske oppdatert versjon, samtidig som jeg dekker store deler av (den svært spredte) brukerbasen. De siste tallene på android sine utvikler-sider tilsier faktisk at API-nivå 21 skal støtte 88,9% av telefonbrukere globalt.[<sup>8</sup>](#8). 
+Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg på en forholdsvis oppdatert versjon, samtidig som jeg dekker store deler av (den svært spredte) brukerbasen. De siste tallene på android sine utvikler-sider tilsier faktisk at API-nivå 21 skal støtte 88,9% av telefonbrukere globalt.[<sup>8</sup>](#8). 
 
 
 ## Biblioteker
@@ -264,11 +265,13 @@ doAsync {
   }
 }
 ```
+(database-mutithreading omtales [her](#room-database))
 
 ## Visuelt
 Jeg har holdt meg til Material Design, og Google sine standard-komponenter. Disse er kjente for brukeren. Det er lagt opp til at brukeren skal kunne endre fargetema gjennom "options-menyen". 
 
-Jeg har også laget et lite ikon til appen.
+Jeg har også laget et ikon til appen:
+
 ![startskjerm](./photos/icon.png)
 
 ## Navngivning 
@@ -311,8 +314,7 @@ fragment_game_text_player1.setTextColor(activePlayerColor)
 
 
 ## Publisering 
-TODO: playstore 
-Prosjektet ligger også på et [github-repo](https://github.com/olaven/tic-tac-toe)
+Prosjektet ligger på et [github-repo](https://github.com/olaven/tic-tac-toe)
 
 
 ## Kildeliste
