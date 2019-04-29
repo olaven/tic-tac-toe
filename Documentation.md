@@ -44,12 +44,12 @@ Det første som møter brukeren er [startskjermen](###startskjerm). Her kan spil
 
 
 ## Skjermer 
-I denne seksjonen skal jeg ta for meg alle skjermene som møter brukeren. Sammen med bildene fra det ferdige produktet, har jeg også lagt ved en [tidilg skisse](#bilde-skisse) av appen, som ble tegnet omtrent da oppgaven ble utlevert.
+I denne seksjonen skal jeg ta for meg alle skjermene som møter brukeren. Sammen med bildene fra det ferdige produktet, har jeg også lagt ved en [tidlig skisse](#bilde-skisse) av appen, som ble tegnet omtrent da oppgaven ble utlevert.
 
 ### Startskjerm - [skjermbilde](#bilde-startskjerm)
 Denne skjermen er det første som møter en bruker når appen åpnes. Her velger man to ting: hvem som skal spille og hvor stort brettet skal være. 
 
-Spillerene velges gjennom nedtrekkslister("spinners"). Disse er mye brukt i Android, og de gir mulighet for ett valg. Det er akkurat det jeg ønsker her. I tillegg til å vise ordinære spiller, gir den siste av nedtrekkslistene mulighet for å velge "TTTBot" som motspiller. Spillerene hentes fra applikasjonens lokale ROOM-database. Dersom man ikke har lagt til noen brukere, får man varsel om at det må gjøres før man får lov til å spille. 
+Spillerne velges gjennom nedtrekkslister("spinners"). Disse er mye brukt i Android, og de gir mulighet for ett valg. Det er akkurat det jeg ønsker her. I tillegg til å vise ordinære spillere, gir den siste av nedtrekkslistene mulighet for å velge "TTTBot" som motspiller. Spillerne hentes fra applikasjonens lokale ROOM-database. Dersom man ikke har lagt til noen brukere, får man varsel om at det må gjøres før man får lov til å spille. 
 
 Brukere legges enkelt til ved å trykke på en _Floating Action Button_ ("FAB"). En FAB er egentlig ment for å være knappen som utføre hovedfunksjon i et program[<sup>1</sup>](#1). Derfor kan man tenke seg at min bruk ikke er helt 100% korrekt, ettersom hovedfunksjonaliteten er å starte spillet, ikke å legge til brukere. Min egen erfaring med Android (og _Material Design_ generelt) sier at det derimot er veldig vanlig å ha "legg til"-funksjonalitet i slike knapper, med pluss-logo. Jeg fikk heller ingen reaksjoner på det da jeg [brukertestet](#brukertest) appen. Derfor har jeg latt det være. 
 
@@ -61,7 +61,7 @@ Her foregår selve spillet. Spillet vises på et kvadratisk brett i midten. Hver
 Under og over spillet vises de to spillernavnene. På denne måten kan man legge telefonen mellom seg, som med et tradisjonelt brettspill. Navnet på spilleren som venter på motstanderens trekk, vil være grått. I utgangspunktet var dette tenkt å være tydeligere (faret bakgrunn/tydeligere tekster). Jeg oppdaget at brukere synes dette var distraherende. Derfor tonet jeg det ned, og har nå kun grått/svart som bytter. 
 
 ### Statistikkskjerm - [skjermbilde](#bilde-statistikkskjerm)
-Her vises alle spillere i en tabell, med kolonner for antall seiere, tap og uavgjort-spill. Dette er ikke en side hvor brukeren skal bruke mye tid. Inntrykket mitt var at brukerene som testet appen, synes siden var morsom i kort tid. Deretter ville de vekk, tilbake til selve spillet. 
+Her vises alle spillere i en tabell, med kolonner for antall seiere, tap og uavgjort-spill. Dette er ikke en side hvor brukeren skal bruke mye tid. Inntrykket mitt var at brukerne som testet appen, synes siden var morsom i kort tid. Deretter ville de vekk, tilbake til selve spillet. 
 
 
 ## Arkitektur
@@ -71,11 +71,11 @@ Programmet bruker en fragment-arkitektur, slik som
 oppgaven spesifiserer. Fragments gir en fordel over activities her fordi de er mindre ressurskrevende å starte opp enn activities. 
 Fragments er mer fleksible enn activities var tenkt til å være. De kan gjenbrukes og, dersom man ønsker, kan man ha flere i samme skjerm (f.eks endring ved rotasjon). Det er ikke anbefalt at de skal være så store. De skal dele opp ganske store bolker. 
 
-Jeg bruker kun ett fragment om gangen, og har samme skjerm uavhengig av rotasjon. Derfor er det først og fremst kostnaden ved å starte en fragment som jeg sparer.
+Jeg bruker kun ett fragment om gangen, og har samme skjerm uavhengig av rotasjon. Derfor er det først og fremst kostnaden ved å starte et fragment som jeg sparer.
 
 ![Activity to framgents](photos/diagrams/activity-to-fragment.png)
 
-Hele appen vises i en felles activity. Dersom en ny skjerm skal vises, byttes bare fragmenten som er aktivt. Dette lar meg bruke alle fordelene som fragments gir. Activity-objektet kan nåes gjennom klassevariabler i Fragments.
+Hele appen vises i en felles activity. Dersom en ny skjerm skal vises, byttes bare fragmentet som er aktivt. Dette lar meg bruke alle fordelene som fragments gir. Activity-objektet kan nåes gjennom klassevariabler i Fragments.
 ```kotlin
 fun replaceMainFragment(fragment: Fragment) {
 
@@ -87,7 +87,7 @@ fun replaceMainFragment(fragment: Fragment) {
 ```
 
 ### Deling av data 
-Data deles mellom de to fragment-klassene gjennom `SharedModel.kt`. Min fremgangsmåte er inspirert av en artikkel skrevet av Shalauddin Ahamad Shuza<sup>2</sup>](#2). 
+Data deles mellom de to fragment-klassene gjennom `SharedModel.kt`. Min fremgangsmåte er inspirert av en artikkel skrevet av Shalauddin Ahamad Shuza[<sup>2</sup>](#2). 
 ```kotlin 
 class SharedModel: ViewModel() {
 
@@ -126,7 +126,7 @@ Dette har jeg valgt bort. I en større applikasjon med flere fragments, vil dett
 ### Room-database
 Å lese fra en database er en forholdsvis tidkrevende prosess. Derfor er det viktig at dette ikke gjøres på samme tråd som kjører brukergrensesnittet ("UI-tråden"). Da vil man blokkere alt annet som skjer, grensesnittet mot brukeren vil henge dersom ting tar tid. Det senker brukeropplevelsen. På databaser er det faktisk så nøye at Android i utgangspuntket ikke lar deg kjøre database kall på UI-tråden i det hele tatt. 
 
-For å håndtere dette, har jeg brukt arkitekturen som har blitt brukt i forelesning, og som Google har på sine eksempelsider<sup>3</sup>](#3). Den bygger på [Kotlins "coroutines"](https://kotlinlang.org/docs/reference/coroutines/basics.html) og [@WorkerThread](https://developer.android.com/reference/android/support/annotation/WorkerThread) for å oppnå multithreading. 
+For å håndtere dette, har jeg brukt arkitekturen som har blitt brukt i forelesning, og som Google har på sine eksempelsider[<sup>3</sup>](#3). Den bygger på [Kotlins "coroutines"](https://kotlinlang.org/docs/reference/coroutines/basics.html) og [@WorkerThread](https://developer.android.com/reference/android/support/annotation/WorkerThread) for å oppnå multithreading. 
 ![Klassediagram for database-arkitektur](./photos/diagrams/database-class-diagram.png)
 Den har vært oversiktlig og fin. En ulempe med den er at den er litt vel omfattende; det er ganske mye kode for ganske lite, sammenlignet med å kjøre spørringer på separate tråder, med litt færre abstraksjonslag mellom "funksjonskalleren" og databasen. Jeg har holdt meg til den allikevel, først og fremst fordi den faste strukturen var lett å jobbe med. 
 
@@ -137,7 +137,7 @@ Resonnering rundt selve valget av lagringsmetode kommer [senere](#lokal-lagring)
 Spillogikken ligger separat fra GUI. 
 
 ![Sekvensdiagram for game-listeners](./photos/diagrams/game-listener-sequence.png)
-Jegh har forsøkt å skille logikken for spillet fra GUI. Faktisk implemetnerte jeg selve logikken i før jeg i det hele tatt tenkte på hvordan det skulle rendres. Problemstillingen jeg møtte da jeg startet med GUI var følgende: hvordan skal GUI si ifra til spillogikken at noe skal oppdateres og motsatt. Etter hvert kom jeg frem til løsningen som er modellert over: 
+Jeg har forsøkt å skille logikken for spillet fra GUI. Faktisk implementerte jeg selve logikken i, før jeg i det hele tatt tenkte på hvordan det skulle rendres. Problemstillingen jeg møtte da jeg startet med GUI var følgende: hvordan skal GUI si ifra til spillogikken at noe skal oppdateres og motsatt. Etter hvert kom jeg frem til løsningen som er modellert over: 
 
 `Game.kt` har tre public klassevariable som er "mutable": 
 
@@ -167,7 +167,7 @@ game.apply {
 
 Her kom Kotlin meg til gode. Dette kunne også vært gjort i Java, f.eks. med funksjonelle interfaces. Det ble allikevel lettere i Kotlin fordi funksjoner er "first class citizens"[<sup>4</sup>](#4). 
 
-Logikken har vært bygget slik at den støtter alle dimensjone, fra start av. Dette gjorde det forholdsvis enkelt for meg å legge inn mulighet for nettopp flere dimensjoner, ikke bare 3x3.
+Logikken har vært bygget slik at den støtter alle dimensjone, fra starten av. Dette gjorde det forholdsvis enkelt for meg å legge inn mulighet for nettopp flere dimensjoner, ikke bare 3x3.
 
 Selve er strukturert som et 2D-array. Logikken og strukturen rundt, kan sies å være noe "over-engineered" for formålene denne applikasjonen trengte. Med det sagt, har det gitt noen fordeler også. Logikken ble laget på et veldig tidlig stadium i utviklingen. Derfor kunne man tenke seg at det ville være vanskelig å debugge det hele, dersom det ikke var godt strukturert. Her fikk jeg igjen for arbeidet, som gjorde det lett a finne feil. Koden har også tilhørende, automatiserte tester, som var kjekt for a se at jeg ikke ødela noe de gangene jeg gjorde endringer.  
 
@@ -179,8 +179,8 @@ Ulempen er at man ikke kan dra nytte av trekk ved spesielle størrelser. F.eks. 
 Med mindre brettet er 3x3 og det er et av de første trekkene, er strategien følgende: 
 * Hvis et trekk leder til at spillet er over, ta det 
 * Forsøk å bygge på eksisterede rekker, hvis det er mulig å vinne i rekkens retning 
-* Fa en tilfeldig posisjon på en rekke det er mulig å vinne på 
-* Fa en tilfeldig posisjon 
+* Få en tilfeldig posisjon på en rekke det er mulig å vinne på 
+* Få en tilfeldig posisjon 
 
 Dette fungerer bra.
 
@@ -232,13 +232,13 @@ Appen har først og fremst blitt kjørt på min egen [Moto E Play](https://www.m
 
 ## Versjoner
 ![Fragmentering av Android sin brukerbase](photos/android-market-share.png)
-(Grafen er hentet fra _Statistia_[<sup>7</sup>](#7))
+(Grafen er hentet fra _Statistia_[<sup>6</sup>](#6))
 
-I appens '.gradle'-fil står target-versjonen på API-nivå 28. Dette er for å følge Google sitt kommende krav om at alle alle nye apper som skal publiseres på Play Store må ha denne versjonen eller høyere[<sup>8</sup>](#8). 
+I appens '.gradle'-fil står target-versjonen på API-nivå 28. Dette er for å følge Google sitt kommende krav om at alle alle nye apper som skal publiseres på Play Store må ha denne versjonen eller høyere[<sup>7</sup>](#7). 
 
 Brukere på Android er svært spredt. Derfor har valget av versjon en del å si for hvilke brukere som har mulighet til å bruke appen. Jeg har valgt å kode opp mot noe som er relativt moderne
 
-Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg på en ganske oppdatert versjon, samtidig som jeg dekker store deler av (den svært spredte) brukerbasen. De siste tallene på android sine utvikler-sider tilsier faktisk at API-nivå 21 skal støtte 88,9% av telefonbrukere globalt.[<sup>9</sup>](#9). 
+Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg på en ganske oppdatert versjon, samtidig som jeg dekker store deler av (den svært spredte) brukerbasen. De siste tallene på android sine utvikler-sider tilsier faktisk at API-nivå 21 skal støtte 88,9% av telefonbrukere globalt.[<sup>8</sup>](#8). 
 
 
 ## Biblioteker
@@ -251,7 +251,7 @@ Room er et unntak, i og med at det kan beskrives som et rammeverk som abstrahere
 2. Jeg har ganske god kjennskap til SQL o.l. fra tidligere kurs og fritidsprosjekter. Derfor var det ikke så farlig at
 de funksjonaliteten ble pakket inn.
 
-Der jeg skal kjøre kode i flere tråder, bruker jeg [Anko](https://github.com/Kotlin/anko) sin `doAsync`. Her kunne jeg gatt for `AsyncTask`, slik som jeg gjør i Modulist (app nr. 2). Sistnevnte er flott fordi den gir deg en god del kontroll, med forskjellige metoder som lar deg gjøre ting underveis i kjøringen. `AsyncTask` gir deg også en ganske eksplisitt måte a definere hva som skal skje på (med generic-parametere osv.), som jeg har sanasen for. Allikevel gikk jeg for `doAsync`, fordi det kun skulle brukes ett sted. Dessuten ble det kort, fint og lettleselig: 
+Der jeg skal kjøre kode i flere tråder, bruker jeg [Anko](https://github.com/Kotlin/anko) sin `doAsync`. Her kunne jeg gatt for `AsyncTask`, slik som jeg gjør i Modulist (app nr. 2). Sistnevnte er flott fordi den gir deg en god del kontroll, med forskjellige metoder som lar deg gjøre ting underveis i kjøringen. `AsyncTask` gir deg også en ganske eksplisitt måte a definere hva som skal skje på (med generic-parametere osv.), som jeg har sansen for. Allikevel gikk jeg for `doAsync`, fordi det kun skulle brukes ett sted. Dessuten ble det kort, fint og lettleselig: 
 ```kotlin
 doAsync {
 
@@ -275,9 +275,9 @@ Jeg har også laget et lite ikon til appen.
 (samme som i _Modulist_)
 
 Mange av navngivningskonvensjonene jeg har fulgt er veldig vanlige, standard-konvenserjoner. 
-B.la. bruker jeg [Camel Case](https://en.wikipedia.org/wiki/Camel_case) på de aller fleste variablelnavn. Kosntanter har store bokstaver. 
+B.la. bruker jeg [Camel Case](https://en.wikipedia.org/wiki/Camel_case) på de aller fleste variabelnavn. Konstanter har store bokstaver. 
 
-Hva navngivning av XML-id'er har jeg ikke vært like tradisjonell. Her har det vært ekstra viktig å ha en navngivningskonvensjon som faktisk er _helt_ identifiserende. Dette er fordi at ID'ene er tilgjengelige i globalt scope. Konvensjonen jeg landet på har følgende sturktur: "parent, type"\_"parent, navn"\_"element, type"_"element, navn". Under er et eksempel i en activity som heter `DemoActivity`. ID er satt på `TextView`-tagen: 
+Hva navngivning av XML-id'er angår, har jeg ikke vært like tradisjonell. Her har det vært ekstra viktig å ha en navngivningskonvensjon som faktisk er _helt_ identifiserende. Dette er fordi at ID'ene er tilgjengelige i globalt scope. Konvensjonen jeg landet på har følgende sturktur: "parent, type"\_"parent, navn"\_"element, type"_"element, navn". Under er et eksempel i en activity som heter `DemoActivity`. ID er satt på `TextView`-tagen: 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
@@ -322,10 +322,9 @@ __note__: Der tilstrekkelig informasjon ikke er oppgitt, kommer det frem i kilde
 * <span id="3">3:</span> Uspesifiert forfatter, Google. NA. "Save data in a local database using Room" (lastet ned 27. April 2019) 
 * <span id="4">4:</span> UMarcos Placona. 10 Mai 2018. “Functions are first-class citizens in Kotlin”. https://realkotlin.com/tutorials/2018-05-10-functions-are-first-class-citizens-in-kotlin/ (lastet ned 27. April 2019)
 *  <span id="5">5:</span> Uspesifiert forfatter, Google. NA. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
-*  <span id="6">6:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
-*  <span id="7">7:</span> Android. October 2018. “Android version market share distribution among smartphone owners as of September 2018". https://www.statista.com/statistics/271774/share-of-android-platforms-on-mobile-devices-with-android-os/ (lastet ned 27. April 2019)
-* <span id="8">8:</span> Uspesifiert forfatter, Google. NA. “Meet Google Play's target API level requirement” Google, March 8, 2017. https://developer.android.com/distribute/best-practices/develop/target-sdk (lastet ned 29. April 2019)
-* <span id="9">9:</span> Uspesifiert forfatter, Google. NA. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
+*  <span id="6">6:</span> Android. October 2018. “Android version market share distribution among smartphone owners as of September 2018". https://www.statista.com/statistics/271774/share-of-android-platforms-on-mobile-devices-with-android-os/ (lastet ned 27. April 2019)
+* <span id="7">7:</span> Uspesifiert forfatter, Google. NA. “Meet Google Play's target API level requirement” Google, March 8, 2017. https://developer.android.com/distribute/best-practices/develop/target-sdk (lastet ned 29. April 2019)
+* <span id="8">8:</span> Uspesifiert forfatter, Google. NA. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
 
 ## Vedlegg
 ### Bilde skisse 
