@@ -26,13 +26,6 @@ class BotPlayer(user: User): Player(user) {
 
         val timeBefore = System.currentTimeMillis()
 
-        threeTimesThreeStrategy(board)?.let {
-
-            if (board.squareAt(it).mark == SquareMark.EMPTY) {
-                return it
-            }
-        }
-
         // find a necessary move
         findCriticalPoint(board)?.let {
 
@@ -158,42 +151,6 @@ class BotPlayer(user: User): Player(user) {
             }
         }
         return null
-    }
-
-    private fun threeTimesThreeStrategy(board: Board): Coordinate? {
-        // Special strategy for 3x3. A bit ugly, but makes the app better.
-        if (board.dimension == 3 && board.moveCount <= 3) {
-
-            val middleMark = board.squareAt(Coordinate(1, 1)).mark
-            when (board.moveCount) {
-                0 -> Coordinate(0, 0)
-                else -> if (middleMark == SquareMark.CROSS) {
-                    if (board.moveCount == 1) {
-                        return Coordinate(0, 2)
-                    } else {
-
-                        if (board.squareAt(Coordinate(0, 0)).mark == SquareMark.EMPTY) {
-                            return Coordinate(0, 0)
-                        }
-                    }
-                } else {
-
-                    return if (board.moveCount == 1) {
-                        Coordinate(1, 1)
-                    } else {
-
-                        val firstEdge = board.squareAt(Coordinate(1, 2)).mark
-                        if (firstEdge == SquareMark.EMPTY) {
-                            Coordinate(1, 2)
-                        } else {
-                            Coordinate(0, 1)
-                        }
-                    }
-                }
-            }
-        }
-
-        return null;
     }
 
     private fun findRandomPoint(board: Board) = board.grid.mapIndexed { index, _ ->
