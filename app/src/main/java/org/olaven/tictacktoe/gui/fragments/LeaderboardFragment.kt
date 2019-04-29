@@ -36,7 +36,10 @@ class LeaderboardFragment : Fragment() {
 
     private fun updateTable(users: List<User>) {
 
-        users.forEach {user ->
+        users
+            .sortedBy { it.wins }
+            .reversed()
+            .forEach {user ->
 
             val row = customRow(
                 user.name,
