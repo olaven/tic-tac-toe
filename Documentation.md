@@ -174,17 +174,15 @@ Logikken har vært bygget slik at den støtter alle dimensjone, fra starten av. 
 Selve brettet er strukturert som et 2D-array. Logikken og strukturen rundt kan sies å være noe "over-engineered" for formålene denne applikasjonen trengte. Med det sagt, har det gitt noen fordeler også. Logikken ble som sagt laget på et veldig tidlig stadium i utviklingen. Derfor kunne man tenke seg at det ville være vanskelig å debugge det hele, dersom det ikke var godt strukturert. Her fikk jeg igjen for arbeidet, som gjorde det lett a finne feil. Koden har også tilhørende, automatiserte tester, som var kjekt for a se at jeg ikke ødela noe de gangene jeg gjorde endringer.  
 
 ## AI 
-Akkurat som med spillogikken, har jeg laget en AI som fungerer helt uavhengig av dimensjonen på brettet. Stort sett har jeg gjort slik at AI-koden ikke skal gjøre noe som handler om en spesiell dimensjon. Fordelen med dette, er at den fungerer på akurat den brettstørrelsen som ønskes.
+Akkurat som med spillogikken, har jeg laget en AI som fungerer helt uavhengig av dimensjonen på brettet. Stort sett har jeg gjort slik at AI-koden ikke skal gjøre noe som handler om en spesiell dimensjon. Fordelen med dette, er at den fungerer på akurat den brettstørrelsen som ønskes. Ulempen er at man ikke kan dra nytte av trekk ved spesielle størrelser.
 
-Ulempen er at man ikke kan dra nytte av trekk ved spesielle størrelser. F.eks. vil man i 3x3 ha et par trekk som er ekstra gode i starten. For å få med dette, har jeg med logikk kun for de to første trekkene som AI gjør, ved 3x3. 
-
-Med mindre brettet er 3x3 og det er et av de første trekkene, er strategien følgende: 
+Strategien er slik: 
 * Hvis et trekk leder til at spillet er over, ta det 
 * Forsøk å bygge på eksisterede rekker, hvis det er mulig å vinne i rekkens retning 
 * Få en tilfeldig posisjon på en rekke det er mulig å vinne på 
 * Få en tilfeldig posisjon 
 
-Dette fungerer bra, og strategien er usaaelig i alle >3x3. 
+Dette fungerer bra, og strategien er usaaelig i alle brett som er større enn 3x3. 
 
 Algoritmen er ikke ytelsesoptimalisert. For disse formålene, tenker jeg at det er greit, i og med at jeg ikke lar brukeren velge størrelse fullstendig fritt (man kan ikke ha 100x100, f.eks.).
 
