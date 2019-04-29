@@ -222,7 +222,7 @@ Man kunne konvertert objektene frem og tilbake til et format som JSON-strings, m
 Shared preferences egner seg derimot godt til klassiske "key-value"-scenarier. Det går også kjappere å lese fra "SharedPreferences" enn fra en SQL-database. Derfor har jeg valgt å bruke "SharedPreferences" for å lagre fargetemaene. 
 
 ## Brukertest
-Jeg har hatt noen uformelle brukertester med venner og bekjente. Jeg har passet på å la både "tekniske" og "ikke-tekniske" kjente. Det vil si at også testet folk som ikke er vant til å bruke mange apper og som sjelden lærer seg å bruke nye programmer. 
+Jeg har hatt noen uformelle brukertester med venner og bekjente. Jeg har passet på å la både "tekniske" og "ikke-tekniske" kjente. Det vil si at jeg også testet folk som ikke er vant til å bruke mange apper og som sjelden lærer seg å bruke nye programmer. 
 
 I begynnelsen hadde jeg mye tydeligere, visuell indikator på hvilken spiller sin tur det var. Noen brukere hang seg opp i at det var distraherende, og at det burde tones ned. Det har jeg gjort i den ferdige versjonen. 
 
@@ -231,14 +231,14 @@ Da jeg testet hadde jeg heller ikke noen tekst som forklart de forksjellige inpu
 Appen har først og fremst blitt kjørt på min egen [Moto E Play](https://www.motorola.com/us/products/moto-e-play-gen-5).
 
 ## Versjoner
-![Fragmentering av Androi sin brukerbase](photos/android-market-share.png)
-(Grafen er hentet fra _Statistia_[<sup>6</sup>](#6))
+![Fragmentering av Android sin brukerbase](photos/android-market-share.png)
+(Grafen er hentet fra _Statistia_[<sup>7</sup>](#7))
 
-I appens '.gradle'-fil står target-versjonen på API-nivå 28. Dette er for å følge Google sitt kommende krav om at alle alle nye apper som skal publiseres på Play Store må ha denne versjonen eller høyere[<sup>7</sup>](#7). 
+I appens '.gradle'-fil står target-versjonen på API-nivå 28. Dette er for å følge Google sitt kommende krav om at alle alle nye apper som skal publiseres på Play Store må ha denne versjonen eller høyere[<sup>8</sup>](#8). 
 
 Brukere på Android er svært spredt. Derfor har valget av versjon en del å si for hvilke brukere som har mulighet til å bruke appen. Jeg har valgt å kode opp mot noe som er relativt moderne
 
-Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg på en ganske oppdatert versjon, samtidig som jeg dekker store deler av (den svært spredte) brukerbasen. De siste tallene på android sine utvikler-sider tilsier faktisk at API-nivå 21 skal støtte 88,9% av telefonbrukere globalt.[<sup>8</sup>](#8). 
+Min-sdk er satt til 21. Det tilsvarer "Lollipop"-versjonen av Android (5.0). Da ligger jeg på en ganske oppdatert versjon, samtidig som jeg dekker store deler av (den svært spredte) brukerbasen. De siste tallene på android sine utvikler-sider tilsier faktisk at API-nivå 21 skal støtte 88,9% av telefonbrukere globalt.[<sup>9</sup>](#9). 
 
 
 ## Biblioteker
@@ -324,7 +324,8 @@ __note__: Der tilstrekkelig informasjon ikke er oppgitt, kommer det frem i kilde
 *  <span id="5">5:</span> Uspesifiert forfatter, Google. NA. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
 *  <span id="6">6:</span> Uspesifiert forfatter, Google. 2019. “Better performance through threading”. https://developer.android.com/topic/performance/threads (lastet ned 27. April 2019)
 *  <span id="7">7:</span> Android. October 2018. “Android version market share distribution among smartphone owners as of September 2018". https://www.statista.com/statistics/271774/share-of-android-platforms-on-mobile-devices-with-android-os/ (lastet ned 27. April 2019)
-* <span id="8">8:</span> Uspesifiert forfatter, Google. NA. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
+* <span id="8">8:</span> Uspesifiert forfatter, Google. NA. “Meet Google Play's target API level requirement” Google, March 8, 2017. https://developer.android.com/distribute/best-practices/develop/target-sdk (lastet ned 29. April 2019)
+* <span id="9">9:</span> Uspesifiert forfatter, Google. NA. “Distribution dashboard” Google, March 8, 2017. https://developer.android.com/about/dashboards (lastet ned 27. April 2019)
 
 ## Vedlegg
 ### Bilde skisse 
